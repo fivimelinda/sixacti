@@ -16,6 +16,7 @@ import java.util.List;
 @Table(name="request_lowongan")
 public class RequestLowonganModel implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

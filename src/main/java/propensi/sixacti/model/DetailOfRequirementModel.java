@@ -19,8 +19,8 @@ public class DetailOfRequirementModel {
     @JoinColumn(name = "id_req_loker", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private RequestLowonganModel idReqLoker;
 
+    private RequestLowonganModel idReqLoker;
     @NotNull
     @Size(max = 3)
     @Column(name = "jumlah_laki", nullable = false)
