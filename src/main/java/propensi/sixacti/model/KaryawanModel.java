@@ -16,19 +16,19 @@ public class KaryawanModel {
     @Id
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nik", referencedColumnName = "nik")
-    private User user;
+    private UserModel user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private RoleModel role;
+    private String role; //Harusnya rolemodel
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_dept", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private DepartemenModel departement;
+    private String departement; //harusnya departemen model
 
     @NotNull
     @Column(name="jenis_karyawan", nullable = false)
@@ -58,29 +58,29 @@ public class KaryawanModel {
 //    private KaryawanModel asstManager;
 
 
-    public User getUser() {
+    public UserModel getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserModel user) {
         this.user = user;
     }
 
-    public RoleModel getRole() {
-        return role;
-    }
+    // public RoleModel getRole() {
+    //     return role;
+    // }
 
-    public void setRole(RoleModel role) {
-        this.role = role;
-    }
+    // public void setRole(RoleModel role) {
+    //     this.role = role;
+    // }
 
-    public DepartemenModel getDepartement() {
-        return departement;
-    }
+    // public DepartemenModel getDepartement() {
+    //     return departement;
+    // }
 
-    public void setDepartement(DepartemenModel departement) {
-        this.departement = departement;
-    }
+    // public void setDepartement(DepartemenModel departement) {
+    //     this.departement = departement;
+    // }
 
     public boolean isJenisKaryawan() {
         return jenisKaryawan;

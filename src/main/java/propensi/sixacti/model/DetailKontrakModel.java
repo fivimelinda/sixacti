@@ -3,8 +3,12 @@ package propensi.sixacti.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "detail_kontrak")
@@ -15,21 +19,21 @@ public class DetailKontrakModel implements Serializable {
     private Long no_surat;
 
     @DateTimeFormat(iso = ISO.DATE)
-    @Column(name = tanggal_mulai,nullable = false)
+    @Column(name = "tanggal_mulai",nullable = false)
     private Date tanggal_mulai;
 
     @DateTimeFormat(iso = ISO.DATE)
-    @Column(name = tanggal_berakhir,nullable = false)
+    @Column(name = "tanggal_berakhir",nullable = false)
     private Date tanggal_berakhir;
 
     @NotNull
     @Size(max = 2)
-    @Column(name = periode,nullable = false)
+    @Column(name = "periode",nullable = false)
     private Integer periode;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "NIK", referencedColumnName = "no_surat")
-    private Karyawan karyawan;
+    private KaryawanModel karyawan;
 
     public Integer getPeriode() {
         return periode;

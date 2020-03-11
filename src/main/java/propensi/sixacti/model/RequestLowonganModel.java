@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name="request_lowongan")
-public class RequestLowongan implements Serializable {
+public class RequestLowonganModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +60,7 @@ public class RequestLowongan implements Serializable {
 
     @NotNull
     @Column(name = "nama_replacement", nullable = false)
-    private List(String) namaReplacement;
+    private String namaReplacement; //check lagi tipenya
 
     @NotNull
     @Column(name = "status", nullable = false)

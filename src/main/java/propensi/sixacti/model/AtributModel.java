@@ -1,6 +1,10 @@
 package propensi.sixacti.model;
 
+import java.io.Serializable;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
@@ -26,7 +30,7 @@ public class AtributModel implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "NIK", referencedColumnName = "no_surat")
-    private Karyawan karyawan;
+    private KaryawanModel karyawan;
 
     public boolean isStatus() {
         return status;
