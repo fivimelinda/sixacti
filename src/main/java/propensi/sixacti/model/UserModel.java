@@ -1,4 +1,14 @@
+package propensi.sixacti.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "user")
@@ -26,7 +36,7 @@ public class UserModel implements Serializable {
 
 
     @DateTimeFormat(iso = ISO.DATE)
-    @Column(name = tanggal_lahir ,nullable = false)
+    @Column(name = "tanggal_lahir" ,nullable = false)
     private Date tanggal_lahir;
     
 
@@ -216,6 +226,8 @@ public class UserModel implements Serializable {
     public void setNPWP(String nPWP) {
         this.NPWP = nPWP;
     }
+
+}
 
 
     
