@@ -1,5 +1,6 @@
 package propensi.sixacti.model;
 
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class AtributModel implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "NIK", referencedColumnName = "no_surat")
     private KaryawanModel karyawan;
+
 
     public boolean isStatus() {
         return status;

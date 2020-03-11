@@ -226,7 +226,6 @@ public class UserModel implements Serializable {
     public void setNPWP(String nPWP) {
         this.NPWP = nPWP;
     }
-
 }
 
 
