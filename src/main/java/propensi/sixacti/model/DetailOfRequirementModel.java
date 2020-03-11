@@ -19,8 +19,8 @@ public class DetailOfRequirementModel {
     @JoinColumn(name = "id_req_loker", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private RequestLowongan idReqLoker;
 
+    private RequestLowonganModel idReqLoker;
     @NotNull
     @Size(max = 3)
     @Column(name = "jumlah_laki", nullable = false)
@@ -45,9 +45,9 @@ public class DetailOfRequirementModel {
     @Column(name = "job_duty", nullable = false)
     private String jobDuty;
 
-    @NotNull
-    @Column(name = "job_duty", nullable = false)
-    private String jobDuty;
+    // @NotNull
+    // @Column(name = "job_duty", nullable = false)
+    // private String jobDuty;
 
     public String getIdDor() {
         return idDor;
@@ -57,11 +57,11 @@ public class DetailOfRequirementModel {
         this.idDor = idDor;
     }
 
-    public RequestLowongan getIdReqLoker() {
+    public RequestLowonganModel getIdReqLoker() {
         return idReqLoker;
     }
 
-    public void setIdReqLoker(RequestLowongan idReqLoker) {
+    public void setIdReqLoker(RequestLowonganModel idReqLoker) {
         this.idReqLoker = idReqLoker;
     }
 
