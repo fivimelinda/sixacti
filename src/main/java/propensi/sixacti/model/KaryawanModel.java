@@ -15,20 +15,20 @@ public class KaryawanModel {
 
     @Id
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nik", referencedColumnName = "nik")
+    @JoinColumn(name = "nik", referencedColumnName = "NIK")
     private UserModel user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private String role; //Harusnya rolemodel
+    private RoleModel role;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_dept", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private String departement; //harusnya departemen model
+    private DepartementModel departement;
 
     @NotNull
     @Column(name="jenis_karyawan", nullable = false)
@@ -39,24 +39,36 @@ public class KaryawanModel {
     @Column(name="gaji", nullable = false)
     private Integer gaji;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "id_dept_mngr", referencedColumnName = "nik", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private KaryawanModel deptManager;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "id_sect_mngr", referencedColumnName = "nik", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private KaryawanModel sectManager;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "id_asst_mngr", referencedColumnName = "nik", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private KaryawanModel asstManager;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_dept_mngr", referencedColumnName = "nik_dept_mngr", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private DepartemenManagerModel deptManager;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_sect_mngr", referencedColumnName = "nik_sect_mngr", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private SectionManagerModel sectManager;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_asst_mngr", referencedColumnName = "nik_asst_mngr", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private AsstManagerModel asstManager;
+
+    @OneToOne(mappedBy = "deptManagerUser")
+    private DepartemenManagerModel idDeptManager;
+
+    @OneToOne(mappedBy = "secttManagerUser")
+    private DepartemenManagerModel idsectManager;
+
+    @OneToOne(mappedBy = "asstManagerUser")
+    private DepartemenManagerModel idAssttManager;
+
+    /*
+    Section Setter Getter===============================================================================================
+     */
 
     public UserModel getUser() {
         return user;
@@ -66,21 +78,21 @@ public class KaryawanModel {
         this.user = user;
     }
 
-    // public RoleModel getRole() {
-    //     return role;
-    // }
+    public RoleModel getRole() {
+        return role;
+    }
 
-    // public void setRole(RoleModel role) {
-    //     this.role = role;
-    // }
+    public void setRole(RoleModel role) {
+        this.role = role;
+    }
 
-    // public DepartemenModel getDepartement() {
-    //     return departement;
-    // }
+    public DepartementModel getDepartement() {
+        return departement;
+    }
 
-    // public void setDepartement(DepartemenModel departement) {
-    //     this.departement = departement;
-    // }
+    public void setDepartement(DepartementModel departement) {
+        this.departement = departement;
+    }
 
     public boolean isJenisKaryawan() {
         return jenisKaryawan;
@@ -96,5 +108,53 @@ public class KaryawanModel {
 
     public void setGaji(Integer gaji) {
         this.gaji = gaji;
+    }
+
+    public DepartemenManagerModel getDeptManager() {
+        return deptManager;
+    }
+
+    public void setDeptManager(DepartemenManagerModel deptManager) {
+        this.deptManager = deptManager;
+    }
+
+    public SectionManagerModel getSectManager() {
+        return sectManager;
+    }
+
+    public void setSectManager(SectionManagerModel sectManager) {
+        this.sectManager = sectManager;
+    }
+
+    public AsstManagerModel getAsstManager() {
+        return asstManager;
+    }
+
+    public void setAsstManager(AsstManagerModel asstManager) {
+        this.asstManager = asstManager;
+    }
+
+    public DepartemenManagerModel getIdDeptManager() {
+        return idDeptManager;
+    }
+
+    public void setIdDeptManager(DepartemenManagerModel idDeptManager) {
+        this.idDeptManager = idDeptManager;
+    }
+
+    public DepartemenManagerModel getIdsectManager() {
+        return idsectManager;
+    }
+
+    public void setIdsectManager(DepartemenManagerModel idsectManager) {
+        this.idsectManager = idsectManager;
+    }
+
+    public DepartemenManagerModel getIdAssttManager() {
+        return idAssttManager;
+    }
+
+    public void setIdAssttManager(DepartemenManagerModel idAssttManager) {
+        this.idAssttManager = idAssttManager;
     }
 }

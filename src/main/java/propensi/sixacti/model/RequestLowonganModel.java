@@ -61,7 +61,7 @@ public class RequestLowonganModel implements Serializable {
 
     @NotNull
     @Column(name = "nama_replacement", nullable = false)
-    private String namaReplacement; //check lagi tipenya
+    private List<String> namaReplacement;
 
     @NotNull
     @Column(name = "status", nullable = false)
@@ -158,5 +158,13 @@ public class RequestLowonganModel implements Serializable {
 
     public void setDetailOfRequirement(List<DetailOfRequirementModel> detailOfRequirement) {
         this.detailOfRequirement = detailOfRequirement;
+    }
+
+    public List<String> getNamaReplacement() {
+        return namaReplacement;
+    }
+
+    public void setNamaReplacement(List<String> namaReplacement) {
+        this.namaReplacement = namaReplacement;
     }
 }
