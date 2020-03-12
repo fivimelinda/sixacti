@@ -16,8 +16,8 @@ public class UserModel implements Serializable {
 
     @Id
     @Size(max = 16)
-    @Column(name = "NIK", nullable = false)
-    private String NIK;
+    @Column(name = "nik", nullable = false)
+    private String nik;
 
     @NotNull
     @Size(max = 50)
@@ -104,11 +104,11 @@ public class UserModel implements Serializable {
     }
 
     public String getNIK() {
-        return NIK;
+        return nik;
     }
 
-    public void setNIK(String nIK) {
-        this.NIK = nIK;
+    public void setNIK(String nik) {
+        this.nik = nik;
     }
 
     public String getUsername() {
