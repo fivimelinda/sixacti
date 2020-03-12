@@ -21,19 +21,8 @@ public class UserModel implements Serializable {
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "username", nullable = false)
-    private String username;
-
-    @NotNull
-    @Size(max = 50)
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @NotNull
-    @Size(max = 50)
     @Column(name = "nama", nullable = false)
     private String nama;
-
 
     @DateTimeFormat(iso = ISO.DATE)
     @Column(name = "tanggal_lahir" ,nullable = false)
@@ -99,9 +88,12 @@ public class UserModel implements Serializable {
     @Column(name = "NPWP", nullable = false)
     private String NPWP;
 
+
+    @OneToOne(mappedBy = "user")
+    private AkunModel akun;
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private KaryawanModel karyawan;
-
    
     public String getNPWP() {
         return NPWP;
@@ -115,21 +107,21 @@ public class UserModel implements Serializable {
         this.NIK = nIK;
     }
 
-    public String getUsername() {
-        return username;
-    }
+    // public String getUsername() {
+    //     return username;
+    // }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    // public void setUsername(String username) {
+    //     this.username = username;
+    // }
 
-    public String getPassword() {
-        return password;
-    }
+    // public String getPassword() {
+    //     return password;
+    // }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    // public void setPassword(String password) {
+    //     this.password = password;
+    // }
 
     public String getNama() {
         return nama;
