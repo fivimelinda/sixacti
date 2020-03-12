@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "lowonganKerja")
 public class LowonganKerjaModel implements Serializable {
 
     @Id
@@ -33,16 +35,16 @@ public class LowonganKerjaModel implements Serializable {
     @Column(name = "nomorLowongan", nullable = false)
     private Integer nomorLowongan;
 
-//    @OneToMany(mappedBy = "lowongan", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
-//    private List<LamaranModel> listLamaran;
-//
-//    public List<LamaranModel> getListLamaran() {
-//        return listLamaran;
-//    }
-//
-//    public void setListLamaran(List<LamaranModel> listLamaran) {
-//        this.listLamaran = listLamaran;
-//    }
+    @OneToMany(mappedBy = "lowongan", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    private List<LamaranModel> listLamaran;
+
+    public List<LamaranModel> getListLamaran() {
+        return listLamaran;
+    }
+
+    public void setListLamaran(List<LamaranModel> listLamaran) {
+        this.listLamaran = listLamaran;
+    }
 
     public Long getIdLowongan() {
         return idLowongan;

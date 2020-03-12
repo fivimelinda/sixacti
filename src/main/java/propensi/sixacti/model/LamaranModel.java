@@ -1,6 +1,8 @@
 package propensi.sixacti.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 //import org.hibernate.annotations.OnDelete;
 //import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,6 +14,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
+@Entity
+@Table(name = "lamaran")
 public class LamaranModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -122,19 +127,19 @@ public class LamaranModel implements Serializable {
     @Lob
     private byte[] resume;
 
-//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-//    @JoinColumn(name = "lowonganId", referencedColumnName = "idLowongan", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private LamaranModel lamaran;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "lowonganId", referencedColumnName = "idLowongan", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private LamaranModel lamaran;
 
-//    public LamaranModel getLamaran() {
-//        return lamaran;
-//    }
-//
-//    public void setLamaran(LamaranModel lamaran) {
-//        this.lamaran = lamaran;
-//    }
+    public LamaranModel getLamaran() {
+        return lamaran;
+    }
+
+    public void setLamaran(LamaranModel lamaran) {
+        this.lamaran = lamaran;
+    }
 
     public byte[] getFotoKtp() {
         return fotoKtp;
