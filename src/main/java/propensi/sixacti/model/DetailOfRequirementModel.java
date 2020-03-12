@@ -7,13 +7,15 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "detail_of_requirement")
-public class DetailOfRequirementModel {
+public class DetailOfRequirementModel implements Serializable {
 
     @Id
-    private String idDor;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_req_loker", referencedColumnName = "id", nullable = false)
@@ -49,12 +51,13 @@ public class DetailOfRequirementModel {
     // @Column(name = "job_duty", nullable = false)
     // private String jobDuty;
 
-    public String getIdDor() {
-        return idDor;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setIdDor(String idDor) {
-        this.idDor = idDor;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public RequestLowonganModel getIdReqLoker() {
