@@ -45,6 +45,8 @@ public class TesMedisModel implements Serializable{
     @Column(name = "riwayatPenyakit", nullable = false)
     private String riwayatPenyakit;
     
+    // reference ke pelamar
+
     /**
      * @return the idTesMedis
      */

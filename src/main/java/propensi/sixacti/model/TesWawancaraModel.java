@@ -30,6 +30,8 @@ public class TesWawancaraModel implements Serializable{
     @Column(name = "feedback", nullable = false)
     private String feedback;
 
+    // reference ke pelamar
+
     /**
      * @return the idTesWawancara
      */
@@ -71,5 +73,5 @@ public class TesWawancaraModel implements Serializable{
     public void setFeedback(String feedback) {
         this.feedback = feedback;
     }
-    
+
 }

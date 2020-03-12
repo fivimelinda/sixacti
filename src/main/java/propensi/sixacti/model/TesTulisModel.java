@@ -25,6 +25,8 @@ public class TesTulisModel implements Serializable{
     @Column(name = "nilai", nullable = false)
     private Integer nilai;
 
+    // reference ke pelamar
+
     /**
      * @return the idTesTulis
      */
