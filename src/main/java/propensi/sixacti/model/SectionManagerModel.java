@@ -3,14 +3,16 @@ package propensi.sixacti.model;
 import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table (name = "section_manager")
 public class SectionManagerModel {
 
-    /**
-     * Ini PK dari FK ke KaryawanModel
-     */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nik_sect_mngr", referencedColumnName = "nik")
+    @JoinColumn(name = "nikSectMngr", referencedColumnName = "nik")
     private KaryawanModel sectManagerUser;
 
 

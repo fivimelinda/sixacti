@@ -14,6 +14,9 @@ import javax.validation.constraints.Size;
 public class KaryawanModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nik", referencedColumnName = "NIK")
     private UserModel user;
@@ -40,121 +43,37 @@ public class KaryawanModel {
     private Integer gaji;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_dept_mngr", referencedColumnName = "nik_dept_mngr", nullable = false)
+    @JoinColumn(name = "idDeptMngr", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private DepartemenManagerModel deptManager;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_sect_mngr", referencedColumnName = "nik_sect_mngr", nullable = false)
+    @JoinColumn(name = "idSectMngr", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private SectionManagerModel sectManager;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_asst_mngr", referencedColumnName = "nik_asst_mngr", nullable = false)
+    @JoinColumn(name = "idAsstMngr", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private AsstManagerModel asstManager;
 
-    @OneToOne(mappedBy = "deptManagerUser")
+    @OneToOne(mappedBy = "deptManagerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private DepartemenManagerModel idDeptManager;
 
-    @OneToOne(mappedBy = "secttManagerUser")
-    private DepartemenManagerModel idsectManager;
+    @OneToOne(mappedBy = "sectManagerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private SectionManagerModel idsectManager;
 
-    @OneToOne(mappedBy = "asstManagerUser")
-    private DepartemenManagerModel idAssttManager;
+    @OneToOne(mappedBy = "asstManagerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private AsstManagerModel idAsstManager;
+
+
+
 
     /*
     Section Setter Getter===============================================================================================
      */
 
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
-
-    public RoleModel getRole() {
-        return role;
-    }
-
-    public void setRole(RoleModel role) {
-        this.role = role;
-    }
-
-    public DepartementModel getDepartement() {
-        return departement;
-    }
-
-    public void setDepartement(DepartementModel departement) {
-        this.departement = departement;
-    }
-
-    public boolean isJenisKaryawan() {
-        return jenisKaryawan;
-    }
-
-    public void setJenisKaryawan(boolean jenisKaryawan) {
-        this.jenisKaryawan = jenisKaryawan;
-    }
-
-    public Integer getGaji() {
-        return gaji;
-    }
-
-    public void setGaji(Integer gaji) {
-        this.gaji = gaji;
-    }
-
-    public DepartemenManagerModel getDeptManager() {
-        return deptManager;
-    }
-
-    public void setDeptManager(DepartemenManagerModel deptManager) {
-        this.deptManager = deptManager;
-    }
-
-    public SectionManagerModel getSectManager() {
-        return sectManager;
-    }
-
-    public void setSectManager(SectionManagerModel sectManager) {
-        this.sectManager = sectManager;
-    }
-
-    public AsstManagerModel getAsstManager() {
-        return asstManager;
-    }
-
-    public void setAsstManager(AsstManagerModel asstManager) {
-        this.asstManager = asstManager;
-    }
-
-    public DepartemenManagerModel getIdDeptManager() {
-        return idDeptManager;
-    }
-
-    public void setIdDeptManager(DepartemenManagerModel idDeptManager) {
-        this.idDeptManager = idDeptManager;
-    }
-
-    public DepartemenManagerModel getIdsectManager() {
-        return idsectManager;
-    }
-
-    public void setIdsectManager(DepartemenManagerModel idsectManager) {
-        this.idsectManager = idsectManager;
-    }
-
-    public DepartemenManagerModel getIdAssttManager() {
-        return idAssttManager;
-    }
-
-    public void setIdAssttManager(DepartemenManagerModel idAssttManager) {
-        this.idAssttManager = idAssttManager;
-    }
 }

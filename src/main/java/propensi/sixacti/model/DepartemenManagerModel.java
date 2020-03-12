@@ -11,12 +11,13 @@ import java.util.List;
 @Table(name = "departement_manager")
 public class DepartemenManagerModel {
 
-    /**
-     * Ini PK dari FK ke KaryawanModel
-     */
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nik_dept_mngr", referencedColumnName = "nik")
+    @JoinColumn(name = "nikDeptMngr", referencedColumnName = "nik")
     private KaryawanModel deptManagerUser;
 
 
