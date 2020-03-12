@@ -14,21 +14,24 @@ import javax.validation.constraints.Size;
 public class KaryawanModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nik", referencedColumnName = "nik")
+    @JoinColumn(name = "nik", referencedColumnName = "NIK")
     private UserModel user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private String role; //Harusnya rolemodel
+    private RoleModel role;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_dept", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private String departement; //harusnya departemen model
+    private DepartementModel departement;
 
     @NotNull
     @Column(name="jenis_karyawan", nullable = false)
@@ -39,62 +42,38 @@ public class KaryawanModel {
     @Column(name="gaji", nullable = false)
     private Integer gaji;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "id_dept_mngr", referencedColumnName = "nik", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private KaryawanModel deptManager;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "id_sect_mngr", referencedColumnName = "nik", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private KaryawanModel sectManager;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "id_asst_mngr", referencedColumnName = "nik", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private KaryawanModel asstManager;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idDeptMngr", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private DepartemenManagerModel deptManager;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idSectMngr", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private SectionManagerModel sectManager;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idAsstMngr", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private AsstManagerModel asstManager;
+
+    @OneToOne(mappedBy = "deptManagerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private DepartemenManagerModel idDeptManager;
+
+    @OneToOne(mappedBy = "sectManagerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private SectionManagerModel idsectManager;
+
+    @OneToOne(mappedBy = "asstManagerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private AsstManagerModel idAsstManager;
 
 
-    public UserModel getUser() {
-        return user;
-    }
 
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
 
-    // public RoleModel getRole() {
-    //     return role;
-    // }
+    /*
+    Section Setter Getter===============================================================================================
+     */
 
-    // public void setRole(RoleModel role) {
-    //     this.role = role;
-    // }
-
-    // public DepartemenModel getDepartement() {
-    //     return departement;
-    // }
-
-    // public void setDepartement(DepartemenModel departement) {
-    //     this.departement = departement;
-    // }
-
-    public boolean isJenisKaryawan() {
-        return jenisKaryawan;
-    }
-
-    public void setJenisKaryawan(boolean jenisKaryawan) {
-        this.jenisKaryawan = jenisKaryawan;
-    }
-
-    public Integer getGaji() {
-        return gaji;
-    }
-
-    public void setGaji(Integer gaji) {
-        this.gaji = gaji;
-    }
 }

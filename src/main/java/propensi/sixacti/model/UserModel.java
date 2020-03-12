@@ -88,8 +88,12 @@ public class UserModel implements Serializable {
     @Column(name = "NPWP", nullable = false)
     private String NPWP;
 
+
     @OneToOne(mappedBy = "user")
     private AkunModel akun;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private KaryawanModel karyawan;
    
     public String getNPWP() {
         return NPWP;
@@ -217,6 +221,14 @@ public class UserModel implements Serializable {
 
     public void setNPWP(String nPWP) {
         this.NPWP = nPWP;
+    }
+
+    public KaryawanModel getKaryawan() {
+        return karyawan;
+    }
+
+    public void setKaryawan(KaryawanModel karyawan) {
+        this.karyawan = karyawan;
     }
 }
 

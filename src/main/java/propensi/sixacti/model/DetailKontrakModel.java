@@ -13,10 +13,10 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @Entity
 @Table(name = "detail_kontrak")
 public class DetailKontrakModel implements Serializable {
-    
-    @Id 
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long no_surat;
+    private Long noSurat;
 
     @DateTimeFormat(iso = ISO.DATE)
     @Column(name = "tanggal_mulai",nullable = false)
@@ -32,19 +32,19 @@ public class DetailKontrakModel implements Serializable {
     private Integer periode;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "NIK", referencedColumnName = "no_surat")
+    @JoinColumn(name = "NIK", referencedColumnName = "noSurat")
     private KaryawanModel karyawan;
 
     public Integer getPeriode() {
         return periode;
     }
 
-    public Long getNo_surat() {
-        return no_surat;
+    public Long getNoSurat() {
+        return noSurat;
     }
 
-    public void setNo_surat(Long no_surat) {
-        this.no_surat = no_surat;
+    public void setNoSurat(Long noSurat) {
+        this.noSurat = noSurat;
     }
 
     public Date getTanggal_mulai() {
