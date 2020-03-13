@@ -32,7 +32,7 @@ public class DetailKontrakModel implements Serializable {
     private Integer periode;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "NIK", referencedColumnName = "noSurat")
+    @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
     private KaryawanModel karyawan;
 
     public Integer getPeriode() {

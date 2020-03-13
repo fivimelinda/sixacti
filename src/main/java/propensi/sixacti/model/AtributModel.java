@@ -30,7 +30,7 @@ public class AtributModel implements Serializable {
     private boolean status;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "NIK", referencedColumnName = "no_surat")
+    @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
     private KaryawanModel karyawan;
 
 
