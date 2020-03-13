@@ -11,7 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
-@Table(name = "user")
+@Table(name = "userRole")
 public class UserModel implements Serializable {
 
     @Id
@@ -89,7 +89,7 @@ public class UserModel implements Serializable {
     private String NPWP;
 
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userAkun")
     private AkunModel akun;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")

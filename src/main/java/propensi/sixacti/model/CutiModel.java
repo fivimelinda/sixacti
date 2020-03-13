@@ -18,6 +18,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cuti")
 public class CutiModel implements Serializable {
@@ -26,13 +28,14 @@ public class CutiModel implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "nik", referencedColumnName = "nik",nullable = false)
+    @JoinColumn(name = "id_karyawan", referencedColumnName = "id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private KaryawanModel karyawan;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "kategori", referencedColumnName = "id",nullable = false)
+    @JoinColumn(name = "id_kategori", referencedColumnName = "id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private KategoriCutiModel kategori;
 
     @NotNull

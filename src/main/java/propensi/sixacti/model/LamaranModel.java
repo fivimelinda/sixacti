@@ -131,14 +131,14 @@ public class LamaranModel implements Serializable {
     @JoinColumn(name = "lowonganId", referencedColumnName = "idLowongan", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private LamaranModel lamaran;
+    private LowonganKerjaModel lowongan;
 
-    public LamaranModel getLamaran() {
-        return lamaran;
+    public LowonganKerjaModel getLamaran() {
+        return lowongan;
     }
 
-    public void setLamaran(LamaranModel lamaran) {
-        this.lamaran = lamaran;
+    public void setLamaran(LowonganKerjaModel lowongan) {
+        this.lowongan = lowongan;
     }
 
     public byte[] getFotoKtp() {
