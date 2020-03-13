@@ -54,6 +54,7 @@ public class KaryawanModel {
     @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
     @JoinColumn(name="id_dept_mngr")
     private Set<KaryawanModel> translations;
+
     
 //    @ManyToOne(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "idDeptMngr", referencedColumnName = "id")
@@ -82,8 +83,11 @@ public class KaryawanModel {
 //    @OneToOne(mappedBy = "asstManagerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private AsstManagerModel idAsstManager;
     
-//    @OneToOne(mappedBy = "atributModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private AtributModel atributModel;
+   @OneToOne(mappedBy = "karyawan")
+   private AtributModel atributModel;
+
+   @OneToOne(mappedBy = "karyawan")
+   private DetailKontrakModel detailKontrakModel;
 //    
 //    @OneToOne(mappedBy = "detailKontrak", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private DetailKontrakModel detailKontrak;
