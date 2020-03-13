@@ -59,9 +59,9 @@ public class RequestLowonganModel implements Serializable {
     @Column(name = "gaji", nullable = false)
     private String gaji;
 
-    @NotNull
-    @Column(name = "nama_replacement", nullable = false)
-    private List<String> namaReplacement;
+//    @NotNull
+//    @Column(name = "nama_replacement", nullable = false)
+//    private List<String> namaReplacement;
 
     @NotNull
     @Column(name = "status", nullable = false)
@@ -71,6 +71,9 @@ public class RequestLowonganModel implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private List<DetailOfRequirementModel> detailOfRequirement;
+    
+    @OneToOne(mappedBy = "requestLowongan")
+    private LowonganKerjaModel lowonganKerja; 
 
     public Long getId() {
         return id;
@@ -160,11 +163,11 @@ public class RequestLowonganModel implements Serializable {
         this.detailOfRequirement = detailOfRequirement;
     }
 
-    public List<String> getNamaReplacement() {
-        return namaReplacement;
-    }
-
-    public void setNamaReplacement(List<String> namaReplacement) {
-        this.namaReplacement = namaReplacement;
-    }
+//    public List<String> getNamaReplacement() {
+//        return namaReplacement;
+//    }
+//
+//    public void setNamaReplacement(List<String> namaReplacement) {
+//        this.namaReplacement = namaReplacement;
+//    }
 }

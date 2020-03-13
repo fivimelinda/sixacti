@@ -9,12 +9,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "lowonganKerja")
+@Table(name = "lowongan")
 public class LowonganKerjaModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long idLowongan;
 
     @NotNull
@@ -37,6 +36,10 @@ public class LowonganKerjaModel implements Serializable {
 
     @OneToMany(mappedBy = "lowongan", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     private List<LamaranModel> listLamaran;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="requestLowonganId", referencedColumnName = "id")
+    private RequestLowonganModel requestLowongan; 
 
     public List<LamaranModel> getListLamaran() {
         return listLamaran;

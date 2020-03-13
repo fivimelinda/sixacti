@@ -11,13 +11,13 @@ import propensi.sixacti.model.UserModel;
 @Controller
 public class TestController{
 
-    @Qualifier("testServiceImpl")
-
-    @Autowired
-    private UserModel userModel;
-
-    @PostMapping(value = "/")
-    public String home(Model model){
-        return "";
-    }
+//    @Qualifier("testServiceImpl")
+//
+//    @Autowired
+//    private UserModel userModel;
+//
+//    @PostMapping(value = "/")
+//    public String home(Model model){
+//        return "";
+//    }
 }

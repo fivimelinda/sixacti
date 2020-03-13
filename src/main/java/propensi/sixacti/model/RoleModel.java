@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table (name = "role")
@@ -17,12 +18,23 @@ public class RoleModel implements Serializable {
     @Size(max = 50)
     @Column (name = "nama_role")
     private String namaRole;
+    
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    private List<KaryawanModel> listKaryawan; 
 
     /*
     Section Setter Getter===============================================================================================
      */
 
-    public Long getId() {
+    public List<KaryawanModel> getListKaryawan() {
+		return listKaryawan;
+	}
+
+	public void setListKaryawan(List<KaryawanModel> listKaryawan) {
+		this.listKaryawan = listKaryawan;
+	}
+
+	public Long getId() {
         return id;
     }
 

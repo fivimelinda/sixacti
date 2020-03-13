@@ -27,7 +27,7 @@ public class AkunModel implements Serializable{
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nikUser", referencedColumnName = "nik")
-    private UserModel user;
+    private UserModel userAkun;
 
     /**
      * @return the idAkun
