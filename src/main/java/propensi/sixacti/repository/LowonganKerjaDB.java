@@ -1,9 +1,12 @@
 package propensi.sixacti.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import propensi.sixacti.model.KaryawanModel;
+import propensi.sixacti.model.LowonganKerjaModel;
 
-@Repository
-public class LowonganKerjaDB extends JpaRepository<KaryawanModel, Long> {
+import java.util.List;
+
+
+public interface LowonganKerjaDB extends JpaRepository<LowonganKerjaModel, Long> {
+
+    List<LowonganKerjaModel> findAllByOrderByTanggalMulaiAsc();
 }
