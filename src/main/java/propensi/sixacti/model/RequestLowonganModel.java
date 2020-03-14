@@ -67,6 +67,12 @@ public class RequestLowonganModel implements Serializable {
     @Column(name = "status", nullable = false)
     private String status;
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idKaryawan", referencedColumnName = "id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private KaryawanModel karyawan;
+
     @OneToMany(mappedBy = "idReqLoker", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
