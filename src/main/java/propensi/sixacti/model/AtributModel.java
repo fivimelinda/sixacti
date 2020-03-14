@@ -67,3 +67,4 @@ public class AtributModel implements Serializable {
     }
 
 }
+
