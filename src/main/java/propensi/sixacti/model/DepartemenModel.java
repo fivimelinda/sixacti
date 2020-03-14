@@ -21,6 +21,9 @@ public class DepartemenModel implements Serializable {
     
     @OneToMany(mappedBy = "departemen", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     private List<KaryawanModel> listKaryawan;
+
+    @OneToMany(mappedBy = "departemen", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    private List<SectionModel> listSection;
     /*
     Section Setter Getter===============================================================================================
      */

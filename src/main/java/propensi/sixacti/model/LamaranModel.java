@@ -18,6 +18,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "lamaran")
 public class LamaranModel implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
@@ -27,7 +28,6 @@ public class LamaranModel implements Serializable {
     @Size(max=16)
     @Column(name="nik", nullable=false)
     private String nik;
-
 
     @Size(max=13)
     @Column(name="noBpjsKetenagakerjaan", nullable=true)
@@ -126,6 +126,14 @@ public class LamaranModel implements Serializable {
     @Column(name = "resume", nullable = false)
     @Lob
     private byte[] resume;
+
+    /*
+    relasi---------------------------------------------------------
+    **/
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
+    private PelamarModel pelamar;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "lowonganId", referencedColumnName = "idLowongan", nullable = false)

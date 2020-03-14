@@ -6,6 +6,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "section")
 
@@ -21,6 +26,11 @@ public class SectionModel implements Serializable{
     private String namaSection;
 
     // id departement
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_dept", referencedColumnName = "id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private DepartemenModel departemen;
 
     /**
      * @return the idSection

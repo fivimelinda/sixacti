@@ -18,6 +18,28 @@ public class KaryawanModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @NotNull
+    @Column(name="jenis_karyawan", nullable = false)
+    private boolean jenisKaryawan;
+
+    @NotNull
+    @Size(max = 10)
+    @Column(name="gaji", nullable = false)
+    private Integer gaji;
+
+    @Column(name="id_dept_mngr", insertable=false, updatable=false)
+    private Long idManager;
+    
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+    @JoinColumn(name="id_dept_mngr")
+    private Set<KaryawanModel> translations;
+
+    @OneToOne(mappedBy = "karyawan")
+    private AtributModel atributModel;
+
+    @OneToOne(mappedBy = "karyawan")
+    private DetailKontrakModel detailKontrakModel;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nik", referencedColumnName = "nik")
@@ -37,22 +59,13 @@ public class KaryawanModel {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
     private List<CutiModel> cuti;
-    
-    @NotNull
-    @Column(name="jenis_karyawan", nullable = false)
-    private boolean jenisKaryawan;
 
-    @NotNull
-    @Size(max = 10)
-    @Column(name="gaji", nullable = false)
-    private Integer gaji;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
+    private List<RequestLowonganModel> requestLowongan;
 
-    @Column(name="id_dept_mngr", insertable=false, updatable=false)
-    private Long idManager;
-    
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-    @JoinColumn(name="id_dept_mngr")
-    private Set<KaryawanModel> translations;
+
+
+
 
     
 //    @ManyToOne(fetch = FetchType.EAGER)
@@ -82,11 +95,7 @@ public class KaryawanModel {
 //    @OneToOne(mappedBy = "asstManagerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private AsstManagerModel idAsstManager;
     
-   @OneToOne(mappedBy = "karyawan")
-   private AtributModel atributModel;
-
-   @OneToOne(mappedBy = "karyawan")
-   private DetailKontrakModel detailKontrakModel;
+   
 //    
 //    @OneToOne(mappedBy = "detailKontrak", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private DetailKontrakModel detailKontrak;

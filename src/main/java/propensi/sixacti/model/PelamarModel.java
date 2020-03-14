@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "pelamar")
 
 public class PelamarModel implements Serializable{
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPelamar;
@@ -16,6 +16,18 @@ public class PelamarModel implements Serializable{
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nik", referencedColumnName = "nik")
     private UserModel userPelamar;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamar")
+    private LamaranModel lamaran;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamar")
+    private TesTulisModel tesTulis;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamar")
+    private TesMedisModel tesMedis;
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamar")
+    private TesWawancaraModel tesWawancara;
 
     /**
      * @param idPelamar the idPelamar to set
