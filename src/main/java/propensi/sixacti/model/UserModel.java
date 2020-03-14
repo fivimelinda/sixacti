@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "userRole")
+
 public class UserModel implements Serializable {
 
     @Id
@@ -28,12 +29,10 @@ public class UserModel implements Serializable {
     @Column(name = "tanggal_lahir" ,nullable = false)
     private Date tanggal_lahir;
     
-
     @NotNull
     @Column(name = "jenis_kelamin", nullable = false)
-    private boolean jenis_kelamin;
+    private Boolean jenis_kelamin;
     
-
     @NotNull
     @Size(max = 50)
     @Column(name = "tempat_lahir", nullable = false)
@@ -54,7 +53,6 @@ public class UserModel implements Serializable {
     @Column(name = "RW", nullable = false)
     private String RW;
     
-
     @NotNull
     @Size(max = 50)
     @Column(name = "kelurahan", nullable = false)
@@ -65,35 +63,42 @@ public class UserModel implements Serializable {
     @Column(name = "kecamatan", nullable = false)
     private String kecamatan;
 
-
     @NotNull
     @Size(max = 5)
     @Column(name = "kode_pos", nullable = false)
-    private Integer kode_pos;
+    private Integer kodePos;
    
-
     @NotNull
     @Size(max = 15)
     @Column(name = "telepon", nullable = false)
     private String telepon;
- 
+
     @NotNull
     @Size(max = 50)
     @Column(name = "email", nullable = false)
     private String email;
-
 
     @NotNull
     @Size(max = 15)
     @Column(name = "NPWP", nullable = false)
     private String NPWP;
 
+    /*
+    Relation
+    **/
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "userAkun")
     private AkunModel akun;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private KaryawanModel karyawan;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userPelamar")
+    private PelamarModel pelamar;
+
+    /*
+    setter getter
+    **/
    
     public String getNPWP() {
         return NPWP;
@@ -106,22 +111,6 @@ public class UserModel implements Serializable {
     public void setNIK(String nik) {
         this.nik = nik;
     }
-
-    // public String getUsername() {
-    //     return username;
-    // }
-
-    // public void setUsername(String username) {
-    //     this.username = username;
-    // }
-
-    // public String getPassword() {
-    //     return password;
-    // }
-
-    // public void setPassword(String password) {
-    //     this.password = password;
-    // }
 
     public String getNama() {
         return nama;
@@ -196,11 +185,11 @@ public class UserModel implements Serializable {
     }
 
     public Integer getKode_pos() {
-        return kode_pos;
+        return kodePos;
     }
 
-    public void setKode_pos(Integer kode_pos) {
-        this.kode_pos = kode_pos;
+    public void setKodePos(Integer kodePos) {
+        this.kodePos = kodePos;
     }
 
     public String getTelepon() {

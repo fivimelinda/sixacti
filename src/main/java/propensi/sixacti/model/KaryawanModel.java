@@ -1,6 +1,5 @@
 package propensi.sixacti.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -91,9 +90,6 @@ public class KaryawanModel {
 //    
 //    @OneToOne(mappedBy = "detailKontrak", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private DetailKontrakModel detailKontrak;
-
-
-
 
     /*
     Section Setter Getter===============================================================================================
