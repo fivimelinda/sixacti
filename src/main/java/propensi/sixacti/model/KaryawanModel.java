@@ -29,11 +29,25 @@ public class KaryawanModel {
     private Integer gaji;
 
     @Column(name="id_dept_mngr", insertable=false, updatable=false)
-    private Long idManager;
+    private Long idDeptManager;
     
     @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
     @JoinColumn(name="id_dept_mngr")
-    private Set<KaryawanModel> translations;
+    private Set<KaryawanModel> deptManager;
+    
+    @Column(name="id_sect_mngr", insertable=false, updatable=false)
+    private Long idSectManager;
+    
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+    @JoinColumn(name="id_sect_mngr")
+    private Set<KaryawanModel> sectManager;
+    
+    @Column(name="id_assist_mngr", insertable=false, updatable=false)
+    private Long idAssistManager;
+    
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+    @JoinColumn(name="id_assist_mngr")
+    private Set<KaryawanModel> assistManager;
 
     @OneToOne(mappedBy = "karyawan")
     private AtributModel atributModel;
@@ -65,37 +79,6 @@ public class KaryawanModel {
 
 
 
-
-
-    
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "idDeptMngr", referencedColumnName = "id")
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private DepartemenManagerModel deptManager;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "idSectMngr", referencedColumnName = "id")
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private SectionManagerModel sectManager;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "idAsstMngr", referencedColumnName = "id")
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private AsstManagerModel asstManager;
-
-//    @OneToOne(mappedBy = "deptManagerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private DepartemenManagerModel idDeptManager;
-//
-//    @OneToOne(mappedBy = "sectManagerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private SectionManagerModel idsectManager;
-//
-//    @OneToOne(mappedBy = "asstManagerUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private AsstManagerModel idAsstManager;
-    
-   
 //    
 //    @OneToOne(mappedBy = "detailKontrak", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private DetailKontrakModel detailKontrak;
