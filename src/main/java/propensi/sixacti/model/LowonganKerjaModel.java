@@ -1,5 +1,7 @@
 package propensi.sixacti.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -17,10 +19,12 @@ public class LowonganKerjaModel implements Serializable {
     private Long idLowongan;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "tanggalMulai", nullable = false)
     private Date tanggalMulai;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "tanggalBerakhir", nullable = false)
     private Date tanggalBerakhir;
 
