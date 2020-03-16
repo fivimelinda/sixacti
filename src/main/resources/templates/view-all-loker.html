@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Daftar Seluruh Loker</h2>
+<div th:each="loker : ${daftarSemuaLoker}">
+    <h3 th:text="'Tanggal Mulai: ' + ${loker.tanggalMulai}"></h3>
+    <h3 th:text="'Tanggal Berakhir: ' + ${loker.tanggalBerakhir}"></h3>
+    <h3 th:text="'Keterangan: ' + ${loker.deskripsi}"></h3>
+    
+    <hr>
+</div>
+
+</body>
+</html>
