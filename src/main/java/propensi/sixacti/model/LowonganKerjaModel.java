@@ -34,7 +34,6 @@ public class LowonganKerjaModel implements Serializable {
     private String deskripsi;
 
     @NotNull
-    @Size(max =50)
     @Column(name = "nomorLowongan", nullable = false)
     private Integer nomorLowongan;
 
