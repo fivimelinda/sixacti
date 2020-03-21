@@ -46,7 +46,13 @@ public class LowonganKerjaServiceImpl implements LowonganKerjaService {
     }
 
     @Override
-    public void deleteLowonganKerja(LowonganKerjaModel lowonganKerja) {
-        lowonganKerjaDB.delete(lowonganKerja);
+    public void deleteLowonganKerja(Long idLowongan) {
+        LowonganKerjaModel loker = getLowonganKerjaById(idLowongan);
+
+        if(loker != null){
+            lowonganKerjaDB.delete(loker);
+
+        }
+
     }
 }
