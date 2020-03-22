@@ -27,6 +27,9 @@ public class KaryawanModel {
     @Size(max = 10)
     @Column(name="gaji", nullable = false)
     private Integer gaji;
+    
+    @Column(name="sisa", nullable = false)
+    private Integer sisaCuti;
 
     @Column(name="id_dept_mngr", insertable=false, updatable=false)
     private Long idDeptManager;
@@ -86,5 +89,142 @@ public class KaryawanModel {
     /*
     Section Setter Getter===============================================================================================
      */
+    
+    public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public boolean isJenisKaryawan() {
+		return jenisKaryawan;
+	}
+
+	public void setJenisKaryawan(boolean jenisKaryawan) {
+		this.jenisKaryawan = jenisKaryawan;
+	}
+
+	public Integer getGaji() {
+		return gaji;
+	}
+
+	public void setGaji(Integer gaji) {
+		this.gaji = gaji;
+	}
+
+	public Integer getSisaCuti() {
+		return sisaCuti;
+	}
+
+	public void setSisaCuti(Integer sisaCuti) {
+		this.sisaCuti = sisaCuti;
+	}
+
+	public Long getIdDeptManager() {
+		return idDeptManager;
+	}
+
+	public void setIdDeptManager(Long idDeptManager) {
+		this.idDeptManager = idDeptManager;
+	}
+
+	public Set<KaryawanModel> getDeptManager() {
+		return deptManager;
+	}
+
+	public void setDeptManager(Set<KaryawanModel> deptManager) {
+		this.deptManager = deptManager;
+	}
+
+	public Long getIdSectManager() {
+		return idSectManager;
+	}
+
+	public void setIdSectManager(Long idSectManager) {
+		this.idSectManager = idSectManager;
+	}
+
+	public Set<KaryawanModel> getSectManager() {
+		return sectManager;
+	}
+
+	public void setSectManager(Set<KaryawanModel> sectManager) {
+		this.sectManager = sectManager;
+	}
+
+	public Long getIdAssistManager() {
+		return idAssistManager;
+	}
+
+	public void setIdAssistManager(Long idAssistManager) {
+		this.idAssistManager = idAssistManager;
+	}
+
+	public Set<KaryawanModel> getAssistManager() {
+		return assistManager;
+	}
+
+	public void setAssistManager(Set<KaryawanModel> assistManager) {
+		this.assistManager = assistManager;
+	}
+
+	public AtributModel getAtributModel() {
+		return atributModel;
+	}
+
+	public void setAtributModel(AtributModel atributModel) {
+		this.atributModel = atributModel;
+	}
+
+	public DetailKontrakModel getDetailKontrakModel() {
+		return detailKontrakModel;
+	}
+
+	public void setDetailKontrakModel(DetailKontrakModel detailKontrakModel) {
+		this.detailKontrakModel = detailKontrakModel;
+	}
+
+	public UserModel getUser() {
+		return user;
+	}
+
+	public void setUser(UserModel user) {
+		this.user = user;
+	}
+
+	public RoleModel getRole() {
+		return role;
+	}
+
+	public void setRole(RoleModel role) {
+		this.role = role;
+	}
+
+	public DepartemenModel getDepartemen() {
+		return departemen;
+	}
+
+	public void setDepartemen(DepartemenModel departemen) {
+		this.departemen = departemen;
+	}
+
+	public List<CutiModel> getCuti() {
+		return cuti;
+	}
+
+	public void setCuti(List<CutiModel> cuti) {
+		this.cuti = cuti;
+	}
+
+	public List<RequestLowonganModel> getRequestLowongan() {
+		return requestLowongan;
+	}
+
+	public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
+		this.requestLowongan = requestLowongan;
+	}
+
+    
 }

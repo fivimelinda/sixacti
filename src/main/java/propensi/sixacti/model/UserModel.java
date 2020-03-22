@@ -86,8 +86,8 @@ public class UserModel implements Serializable {
     /*
     Relation
     **/
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userAkun")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_akun", referencedColumnName = "idAkun")
     private AkunModel akun;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")

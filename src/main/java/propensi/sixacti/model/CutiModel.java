@@ -45,16 +45,12 @@ public class CutiModel implements Serializable {
 
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Column(name="tanggal_selesai", nullable = false)
-    private Date tanggalSelesai;
+    @Column(name="tanggal_sampai", nullable = false)
+    private Date tanggalSampai;
 
     @NotNull
     @Column(name="status", nullable = false)
     private String status;
-
-    @NotNull
-    @Column(name="sisa", nullable = false)
-    private Integer sisaCuti;
 
     @NotNull
     @Column(name="carry", nullable = false)
@@ -92,12 +88,12 @@ public class CutiModel implements Serializable {
 		this.tanggalMulai = tanggalMulai;
 	}
 
-	public Date getTanggalSelesai() {
-		return tanggalSelesai;
+	public Date getTanggalSampai() {
+		return tanggalSampai;
 	}
 
-	public void setTanggalSelesai(Date tanggalSelesai) {
-		this.tanggalSelesai = tanggalSelesai;
+	public void setTanggalSampai(Date tanggalSampai) {
+		this.tanggalSampai = tanggalSampai;
 	}
 
 	public String getStatus() {
@@ -106,14 +102,6 @@ public class CutiModel implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public Integer getSisaCuti() {
-		return sisaCuti;
-	}
-
-	public void setSisaCuti(Integer sisaCuti) {
-		this.sisaCuti = sisaCuti;
 	}
 
 	public Integer getCarry() {
