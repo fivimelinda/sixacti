@@ -30,14 +30,13 @@ public class LowonganKerjaServiceImpl implements LowonganKerjaService {
     }
 
     @Override
-    public LowonganKerjaModel changeLowonganKerja(LowonganKerjaModel newLoker) {
-        LowonganKerjaModel targetLoker = lowonganKerjaDB.findById(newLoker.getIdLowongan()).get();
+    public LowonganKerjaModel changeLowonganKerja(Long idLowongan, LowonganKerjaModel newLoker) {
+        LowonganKerjaModel targetLoker = getLowonganKerjaById(idLowongan);
         targetLoker.setDeskripsi(newLoker.getDeskripsi());
         targetLoker.setNomorLowongan(newLoker.getNomorLowongan());
         targetLoker.setTanggalBerakhir(newLoker.getTanggalBerakhir());
         targetLoker.setTanggalMulai(newLoker.getTanggalMulai());
-        lowonganKerjaDB.save(targetLoker);
-        return targetLoker;
+        return lowonganKerjaDB.save(targetLoker);
     }
 
     @Override
