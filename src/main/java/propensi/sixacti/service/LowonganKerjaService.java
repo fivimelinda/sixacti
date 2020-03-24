@@ -10,7 +10,7 @@ public interface LowonganKerjaService {
     void addLowonganKerja (LowonganKerjaModel lowonganKerja);
     LowonganKerjaModel changeLowonganKerja (LowonganKerjaModel newLoker);
     List<LowonganKerjaModel> getListLowonganKerja();
-    void deleteLowonganKerja(LowonganKerjaModel lowonganKerja);
+    void deleteLowonganKerja(Long idLowongan);
 
 
 }
