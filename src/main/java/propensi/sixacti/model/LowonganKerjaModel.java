@@ -34,20 +34,20 @@ public class LowonganKerjaModel implements Serializable {
     @Column(name = "nomorLowongan", nullable = false)
     private Integer nomorLowongan;
 
-    @OneToMany(mappedBy = "lowongan", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
-    private List<LamaranModel> listLamaran;
+//    @OneToMany(mappedBy = "lowongan", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+//    private List<LamaranModel> listLamaran;
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="requestLowonganId", referencedColumnName = "id")
     private RequestLowonganModel requestLowongan; 
 
-    public List<LamaranModel> getListLamaran() {
-        return listLamaran;
-    }
-
-    public void setListLamaran(List<LamaranModel> listLamaran) {
-        this.listLamaran = listLamaran;
-    }
+//    public List<LamaranModel> getListLamaran() {
+//        return listLamaran;
+//    }
+//
+//    public void setListLamaran(List<LamaranModel> listLamaran) {
+//        this.listLamaran = listLamaran;
+//    }
 
     public Long getIdLowongan() {
         return idLowongan;

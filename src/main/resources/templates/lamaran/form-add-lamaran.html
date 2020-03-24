@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Lamaran</title>
+<!--    <object th:include="fragments/fragments :: js" th:remove="tag"></object>-->
+<!--    <object th:include="fragments/fragments :: css" th:remove="tag"></object>-->
+</head>
+<body>
+<!--Pop Up-->
+<div th:if="${added}" id="pesan" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Success! </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> Lamaran berhasil ditambahkan!  </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-success text-white" data-dismiss="modal"> Close </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:if="${gagal}" id="pesan" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Failed! </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> Lamaran dengan NIK yang sama telah dibuat!  </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-success text-white" data-dismiss="modal"> Close </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<nav th:replace="fragments/fragment :: navbar"></nav>-->
+<h1 class="text-center font-weight-bold mt-5" > Tambah Lamaran </h1>
+<div class="row mt-5 ">
+    <div class="col-md-10 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                    <form th:action="@{/lamaran/add}" th:object="${lamaran}" method="POST" id="test" enctype="multipart/form-data">
+                        NIK* :
+                        <input class="form-control" placeholder=" Masukkan nik " type="text" name="nik" required/>
+                        <br><br>
+
+                        Nama Ibu* :
+                        <input class="form-control" placeholder=" Masukkan nama ibu " type="text" name="namaIbu" required/>
+                        <br><br>
+
+                        Alamat Domisili* :
+                        <input class="form-control" placeholder=" Masukkan alamat domisili " type="text" name="alamatDomisili" required />
+                        <br><br>
+
+                        RT Domisili* :
+                        <input class="form-control" placeholder=" Masukkan RT domisili " type="number" name="rtDomisili" required />
+                        <br><br>
+
+                        RW Domisili* :
+                        <input class="form-control" placeholder=" Masukkan RW domisili " type="number" name="rwDomisili" required/>
+                        <br><br>
+
+                        Kelurahan Domisili* :
+                        <input class="form-control" placeholder=" Masukkan kelurahan domisli " type="text" name="kelurahanDomisili" required/>
+                        <br>
+                        <br>
+
+                        Kecamatan Domisili* :
+                        <input class="form-control" placeholder=" Masukkan kecamatan domisli " type="text" name="kecamatanDomisili" required/>
+                        <br>
+                        <br>
+
+                        Kode Pos Domisili* :
+                        <input class="form-control" placeholder=" Masukkan kode pos domisili " type="number" name="kodePosDomisili" required/>
+                        <br><br>
+
+                        Telepon* :
+                        <input class="form-control" placeholder=" Masukkan nomor telepon " type="text" name="telepon" required/>
+                        <br>
+                        <br>
+
+                        Pendidikan* :
+                        <input class="form-control" placeholder=" Masukkan pendidikan " type="text" name="pendidikan" required/>
+                        <br>
+                        <br>
+
+                        Nomor Kartu BPJS Kesehatan :
+                        <input class="form-control" placeholder=" Masukkan nomor kartu BPJS kesehatan " type="text" name="noBpjsKesehatan" />
+                        <br>
+                        <br>
+
+                        Nomor Kartu BPJS Ketenagakerjaan :
+                        <input class="form-control" placeholder=" Masukkan nomor kartu BPJS ketenagakerjaan " type="text" name="noBpjsKetenagakerjaan" />
+                        <br>
+                        <br>
+
+                        Nomor Kartu Indonesia Sehat :
+                        <input class="form-control" placeholder=" Masukkan nomor kartu indonesia sehat" type="text" name="noKis" />
+                        <br>
+                        <br>
+
+                        Pengalaman bekerja :
+                        <input class="form-control" placeholder=" Masukkan pengalaman bekerja " type="text" name="pengalamanKerja" />
+                        <br>
+                        <br>
+
+                        Foto Kartu Keluarga* :
+                        <input type="file" name="files" required />
+                        <br>
+                        <br>
+
+                        Foto Kartu Tanda Penduduk* :
+                        <input type="file" name="files" required />
+                        <br>
+                        <br>
+
+                        Foto Nomor Pokok Wajib Pajak :
+                        <input type="file" name="files"  />
+                        <br>
+                        <br>
+
+                        Foto BPJS Kesehatan :
+                        <input type="file" name="files"  />
+                        <br>
+                        <br>
+
+                        Foto BPJS Ketenagakerjaan :
+                        <input type="file" name="files"  />
+                        <br>
+                        <br>
+
+                        Resume* :
+                        <input type="file" name="files" required />
+                        <br>
+                        <br>
+
+                        <div class="text-center">
+                            <button class="btn btn-sm btn-dark" type="submit">
+                                <a style="color: white"> Submit</a>
+                            </button>
+                        </div>
+                    </form>
+
+
+            </div>
+            </tbody>
+            </table>
+
+
+
+
+
+
+</html>
