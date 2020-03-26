@@ -22,14 +22,8 @@ public class LamaranServiceImpl implements LamaranService {
     }
 
     @Override
-    public void addLamaran(LamaranModel lamaran, MultipartFile file) {
-        try {
-            LamaranModel lamaranModel = new LamaranModel(file.getBytes(), file.getBytes(), file.getBytes(), file.getBytes(), file.getBytes(), file.getBytes());
-            lamaran.setTimestampPelamar(Calendar.getInstance().getTime());
-            lamaranDB.save(lamaran);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void addLamaran(LamaranModel lamaran) {
+        lamaran.setTimestampPelamar(Calendar.getInstance().getTime());
         lamaranDB.save(lamaran);
     }
 

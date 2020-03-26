@@ -21,40 +21,35 @@ public class LamaranController {
     @Qualifier("lamaranServiceImpl")
     @Autowired LamaranService lamaranService;
 
-    public String getLamaran(Model model) {
-        List<LamaranModel> listLamaran = lamaranService.getLamaran();
-        model.addAttribute("lamaran", listLamaran);
-
-        return "lamaran/form-add-lamaran";
-    }
+//    public String getLamaran(Model model) {
+//        List<LamaranModel> listLamaran = lamaranService.getLamaran();
+//        model.addAttribute("lamaran", listLamaran);
+//
+//        return "lamaran/form-add-lamaran";
+//    }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String formAddLamaran(Model model) {
         LamaranModel newLamaran = new LamaranModel();
-        List<LamaranModel> docs = lamaranService.getLamaran();
-        model.addAttribute("lamaran", docs);
+//        model.addAttribute("lamaran", docs);
         model.addAttribute("lamaran", newLamaran);
         return "lamaran/form-add-lamaran";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String submitAddLamaran(@RequestParam ("files") MultipartFile[] files,
-            @RequestParam("nik") String nik,
-            @ModelAttribute LamaranModel lamaran, Model model) {
+    public String submitAddLamaran(@ModelAttribute LamaranModel lamaran, Model model) {
         List<LamaranModel> docs = lamaranService.getLamaran();
-        System.out.println(nik);
-        if (docs!= null){
-            for (LamaranModel i : docs){
-                if (i.getNik().toLowerCase().equals(nik.toLowerCase())) {
-                    model.addAttribute("gagal", true);
-                    model.addAttribute("lamaran", docs);
-                    return "lamaran/form-add-lamaran";
-                }
-            }
-        }
-        for (MultipartFile file: files ) {
-            lamaranService.addLamaran(lamaran, file);
-        }
+//        if (docs!= null){
+//            for (LamaranModel i : docs){
+//                if (i.getNik().toLowerCase().equals(nik.toLowerCase())) {
+//                    model.addAttribute("gagal", true);
+//                    model.addAttribute("lamaran", docs);
+//                    return "lamaran/form-add-lamaran";
+//                }
+//            }
+//        }
+        lamaranService.addLamaran(lamaran);
+
         model.addAttribute("docs", docs);
         model.addAttribute("added", true);
         return "lamaran/form-add-lamaran";

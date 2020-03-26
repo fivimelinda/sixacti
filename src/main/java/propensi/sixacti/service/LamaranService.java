@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface LamaranService {
     LamaranModel findByIdLamaran(Long id);
-    void addLamaran(LamaranModel lamaran, MultipartFile file);
+    void addLamaran(LamaranModel lamaran);
     List<LamaranModel> getLamaran();
 }

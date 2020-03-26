@@ -98,18 +98,6 @@ public class LamaranModel implements Serializable {
     private String npwp;
 
 
-    public LamaranModel(){
-    }
-
-    public LamaranModel(byte[] fotoKtp, byte[] fotoKk, byte[] fotoNpwp, byte[] fotoBpjsKes, byte[] fotoBpjsKet, byte[] resume) {
-        this.fotoKtp = fotoKtp;
-        this.fotoKk = fotoKk;
-        this.fotoNpwp = fotoNpwp;
-        this.fotoBpjsKes = fotoBpjsKes;
-        this.fotoBpjsKet = fotoBpjsKet;
-        this.resume = resume;
-    }
-
     @Column(name = "fotoKtp", nullable=true)
     @Lob
     private byte[] fotoKtp;
