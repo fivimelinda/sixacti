@@ -23,7 +23,7 @@ public class LamaranServiceImpl implements LamaranService {
 
     @Override
     public void addLamaran(LamaranModel lamaran) {
-        lamaran.setTimestampPelamar(Calendar.getInstance().getTime());
+//        lamaran.setTimestampPelamar(Calendar.getInstance().getTime());
         lamaranDB.save(lamaran);
     }
 

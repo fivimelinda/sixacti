@@ -24,7 +24,7 @@ public class LamaranRestController {
     private LamaranService lamaranService;
 
     @PostMapping(value = "/addLamaran")
-    private ResponseEntity<Void> createLamaran(@RequestBody LamaranModel lamaranModel, @RequestBody MultipartFile multipartFile, BindingResult bindingResult){
+    private ResponseEntity<Void> createLamaran(@RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
