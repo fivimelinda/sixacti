@@ -130,6 +130,7 @@ public class LamaranModel implements Serializable {
     **/
 
 
+
     public PelamarModel getPelamar() {
         return pelamar;
     }
@@ -142,9 +143,9 @@ public class LamaranModel implements Serializable {
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     private PelamarModel pelamar;
 
-//    @OneToMany(mappedBy = "lamaranModel")
-//    @JsonIgnore
-//    private List<LamaranModel> listLamaran;
+    @OneToMany(mappedBy = "lamaran")
+    @JsonIgnore
+    private List<BerkasModel> listBerkas;
 
 
 //    @ManyToOne(fetch = FetchType.EAGER, optional = false)

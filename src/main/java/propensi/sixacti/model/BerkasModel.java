@@ -1,6 +1,8 @@
 package propensi.sixacti.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -35,6 +37,11 @@ public class BerkasModel implements Serializable {
         this.fileName = fileName;
         this.data = data;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "lamaranId")
+    @JsonIgnore
+    private LamaranModel lamaran;
 
     public Long getId() {
         return Id;
