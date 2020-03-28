@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -141,6 +142,9 @@ public class LamaranModel implements Serializable {
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     private PelamarModel pelamar;
 
+//    @OneToMany(mappedBy = "lamaranModel")
+//    @JsonIgnore
+//    private List<LamaranModel> listLamaran;
 
 
 //    @ManyToOne(fetch = FetchType.EAGER, optional = false)
