@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,7 @@ public class RequestLowonganRestController {
     @Autowired
     KaryawanService karyawanService;
 
+    @CrossOrigin
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     private List<RequestLowonganModel> retrieveListUser(){
         return requestLowonganService.retrieveListRequestLowongan();
@@ -46,7 +48,7 @@ public class RequestLowonganRestController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
 
         } else {
-            // System.out.println(requestLowongan);
+            // mekanismennya nanti diubah pas udh ada login di front end
             KaryawanModel karyawan = karyawanService.getKaryawanById(Long.parseLong("1"));
             requestLowongan.setKaryawan(karyawan);
             return requestLowonganService.addRequestLowongan(requestLowongan);
