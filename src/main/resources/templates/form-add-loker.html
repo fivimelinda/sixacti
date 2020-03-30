@@ -11,10 +11,10 @@
         <input type="text" name="judulLoker" />
         <br>
         Departement: <br>
-        <input type="text" name="departement" />
+        <input type="text" th:value = "${reqLoker.departement}"  name="departement" />
         <br>
         Section: <br>
-        <input type="text" name="section" />
+        <input type="text" th:value = "${reqLoker.section}" name="section" />
         <br>
         Tanggal mulai: <br>
         <input type="date" name="tanggalMulai" />

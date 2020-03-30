@@ -7,7 +7,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import propensi.sixacti.model.LowonganKerjaModel;
+import propensi.sixacti.model.RequestLowonganModel;
 import propensi.sixacti.service.LowonganKerjaService;
+import propensi.sixacti.service.RequestLowonganService;
+
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -19,6 +22,9 @@ public class LowonganKerjaRestController {
 
     @Autowired
     private LowonganKerjaService lowonganKerjaService;
+
+    @Autowired
+    private RequestLowonganService requestLowonganService;
 
     @GetMapping(value = "detailLoker/{idLowongan}")
     private LowonganKerjaModel getLokerById(@PathVariable Long idLowongan){
@@ -45,10 +51,10 @@ public class LowonganKerjaRestController {
     }
 
     @PutMapping(value = "/ubahLoker/{idLowongan}")
-    private ResponseEntity<LowonganKerjaModel> updateLoker(@PathVariable Long idLowongan, @RequestBody LowonganKerjaModel loker){
+    private LowonganKerjaModel updateLoker(@PathVariable Long idLowongan, @RequestBody LowonganKerjaModel loker){
         try{
-            LowonganKerjaModel updateLoker = lowonganKerjaService.changeLowonganKerja(idLowongan, loker);
-            return new ResponseEntity<LowonganKerjaModel>(updateLoker, HttpStatus.OK);
+            return lowonganKerjaService.changeLowonganKerja(idLowongan, loker);
+
         }
         catch (NoSuchElementException e){
             throw new ResponseStatusException(
@@ -61,16 +67,19 @@ public class LowonganKerjaRestController {
     /*Untuk addLoker, nunggu requestLoker dulu Nanti di serviceLokerIMPLnya
     yang add parameternya req.Loker id, dicari terus oper oper data. save
      */
-//    @PostMapping(value = "/addLoker")
-//    private ResponseEntity<Void> createLoker(@RequestBody LowonganKerjaModel loker, BindingResult bindingResult){
-//        if(bindingResult.hasFieldErrors()){
-//            throw new ResponseStatusException(
-//                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
-//        }else{
-//            lowonganKerjaService.addLowonganKerja(loker);
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }
-//    }
+    @PostMapping(value = "/addLoker/{idReqLowongan}")
+    private ResponseEntity<Void> createLoker(@PathVariable Long idReqLowongan, @RequestBody LowonganKerjaModel loker, BindingResult bindingResult){
+        if(bindingResult.hasFieldErrors()){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+        }else{
+            RequestLowonganModel reqLoker = requestLowonganService.getRequestLowonganById(idReqLowongan);
+            loker.setDepartement(reqLoker.getDepartement());
+            loker.setSection(reqLoker.getSection());
+            lowonganKerjaService.addLowonganKerja(loker);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
 
 
 
