@@ -76,6 +76,7 @@ public class LowonganKerjaRestController {
             RequestLowonganModel reqLoker = requestLowonganService.getRequestLowonganById(idReqLowongan);
             loker.setDepartement(reqLoker.getDepartement());
             loker.setSection(reqLoker.getSection());
+            loker.setRequestLowongan(reqLoker);
             lowonganKerjaService.addLowonganKerja(loker);
             return new ResponseEntity<>(HttpStatus.OK);
         }
