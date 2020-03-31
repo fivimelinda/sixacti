@@ -19,6 +19,18 @@ public class LowonganKerjaModel implements Serializable {
     private Long idLowongan;
 
     @NotNull
+    @Column(name = "judulLoker")
+    private String judulLoker;
+
+    @NotNull
+    @Column(name = "departement")
+    private String departement;
+
+    @NotNull
+    @Column(name = "section")
+    private String section;
+
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "tanggalMulai", nullable = false)
     private Date tanggalMulai;
@@ -33,9 +45,9 @@ public class LowonganKerjaModel implements Serializable {
     @Column(name = "deskripsi", nullable = false)
     private String deskripsi;
 
-    @NotNull
-    @Column(name = "nomorLowongan", nullable = false)
-    private Integer nomorLowongan;
+//    @NotNull
+//    @Column(name = "nomorLowongan", nullable = false)
+//    private Integer nomorLowongan;
 
     @OneToMany(mappedBy = "lowongan", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     private List<LamaranModel> listLamaran;
@@ -58,6 +70,30 @@ public class LowonganKerjaModel implements Serializable {
 
     public void setIdLowongan(Long idLowongan) {
         this.idLowongan = idLowongan;
+    }
+
+    public String getJudulLoker() {
+        return judulLoker;
+    }
+
+    public void setJudulLoker(String judulLoker) {
+        this.judulLoker = judulLoker;
+    }
+
+    public String getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(String departement) {
+        this.departement = departement;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
     }
 
     public Date getTanggalMulai() {
@@ -84,12 +120,20 @@ public class LowonganKerjaModel implements Serializable {
         this.deskripsi = deskripsi;
     }
 
-    public Integer getNomorLowongan() {
-        return nomorLowongan;
+    public RequestLowonganModel getRequestLowongan() {
+        return requestLowongan;
     }
 
-    public void setNomorLowongan(Integer nomorLowongan) {
-        this.nomorLowongan = nomorLowongan;
+    public void setRequestLowongan(RequestLowonganModel requestLowongan) {
+        this.requestLowongan = requestLowongan;
     }
+
+    //    public Integer getNomorLowongan() {
+//        return nomorLowongan;
+//    }
+//
+//    public void setNomorLowongan(Integer nomorLowongan) {
+//        this.nomorLowongan = nomorLowongan;
+//    }
 }
 
