@@ -7,18 +7,23 @@
 <body>
     <form th:action="@{/loker/tambah-loker}" th:object="${loker}" method="POST">
         <!-- <input type="hidden" th:field="${loker.id}" /> -->
-        deskripsi : <br>
-        <input type="text" name="deskripsi" />
+        Judul Loker : <br>
+        <input type="text" name="judulLoker" />
         <br>
-        nomor lowongan: <br>
-        <input type="number" name="nomorLowongan" />
+        Departement: <br>
+        <input type="text" th:value = "${reqLoker.departement}"  name="departement" />
         <br>
-        Tanggal Berakhir: <br>
-        <input type="date" name="tanggalBerakhir" />
+        Section: <br>
+        <input type="text" th:value = "${reqLoker.section}" name="section" />
         <br>
         Tanggal mulai: <br>
         <input type="date" name="tanggalMulai" />
         <br>
+        Tanggal Berakhir: <br>
+        <input type="date" name="tanggalBerakhir" />
+        <br>
+        Deskripsi :
+        <textarea id = "deskripsi" name = "deskripsi" rows = "5" cols = "30"></textarea>
         Req. Lowongan <br>
         <input type="number" name="requestLowonganId" />
         <br>

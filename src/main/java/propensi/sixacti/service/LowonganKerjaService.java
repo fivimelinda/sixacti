@@ -2,6 +2,7 @@ package propensi.sixacti.service;
 
 import propensi.sixacti.model.LowonganKerjaModel;
 
+import java.util.Date;
 import java.util.List;
 
 public interface LowonganKerjaService {

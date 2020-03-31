@@ -3,8 +3,12 @@ package propensi.sixacti.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import propensi.sixacti.model.LowonganKerjaModel;
+import propensi.sixacti.model.RequestLowonganModel;
 import propensi.sixacti.repository.LowonganKerjaDB;
 
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +17,9 @@ public class LowonganKerjaServiceImpl implements LowonganKerjaService {
 
     @Autowired
     LowonganKerjaDB lowonganKerjaDB;
+
+    @Autowired
+    RequestLowonganService requestLowonganService;
 
     @Override
     public LowonganKerjaModel getLowonganKerjaById(Long id) {
@@ -32,10 +39,9 @@ public class LowonganKerjaServiceImpl implements LowonganKerjaService {
     @Override
     public LowonganKerjaModel changeLowonganKerja(Long idLowongan, LowonganKerjaModel newLoker) {
         LowonganKerjaModel targetLoker = getLowonganKerjaById(idLowongan);
-        targetLoker.setDeskripsi(newLoker.getDeskripsi());
-        targetLoker.setNomorLowongan(newLoker.getNomorLowongan());
-        targetLoker.setTanggalBerakhir(newLoker.getTanggalBerakhir());
         targetLoker.setTanggalMulai(newLoker.getTanggalMulai());
+        targetLoker.setTanggalBerakhir(newLoker.getTanggalBerakhir());
+        targetLoker.setDeskripsi(newLoker.getDeskripsi());
         return lowonganKerjaDB.save(targetLoker);
     }
 
@@ -54,4 +60,5 @@ public class LowonganKerjaServiceImpl implements LowonganKerjaService {
         }
 
     }
+
 }
