@@ -98,32 +98,32 @@ public class LamaranModel implements Serializable {
     @Column(name= "npwp", nullable = true)
     private String npwp;
 
-
-    @Column(name = "fotoKtp", nullable=true)
-    @Lob
-    private byte[] fotoKtp;
-
-    @Column(name = "fotoKk", nullable=true)
-    @Lob
-    private byte[] fotoKk;
-
-
-    @Column(name = "fotoNpwp", nullable = true)
-    @Lob
-    private byte[] fotoNpwp;
-
-    @Column(name = "fotoBpjsKes", nullable = true)
-    @Lob
-    private byte[] fotoBpjsKes;
-
-    @Column(name = "fotoBpjsKet", nullable = true)
-    @Lob
-    private byte[] fotoBpjsKet;
-
-
-    @Column(name = "resume", nullable = true)
-    @Lob
-    private byte[] resume;
+//
+//    @Column(name = "fotoKtp", nullable=true)
+//    @Lob
+//    private byte[] fotoKtp;
+//
+//    @Column(name = "fotoKk", nullable=true)
+//    @Lob
+//    private byte[] fotoKk;
+//
+//
+//    @Column(name = "fotoNpwp", nullable = true)
+//    @Lob
+//    private byte[] fotoNpwp;
+//
+//    @Column(name = "fotoBpjsKes", nullable = true)
+//    @Lob
+//    private byte[] fotoBpjsKes;
+//
+//    @Column(name = "fotoBpjsKet", nullable = true)
+//    @Lob
+//    private byte[] fotoBpjsKet;
+//
+//
+//    @Column(name = "resume", nullable = true)
+//    @Lob
+//    private byte[] resume;
 
     /*
     relasi---------------------------------------------------------
@@ -148,11 +148,11 @@ public class LamaranModel implements Serializable {
     private List<BerkasModel> listBerkas;
 
 
-//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-//    @JoinColumn(name = "lowonganId", referencedColumnName = "idLowongan", nullable = true)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private LowonganKerjaModel lowongan;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "lowonganId", referencedColumnName = "idLowongan", nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private LowonganKerjaModel lowongan;
 
 //    public LowonganKerjaModel getLamaran() {
 //        return lowongan;
@@ -162,53 +162,53 @@ public class LamaranModel implements Serializable {
 //        this.lowongan = lowongan;
 //    }
 
-    public byte[] getFotoKtp() {
-        return fotoKtp;
-    }
-
-    public void setFotoKtp(byte[] fotoKtp) {
-        this.fotoKtp = fotoKtp;
-    }
-
-    public byte[] getFotoKk() {
-        return fotoKk;
-    }
-
-    public void setFotoKk(byte[] fotoKk) {
-        this.fotoKk = fotoKk;
-    }
-
-    public byte[] getFotoNpwp() {
-        return fotoNpwp;
-    }
-
-    public void setFotoNpwp(byte[] fotoNpwp) {
-        this.fotoNpwp = fotoNpwp;
-    }
-
-    public byte[] getFotoBpjsKes() {
-        return fotoBpjsKes;
-    }
-
-    public void setFotoBpjsKes(byte[] fotoBpjsKes) {
-        this.fotoBpjsKes = fotoBpjsKes;
-    }
-
-    public byte[] getFotoBpjsKet() {
-        return fotoBpjsKet;
-    }
-
-    public void setFotoBpjsKet(byte[] fotoBpjsKet) {
-        this.fotoBpjsKet = fotoBpjsKet;
-    }
-
-    public byte[] getResume() {
-        return resume;
-    }
-
-    public void setResume(byte[] resume) {
-        this.resume = resume;
-    }
+//    public byte[] getFotoKtp() {
+//        return fotoKtp;
+//    }
+//
+//    public void setFotoKtp(byte[] fotoKtp) {
+//        this.fotoKtp = fotoKtp;
+//    }
+//
+//    public byte[] getFotoKk() {
+//        return fotoKk;
+//    }
+//
+//    public void setFotoKk(byte[] fotoKk) {
+//        this.fotoKk = fotoKk;
+//    }
+//
+//    public byte[] getFotoNpwp() {
+//        return fotoNpwp;
+//    }
+//
+//    public void setFotoNpwp(byte[] fotoNpwp) {
+//        this.fotoNpwp = fotoNpwp;
+//    }
+//
+//    public byte[] getFotoBpjsKes() {
+//        return fotoBpjsKes;
+//    }
+//
+//    public void setFotoBpjsKes(byte[] fotoBpjsKes) {
+//        this.fotoBpjsKes = fotoBpjsKes;
+//    }
+//
+//    public byte[] getFotoBpjsKet() {
+//        return fotoBpjsKet;
+//    }
+//
+//    public void setFotoBpjsKet(byte[] fotoBpjsKet) {
+//        this.fotoBpjsKet = fotoBpjsKet;
+//    }
+//
+//    public byte[] getResume() {
+//        return resume;
+//    }
+//
+//    public void setResume(byte[] resume) {
+//        this.resume = resume;
+//    }
 
     public Long getId() {
         return id;
