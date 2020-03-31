@@ -37,6 +37,7 @@ public class RequestLowonganRestController {
         return requestLowonganService.retrieveListRequestLowongan();
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/get/{id}")
     private RequestLowonganModel getRequestLowonganById(@PathVariable("id") Long id){
         return requestLowonganService.getRequestLowonganById(id);
