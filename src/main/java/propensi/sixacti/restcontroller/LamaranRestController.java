@@ -27,13 +27,13 @@ public class LamaranRestController {
     @Autowired
     private LowonganKerjaService lowonganKerjaService;
 
-    @PostMapping(value = "/addLamaran")
-    private ResponseEntity<Void> createLamaran(@RequestParam Long id, @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
+    @PostMapping(value = "/addLamaran/{idLowongan}")
+    private ResponseEntity<Void> createLamaran(@PathVariable Long idLowongan, @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }else{
-            LowonganKerjaModel lowonganKerjaModel = lowonganKerjaService.getLowonganKerjaById(id);
+            LowonganKerjaModel lowonganKerjaModel = lowonganKerjaService.getLowonganKerjaById(idLowongan);
             lamaranModel.setLamaran(lowonganKerjaModel);
             lamaranService.addLamaran(lamaranModel);
             return new ResponseEntity<>(HttpStatus.OK);
