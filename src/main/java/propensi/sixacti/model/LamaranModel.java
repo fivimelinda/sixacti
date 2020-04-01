@@ -149,18 +149,18 @@ public class LamaranModel implements Serializable {
 
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "lowonganId", referencedColumnName = "idLowongan", nullable = true)
+    @JoinColumn(name = "lowonganId", referencedColumnName = "idLowongan")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private LowonganKerjaModel lowongan;
 
-//    public LowonganKerjaModel getLamaran() {
-//        return lowongan;
-//    }
-//
-//    public void setLamaran(LowonganKerjaModel lowongan) {
-//        this.lowongan = lowongan;
-//    }
+    public LowonganKerjaModel getLamaran() {
+        return lowongan;
+    }
+
+    public void setLamaran(LowonganKerjaModel lowongan) {
+        this.lowongan = lowongan;
+    }
 
 //    public byte[] getFotoKtp() {
 //        return fotoKtp;

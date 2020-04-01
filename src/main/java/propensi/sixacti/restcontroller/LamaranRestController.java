@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import propensi.sixacti.model.LamaranModel;
+import propensi.sixacti.model.LowonganKerjaModel;
 import propensi.sixacti.service.LamaranService;
+import propensi.sixacti.service.LowonganKerjaService;
 
 
 import javax.swing.*;
@@ -22,13 +24,17 @@ public class LamaranRestController {
 
     @Autowired
     private LamaranService lamaranService;
+    @Autowired
+    private LowonganKerjaService lowonganKerjaService;
 
     @PostMapping(value = "/addLamaran")
-    private ResponseEntity<Void> createLamaran(@RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
+    private ResponseEntity<Void> createLamaran(@RequestParam Long id, @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }else{
+            LowonganKerjaModel lowonganKerjaModel = lowonganKerjaService.getLowonganKerjaById(id);
+            lamaranModel.setLamaran(lowonganKerjaModel);
             lamaranService.addLamaran(lamaranModel);
             return new ResponseEntity<>(HttpStatus.OK);
         }
