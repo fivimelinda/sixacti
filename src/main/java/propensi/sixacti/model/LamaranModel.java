@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,7 +22,6 @@ public class LamaranModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long id;
 
     @NotNull
@@ -33,13 +33,13 @@ public class LamaranModel implements Serializable {
     @Column(name="noBpjsKetenagakerjaan", nullable=true)
     private String noBpjsKetenagakerjaan;
 
-    @NotNull
-    @Size(max=50)
-    @Column(name="nama", nullable=false)
-    private String nama;
+//    @NotNull
+//    @Size(max=50)
+//    @Column(name="nama", nullable=false)
+//    private String nama;
 
-    @NotNull
-    @Column(name="timestampPelamar", nullable=false)
+
+    @Column(name="timestampPelamar", nullable=true)
     private Date timestampPelamar;
 
     @NotNull
@@ -53,12 +53,10 @@ public class LamaranModel implements Serializable {
     private String alamatDomisili;
 
     @NotNull
-    @Size(max=3)
     @Column(name= "rtDomisili",  nullable = false)
     private Integer rtDomisili;
 
     @NotNull
-    @Size(max=3)
     @Column(name= "rwDomisili",  nullable = false)
     private Integer rwDomisili;
 
@@ -68,7 +66,6 @@ public class LamaranModel implements Serializable {
     private String kelurahanDomisili;
 
     @NotNull
-    @Size(max=5)
     @Column(name= "kodePosDomisili",  nullable = false)
     private Integer kodePosDomisili;
 
@@ -82,61 +79,77 @@ public class LamaranModel implements Serializable {
     @Column(name= "pendidikan",  nullable = false)
     private String pendidikan;
 
-    @NotNull
+
     @Size(max=13)
-    @Column(name="noKis", nullable = false)
+    @Column(name="noKis", nullable = true)
     private String noKis;
 
-    @NotNull
+
     @Size(max=255)
-    @Column(name="pengalamanKerja", nullable = false)
+    @Column(name="pengalamanKerja", nullable = true)
     private String pengalamanKerja;
 
     @Size(max=13)
     @Column(name="noBpjsKesehatan", nullable = true)
     private String noBpjsKesehatan;
 
+
     @Size(max=13)
     @Column(name= "npwp", nullable = true)
     private String npwp;
 
-    @NotNull
-    @Column(name = "fotoKtp", nullable = false)
-    @Lob
-    private byte[] fotoKtp;
-
-    @NotNull
-    @Column(name = "fotoKk", nullable = false)
-    @Lob
-    private byte[] fotoKk;
-
-    @Column(name = "fotoNpwp", nullable = true)
-    @Lob
-    private byte[] fotoNpwp;
-
-    @Column(name = "fotoBpjsKes", nullable = true)
-    @Lob
-    private byte[] fotoBpjsKes;
-
-    @Column(name = "fotoBpjsKet", nullable = true)
-    @Lob
-    private byte[] fotoBpjsKet;
-
-    @NotNull
-    @Column(name = "resume", nullable = false)
-    @Lob
-    private byte[] resume;
+//
+//    @Column(name = "fotoKtp", nullable=true)
+//    @Lob
+//    private byte[] fotoKtp;
+//
+//    @Column(name = "fotoKk", nullable=true)
+//    @Lob
+//    private byte[] fotoKk;
+//
+//
+//    @Column(name = "fotoNpwp", nullable = true)
+//    @Lob
+//    private byte[] fotoNpwp;
+//
+//    @Column(name = "fotoBpjsKes", nullable = true)
+//    @Lob
+//    private byte[] fotoBpjsKes;
+//
+//    @Column(name = "fotoBpjsKet", nullable = true)
+//    @Lob
+//    private byte[] fotoBpjsKet;
+//
+//
+//    @Column(name = "resume", nullable = true)
+//    @Lob
+//    private byte[] resume;
 
     /*
     relasi---------------------------------------------------------
     **/
 
+
+
+    public PelamarModel getPelamar() {
+        return pelamar;
+    }
+
+    public void setPelamar(PelamarModel pelamar) {
+        this.pelamar = pelamar;
+    }
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     private PelamarModel pelamar;
 
+    @OneToMany(mappedBy = "lamaran")
+    @JsonIgnore
+    private List<BerkasModel> listBerkas;
+
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "lowonganId", referencedColumnName = "idLowongan", nullable = false)
+    @JoinColumn(name = "lowonganId", referencedColumnName = "idLowongan", nullable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private LowonganKerjaModel lowongan;
@@ -149,53 +162,53 @@ public class LamaranModel implements Serializable {
         this.lowongan = lowongan;
     }
 
-    public byte[] getFotoKtp() {
-        return fotoKtp;
-    }
-
-    public void setFotoKtp(byte[] fotoKtp) {
-        this.fotoKtp = fotoKtp;
-    }
-
-    public byte[] getFotoKk() {
-        return fotoKk;
-    }
-
-    public void setFotoKk(byte[] fotoKk) {
-        this.fotoKk = fotoKk;
-    }
-
-    public byte[] getFotoNpwp() {
-        return fotoNpwp;
-    }
-
-    public void setFotoNpwp(byte[] fotoNpwp) {
-        this.fotoNpwp = fotoNpwp;
-    }
-
-    public byte[] getFotoBpjsKes() {
-        return fotoBpjsKes;
-    }
-
-    public void setFotoBpjsKes(byte[] fotoBpjsKes) {
-        this.fotoBpjsKes = fotoBpjsKes;
-    }
-
-    public byte[] getFotoBpjsKet() {
-        return fotoBpjsKet;
-    }
-
-    public void setFotoBpjsKet(byte[] fotoBpjsKet) {
-        this.fotoBpjsKet = fotoBpjsKet;
-    }
-
-    public byte[] getResume() {
-        return resume;
-    }
-
-    public void setResume(byte[] resume) {
-        this.resume = resume;
-    }
+//    public byte[] getFotoKtp() {
+//        return fotoKtp;
+//    }
+//
+//    public void setFotoKtp(byte[] fotoKtp) {
+//        this.fotoKtp = fotoKtp;
+//    }
+//
+//    public byte[] getFotoKk() {
+//        return fotoKk;
+//    }
+//
+//    public void setFotoKk(byte[] fotoKk) {
+//        this.fotoKk = fotoKk;
+//    }
+//
+//    public byte[] getFotoNpwp() {
+//        return fotoNpwp;
+//    }
+//
+//    public void setFotoNpwp(byte[] fotoNpwp) {
+//        this.fotoNpwp = fotoNpwp;
+//    }
+//
+//    public byte[] getFotoBpjsKes() {
+//        return fotoBpjsKes;
+//    }
+//
+//    public void setFotoBpjsKes(byte[] fotoBpjsKes) {
+//        this.fotoBpjsKes = fotoBpjsKes;
+//    }
+//
+//    public byte[] getFotoBpjsKet() {
+//        return fotoBpjsKet;
+//    }
+//
+//    public void setFotoBpjsKet(byte[] fotoBpjsKet) {
+//        this.fotoBpjsKet = fotoBpjsKet;
+//    }
+//
+//    public byte[] getResume() {
+//        return resume;
+//    }
+//
+//    public void setResume(byte[] resume) {
+//        this.resume = resume;
+//    }
 
     public Long getId() {
         return id;
@@ -221,13 +234,13 @@ public class LamaranModel implements Serializable {
         this.noBpjsKetenagakerjaan = noBpjsKetenagakerjaan;
     }
 
-    public String getNama() {
-        return nama;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
+//    public String getNama() {
+//        return nama;
+//    }
+//
+//    public void setNama(String nama) {
+//        this.nama = nama;
+//    }
 
     public Date getTimestampPelamar() {
         return timestampPelamar;
