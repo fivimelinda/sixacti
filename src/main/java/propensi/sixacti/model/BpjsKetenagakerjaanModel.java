@@ -1,16 +1,12 @@
 package propensi.sixacti.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "berkas")
-public class BerkasModel implements Serializable {
+@Table(name = "bpjsKetenagakerjaan")
+public class BpjsKetenagakerjaanModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -24,36 +20,17 @@ public class BerkasModel implements Serializable {
     @Lob
     private byte[] data;
 
-//    @ManyToOne
-//    @JoinColumn(name="idLamaran")
-//    @JsonIgnore
-//    private LamaranModel lamaranModel;
-
-    public BerkasModel() {
-
+    public BpjsKetenagakerjaanModel(){
     }
 
-    public BerkasModel(@NotNull String fileName, @NotNull byte[] data) {
+    public BpjsKetenagakerjaanModel(@NotNull String fileName, @NotNull byte[] data) {
         this.fileName = fileName;
         this.data = data;
     }
 
-//    @ManyToOne
-//    @JoinColumn(name = "lamaranId")
-//    @JsonIgnore
-//    private LamaranModel lamaran;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "lamaranId", referencedColumnName = "id")
     private LamaranModel lamaran;
-
-    public LamaranModel getLamaran() {
-        return lamaran;
-    }
-
-    public void setLamaran(LamaranModel lamaran) {
-        this.lamaran = lamaran;
-    }
 
     public Long getId() {
         return Id;
@@ -78,14 +55,12 @@ public class BerkasModel implements Serializable {
     public void setData(byte[] data) {
         this.data = data;
     }
-}
 
-//    public LamaranModel getLamaranModel() {
-//        return lamaranModel;
-//    }
-//
-//    public void setLamaranModel(LamaranModel lamaranModel) {
-//        this.lamaranModel = lamaranModel;
-//    }
-//}
-//
+    public LamaranModel getLamaran() {
+        return lamaran;
+    }
+
+    public void setLamaran(LamaranModel lamaran) {
+        this.lamaran = lamaran;
+    }
+}

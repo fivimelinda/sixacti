@@ -8,8 +8,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -143,16 +141,52 @@ public class LamaranModel implements Serializable {
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     private PelamarModel pelamar;
 
-    @OneToMany(mappedBy = "lamaran")
-    @JsonIgnore
-    private List<BerkasModel> listBerkas;
+//    @OneToMany(mappedBy = "lamaran")
+//    @JsonIgnore
+//    private List<BerkasModel> listBerkas;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    private BerkasModel berkasModel;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    private KtpModel ktpModel;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    private KkModel kkModel;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    private NpwpModel npwpModel;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    private BpjsKetenagakerjaanModel bpjsKetenagakerjaan;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    private BpjsKesehatanModel bpjsKesehatanModel;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    private KisModel kisModel;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "lowonganId", referencedColumnName = "idLowongan", nullable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private LowonganKerjaModel lowongan;
+
+    public BerkasModel getBerkasModel() {
+        return berkasModel;
+    }
+
+    public void setBerkasModel(BerkasModel berkasModel) {
+        this.berkasModel = berkasModel;
+    }
+
+    public LowonganKerjaModel getLowongan() {
+        return lowongan;
+    }
+
+    public void setLowongan(LowonganKerjaModel lowongan) {
+        this.lowongan = lowongan;
+    }
 
     public LowonganKerjaModel getLamaran() {
         return lowongan;
