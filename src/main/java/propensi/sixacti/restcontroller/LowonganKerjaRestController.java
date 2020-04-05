@@ -1,4 +1,4 @@
-package propensi.sixacti.restController;
+package propensi.sixacti.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
