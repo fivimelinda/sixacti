@@ -30,9 +30,15 @@ public class TesTulisRestController {
     @PostMapping(value = "/tulis")
     public TesTulisModel tambahTesTulis(
         @Valid @RequestBody TesTulisModel tesTulis,
+        // @PathVariable(value = "nilai") String nilai,
+        // @PathVariable(value = "pelamar") String idPelamar,
         BindingResult bindingResult
     )
     {
+        // TesTulisModel tesTulis = new TesTulisModel();
+        // tesTulis.setNilai(nilai);
+        // tesTulis.setPelamar(null);
+
         //TODO: process POST request
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(

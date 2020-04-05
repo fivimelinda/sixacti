@@ -26,7 +26,7 @@ public class TesTulisModel implements Serializable{
     @NotNull
     @Size(max = 255)
     @Column(name = "nilai", nullable = false)
-    private Integer nilai;
+    private String nilai;
 
     // reference ke pelamar
     @OneToOne(cascade = CascadeType.ALL)
@@ -51,14 +51,28 @@ public class TesTulisModel implements Serializable{
     /**
      * @return the nilai
      */
-    public Integer getNilai() {
+    public String getNilai() {
         return nilai;
     }
 
     /**
      * @param nilai the nilai to set
      */
-    public void setNilai(Integer nilai) {
+    public void setNilai(String nilai) {
         this.nilai = nilai;
+    }
+
+    /**
+     * @param pelamar the pelamar to set
+     */
+    public void setPelamar(PelamarModel pelamar) {
+        this.pelamar = pelamar;
+    }
+
+    /**
+     * @return the pelamar
+     */
+    public PelamarModel getPelamar() {
+        return pelamar;
     }
 }
