@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import propensi.sixacti.model.TesWawancaraModel;
+import propensi.sixacti.repository.tes.TesWawancaraDb;
 
 @Service
 @Transactional
@@ -17,18 +18,18 @@ public class TesWawancaraRestServiceImpl implements TesWawancaraRestService{
     }
 
     public TesWawancaraModel ubahTesWawancara(Long idTesWawancara, TesWawancaraModel tesWawancara){
-        TesWawancaraModel oldTesWanwancara = getTesWawancaraByIdTesWawancara(idTesWawancara);
+        TesWawancaraModel updateTesWawancara = getTesWawancaraByIdTesWawancara(idTesWawancara);
         // restoran.setNama(restoranUpdate.getNama());
         // restoran.setAlamat(restoranUpdate.getAlamat());
         // restoran.setNomorTelepon(restoranUpdate.getNomorTelepon());
         // restoran.setRating(restoranUpdate.getRating());
 
-        return tesMWawancaraDb.save(oldTesWawancara);
+        return tesWawancaraDb.save(updateTesWawancara);
     }
 
     public TesWawancaraModel getTesWawancaraByIdTesWawancara(Long idTesWawancara){
-        return null;
-        // Optional<RestoranModel> restoran = restoranDb.findByIdRestoran(idRestoran);
+        TesWawancaraModel tesWawancara = tesWawancaraDb.findById(idTesWawancara).orElse(null);
+        return tesWawancara;
         // if(restoran.isPresent()){
         //     return restoran.get();
         // }else{

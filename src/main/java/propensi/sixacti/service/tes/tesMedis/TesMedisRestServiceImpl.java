@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import propensi.sixacti.model.TesMedisModel;
+import propensi.sixacti.repository.tes.TesMedisDb;
 
 @Service
 @Transactional
@@ -20,19 +21,19 @@ public class TesMedisRestServiceImpl implements TesMedisRestService{
 
     @Override
     public TesMedisModel ubahTesMedis(Long idTesMedis, TesMedisModel tesMedis){
-        TesMedisModel oldTesMedis = getTesMedisByIdTesMedis(idTesMedis);
+        TesMedisModel updateTesMedis = getTesMedisByIdTesMedis(idTesMedis);
         // restoran.setNama(restoranUpdate.getNama());
         // restoran.setAlamat(restoranUpdate.getAlamat());
         // restoran.setNomorTelepon(restoranUpdate.getNomorTelepon());
         // restoran.setRating(restoranUpdate.getRating());
 
-        return tesMedisDb.save(oldTesMedis);
+        return tesMedisDb.save(updateTesMedis);
     }
 
     @Override
     public TesMedisModel getTesMedisByIdTesMedis(Long idTesMedis){
-        return null;
-        // Optional<RestoranModel> restoran = restoranDb.findByIdRestoran(idRestoran);
+        TesMedisModel tesMedis = tesMedisDb.findById(idTesMedis).orElse(null);
+        return tesMedis;
         // if(restoran.isPresent()){
         //     return restoran.get();
         // }else{

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import propensi.sixacti.model.TesTulisModel;
+import propensi.sixacti.repository.tes.TesTulisDb;
 
 @Service
 @Transactional
@@ -18,18 +19,18 @@ public class TesTulisRestServiceImpl implements TesTulisRestService{
     }
 
     public TesTulisModel ubahTesTulis(Long idTesTulis, TesTulisModel tesTulis){
-        TesTulisModel oldTesTulis = getTesTulisByIdTesTulis(idTesTulis);
+        TesTulisModel updateTesTulis = getTesTulisByIdTesTulis(idTesTulis);
         // restoran.setNama(restoranUpdate.getNama());
         // restoran.setAlamat(restoranUpdate.getAlamat());
         // restoran.setNomorTelepon(restoranUpdate.getNomorTelepon());
         // restoran.setRating(restoranUpdate.getRating());
 
-        return tesMedisDb.save(oldTesTulis);
+        return tesTulisDb.save(updateTesTulis);
     }
 
     public TesTulisModel getTesTulisByIdTesTulis(Long idTesTulis){
-        return null;
-        // Optional<RestoranModel> restoran = restoranDb.findByIdRestoran(idRestoran);
+        TesTulisModel tesTulis = tesTulisDb.findById(idTesTulis).orElse(null);
+        return tesTulis;
         // if(restoran.isPresent()){
         //     return restoran.get();
         // }else{
