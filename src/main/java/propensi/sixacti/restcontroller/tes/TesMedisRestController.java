@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import propensi.sixacti.model.TesMedisModel;
+import propensi.sixacti.service.tes.tesMedis.TesMedisRestService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,14 +25,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
 @RestController
 @RequestMapping("/api/tes")
-public class TesMedisRestController(){
+public class TesMedisRestController{
     
     @Autowired
     private TesMedisRestService tesMedisRestService;
 
-    @Autowired
-    private UserRestService userRestService;
-
+    // @Autowired
+    // private UserRestService userRestService;
 
     //add new tes medis
     @PostMapping(value="/medis")
@@ -44,7 +45,7 @@ public class TesMedisRestController(){
                 HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }
         else{
-            return tesMedisRestService.buatTesMedis();
+            return tesMedisRestService.buatTesMedis(tesMedis);
         }
     }
 
@@ -59,7 +60,7 @@ public class TesMedisRestController(){
         }catch(NoSuchElementException e){
             throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "ID Tes Medis " + String.valueOf(idTesMedis+ " Not Found"
-            );
+            ));
         }
     }
 

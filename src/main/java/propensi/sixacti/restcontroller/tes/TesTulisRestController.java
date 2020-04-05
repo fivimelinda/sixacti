@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import propensi.sixacti.model.TesTulisModel;
+import propensi.sixacti.service.tes.tesTulis.TesTulisRestService;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
 @RestController
@@ -38,7 +39,7 @@ public class TesTulisRestController {
                 HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }
         else{
-            return tesTulisRestService.buatTesMedis();
+            return tesTulisRestService.buatTesTulis(tesTulis);
         }
     }
 

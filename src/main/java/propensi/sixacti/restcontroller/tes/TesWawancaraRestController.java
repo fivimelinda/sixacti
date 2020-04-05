@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import propensi.sixacti.model.TesWawancaraModel;
+import propensi.sixacti.service.tes.tesWawancara.TesWawancaraRestService;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
 @RestController
@@ -24,7 +25,7 @@ import propensi.sixacti.model.TesWawancaraModel;
 public class TesWawancaraRestController {
 
     @Autowired
-    private TesWawancaraRestController tesWawancaraRestController;
+    private TesWawancaraRestService tesWawancaraRestService;
 
     //tambah tes wawancara
     @PostMapping(value = "/wawancara")
@@ -38,7 +39,7 @@ public class TesWawancaraRestController {
                 HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }
         else{
-            return tesWawancaraRestService.buatTesMedis();
+            return tesWawancaraRestService.buatTesWawancara(tesWawancara);
         }
     } 
 
@@ -49,7 +50,7 @@ public class TesWawancaraRestController {
         @RequestBody TesWawancaraModel tesWawancara
     ){
         try{
-            return tesWawancaraRestService.ubahTesTulis(idTesWawancara, tesWawancara);
+            return tesWawancaraRestService.ubahTesWawancara(idTesWawancara, tesWawancara);
         }catch(NoSuchElementException e){
             throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "ID Tes Wawancara " + String.valueOf(idTesWawancara+ " Not Found"
