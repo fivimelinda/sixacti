@@ -20,16 +20,15 @@ public class TesTulisRestServiceImpl implements TesTulisRestService{
 
     public TesTulisModel ubahTesTulis(Long idTesTulis, TesTulisModel tesTulis){
         TesTulisModel updateTesTulis = getTesTulisByIdTesTulis(idTesTulis);
-        // restoran.setNama(restoranUpdate.getNama());
-        // restoran.setAlamat(restoranUpdate.getAlamat());
-        // restoran.setNomorTelepon(restoranUpdate.getNomorTelepon());
-        // restoran.setRating(restoranUpdate.getRating());
-
+        System.out.println(updateTesTulis.getIdTesTulis());
+        System.out.println(updateTesTulis.getNilai());
+        System.out.println("###################################################");
+        updateTesTulis.setNilai(tesTulis.getNilai());
         return tesTulisDb.save(updateTesTulis);
     }
 
     public TesTulisModel getTesTulisByIdTesTulis(Long idTesTulis){
-        TesTulisModel tesTulis = tesTulisDb.findById(idTesTulis).orElse(null);
+        TesTulisModel tesTulis = tesTulisDb.findByIdTesTulis(idTesTulis).get(0);
         return tesTulis;
         // if(restoran.isPresent()){
         //     return restoran.get();

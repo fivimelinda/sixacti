@@ -19,11 +19,8 @@ public class TesWawancaraRestServiceImpl implements TesWawancaraRestService{
 
     public TesWawancaraModel ubahTesWawancara(Long idTesWawancara, TesWawancaraModel tesWawancara){
         TesWawancaraModel updateTesWawancara = getTesWawancaraByIdTesWawancara(idTesWawancara);
-        // restoran.setNama(restoranUpdate.getNama());
-        // restoran.setAlamat(restoranUpdate.getAlamat());
-        // restoran.setNomorTelepon(restoranUpdate.getNomorTelepon());
-        // restoran.setRating(restoranUpdate.getRating());
-
+        updateTesWawancara.setNilai(tesWawancara.getNilai());
+        updateTesWawancara.setFeedback(tesWawancara.getFeedback());
         return tesWawancaraDb.save(updateTesWawancara);
     }
 

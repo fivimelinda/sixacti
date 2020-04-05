@@ -1,5 +1,6 @@
 package propensi.sixacti.repository.tes;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +11,6 @@ import propensi.sixacti.model.TesTulisModel;
 @Repository
 public interface TesTulisDb extends JpaRepository<TesTulisModel, Long>{
     
-    Optional<TesTulisModel> findById(Long idTesTulis);
+    List<TesTulisModel> findByIdTesTulis(Long idTesTulis);
 
 }

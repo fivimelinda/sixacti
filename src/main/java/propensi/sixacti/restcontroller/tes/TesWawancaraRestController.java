@@ -44,7 +44,7 @@ public class TesWawancaraRestController {
     } 
 
     //ubah tes wawancara
-    @PutMapping(value = "/wawancara/update")
+    @PutMapping(value = "/wawancara/update/{idTesWawancara}")
     public TesWawancaraModel ubahTesWawancara(
         @PathVariable (value = "idTesWawancara") Long idTesWawancara,
         @RequestBody TesWawancaraModel tesWawancara

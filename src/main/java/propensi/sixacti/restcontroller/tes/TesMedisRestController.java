@@ -50,7 +50,7 @@ public class TesMedisRestController{
     }
 
     //edit tes
-    @PutMapping(value = "/medis/update")
+    @PutMapping(value = "/medis/update/{idTesMedis}")
     public TesMedisModel ubahTesMedis(
         @PathVariable (value = "idTesMedis") Long idTesMedis,
         @RequestBody TesMedisModel tesMedis

@@ -22,11 +22,11 @@ public class TesMedisRestServiceImpl implements TesMedisRestService{
     @Override
     public TesMedisModel ubahTesMedis(Long idTesMedis, TesMedisModel tesMedis){
         TesMedisModel updateTesMedis = getTesMedisByIdTesMedis(idTesMedis);
-        // restoran.setNama(restoranUpdate.getNama());
-        // restoran.setAlamat(restoranUpdate.getAlamat());
-        // restoran.setNomorTelepon(restoranUpdate.getNomorTelepon());
-        // restoran.setRating(restoranUpdate.getRating());
-
+        updateTesMedis.setBeratBadan(tesMedis.getBeratBadan());
+        updateTesMedis.setTinggiBadan(tesMedis.getTinggiBadan());
+        updateTesMedis.setButaWarna(tesMedis.getButaWarna());
+        updateTesMedis.setRiwayatPenyakit(tesMedis.getRiwayatPenyakit());
+        updateTesMedis.setTekananDarah(tesMedis.getTekananDarah());
         return tesMedisDb.save(updateTesMedis);
     }
 
