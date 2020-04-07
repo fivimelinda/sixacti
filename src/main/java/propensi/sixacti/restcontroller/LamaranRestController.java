@@ -14,6 +14,7 @@ import propensi.sixacti.service.LowonganKerjaService;
 
 
 import javax.swing.*;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -35,6 +36,8 @@ public class LamaranRestController {
         }else{
             LowonganKerjaModel lowonganKerjaModel = lowonganKerjaService.getLowonganKerjaById(idLowongan);
             lamaranModel.setLamaran(lowonganKerjaModel);
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            lamaranModel.setTimestampPelamar(timestamp);
             lamaranService.addLamaran(lamaranModel);
             return new ResponseEntity<>(HttpStatus.OK);
         }
