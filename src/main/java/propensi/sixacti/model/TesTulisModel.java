@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "tesTulis")
@@ -26,13 +32,14 @@ public class TesTulisModel implements Serializable{
     @NotNull
     @Size(max = 255)
     @Column(name = "nilai", nullable = false)
-    private Integer nilai;
+    private String nilai;
 
     // reference ke pelamar
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY )
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
-    private PelamarModel pelamar;
-
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private PelamarModel pelamarTesTulis;
 
     /**
      * @return the idTesTulis
@@ -51,14 +58,28 @@ public class TesTulisModel implements Serializable{
     /**
      * @return the nilai
      */
-    public Integer getNilai() {
+    public String getNilai() {
         return nilai;
     }
 
     /**
      * @param nilai the nilai to set
      */
-    public void setNilai(Integer nilai) {
+    public void setNilai(String nilai) {
         this.nilai = nilai;
+    }
+
+    /**
+     * @param pelamarTesTulis the pelamarTesTulis to set
+     */
+    public void setPelamarTesTulis(PelamarModel pelamarTesTulis) {
+        this.pelamarTesTulis = pelamarTesTulis;
+    }
+
+    /**
+     * @return the pelamarTesTulis
+     */
+    public PelamarModel getPelamarTesTulis() {
+        return pelamarTesTulis;
     }
 }
