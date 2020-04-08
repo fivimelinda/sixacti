@@ -37,6 +37,11 @@ public class RequestLowonganServiceImpl implements RequestLowonganService {
     public RequestLowonganModel addRequestLowongan(RequestLowonganModel requestLowongan) {
         return requestLowonganDb.save(requestLowongan);
     }
+
+    @Override
+    public void deleteRequestLowonganById(Long id) {
+        requestLowonganDb.deleteById(id);
+    }
     
     
 }
