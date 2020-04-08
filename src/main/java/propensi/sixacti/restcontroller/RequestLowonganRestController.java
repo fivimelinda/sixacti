@@ -38,6 +38,7 @@ public class RequestLowonganRestController {
         return requestLowonganService.getRequestLowonganById(id);
     }
 
+    @CrossOrigin
     @PostMapping(value = "/add")
     private RequestLowonganModel addRequestLowongan(@Valid @RequestBody RequestLowonganModel requestLowongan, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){
@@ -49,6 +50,12 @@ public class RequestLowonganRestController {
             requestLowongan.setKaryawan(karyawan);
             return requestLowonganService.addRequestLowongan(requestLowongan);
         }
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    private void RequestLowonganModel(@PathVariable("id") Long id){
+        requestLowonganService.deleteRequestLowonganById(id);
     }
 
 
