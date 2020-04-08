@@ -56,13 +56,13 @@ public class LowonganKerjaModel implements Serializable {
     @JoinColumn(name="requestLowonganId", referencedColumnName = "id")
     private RequestLowonganModel requestLowongan; 
 
-    public List<LamaranModel> getListLamaran() {
-        return listLamaran;
-    }
-
-    public void setListLamaran(List<LamaranModel> listLamaran) {
-        this.listLamaran = listLamaran;
-    }
+//    public List<LamaranModel> getListLamaran() {
+//        return listLamaran;
+//    }
+//
+//    public void setListLamaran(List<LamaranModel> listLamaran) {
+//        this.listLamaran = listLamaran;
+//    }
 
     public Long getIdLowongan() {
         return idLowongan;

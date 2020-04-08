@@ -20,13 +20,13 @@ public class PelamarModel implements Serializable{
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamar")
     private LamaranModel lamaran;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamar")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamarTesTulis")
     private TesTulisModel tesTulis;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamar")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamarTesMedis")
     private TesMedisModel tesMedis;
     
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamar")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamarTesWawancara")
     private TesWawancaraModel tesWawancara;
 
     /**

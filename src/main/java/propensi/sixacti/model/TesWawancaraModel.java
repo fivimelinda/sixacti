@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "tesWawancara")
@@ -34,9 +40,11 @@ public class TesWawancaraModel implements Serializable{
     private String feedback;
 
     // reference ke pelamar
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
-    private PelamarModel pelamar;
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private PelamarModel pelamarTesWawancara;
 
     /**
      * @return the idTesWawancara
@@ -80,4 +88,17 @@ public class TesWawancaraModel implements Serializable{
         this.feedback = feedback;
     }
 
+    /**
+     * @return the pelamarTesWawancara
+     */
+    public PelamarModel getPelamarTesWawancara() {
+        return pelamarTesWawancara;
+    }
+
+    /**
+     * @param pelamarTesWawancara the pelamarTesWawancara to set
+     */
+    public void setPelamarTesWawancara(PelamarModel pelamarTesWawancara) {
+        this.pelamarTesWawancara = pelamarTesWawancara;
+    }
 }

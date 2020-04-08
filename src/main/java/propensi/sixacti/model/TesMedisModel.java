@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "tesMedis")
@@ -39,7 +45,6 @@ public class TesMedisModel implements Serializable{
     private String tekananDarah;
   
     @NotNull
-    @Size(max = 255)
     @Column(name = "butaWarna", nullable = false)
     private Boolean butaWarna;
 
@@ -49,9 +54,12 @@ public class TesMedisModel implements Serializable{
     private String riwayatPenyakit;
     
     // reference ke pelamar
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
-    private PelamarModel pelamar;
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private PelamarModel pelamarTesMedis;
+
 
     /**
      * @return the idTesMedis
@@ -135,6 +143,20 @@ public class TesMedisModel implements Serializable{
      */
     public void setRiwayatPenyakit(String riwayatPenyakit) {
         this.riwayatPenyakit = riwayatPenyakit;
+    }
+
+    /**
+     * @return the pelamarTesMedis
+     */
+    public PelamarModel getPelamarTesMedis() {
+        return pelamarTesMedis;
+    }
+
+    /**
+     * @param pelamarTesMedis the pelamarTesMedis to set
+     */
+    public void setPelamarTesMedis(PelamarModel pelamarTesMedis) {
+        this.pelamarTesMedis = pelamarTesMedis;
     }
 
 }
