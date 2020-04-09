@@ -250,11 +250,11 @@ public class KaryawanModel {
         this.cuti = cuti;
     }
 
-    public List<RequestLowonganModel> getRequestLowongan() {
-        return requestLowongan;
-    }
+    // public List<RequestLowonganModel> getRequestLowongan() {
+    //     return requestLowongan;
+    // }
 
-    public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
-        this.requestLowongan = requestLowongan;
-    }
+    // public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
+    //     this.requestLowongan = requestLowongan;
+    // }
 }

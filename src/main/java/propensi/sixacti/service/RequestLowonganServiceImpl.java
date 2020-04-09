@@ -32,6 +32,16 @@ public class RequestLowonganServiceImpl implements RequestLowonganService {
     public List<RequestLowonganModel> retrieveListRequestLowongan() {
         return requestLowonganDb.findAll();
     }
+
+    @Override
+    public RequestLowonganModel addRequestLowongan(RequestLowonganModel requestLowongan) {
+        return requestLowonganDb.save(requestLowongan);
+    }
+
+    @Override
+    public void deleteRequestLowonganById(Long id) {
+        requestLowonganDb.deleteById(id);
+    }
     
     
 }

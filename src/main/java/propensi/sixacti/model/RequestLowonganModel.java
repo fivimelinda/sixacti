@@ -3,9 +3,12 @@ package propensi.sixacti.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -50,7 +53,7 @@ public class RequestLowonganModel implements Serializable {
     private boolean shift;
 
     @NotNull
-    @Size(max = 2)
+    @Min(1)
     @Column(name="jumlah", nullable = false)
     private Integer jumlah;
 
@@ -58,6 +61,11 @@ public class RequestLowonganModel implements Serializable {
     @Size(max = 10)
     @Column(name = "gaji", nullable = false)
     private String gaji;
+
+    // @Nullable
+    // @Range(min=0, max = 1000)
+    // @Column (name = "id_karyawan_dummy")
+    // private Integer id_karyawan_dummy;
 
 //    @NotNull
 //    @Column(name = "nama_replacement", nullable = false)
@@ -71,7 +79,15 @@ public class RequestLowonganModel implements Serializable {
     @JoinColumn(name = "idKaryawan", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private KaryawanModel karyawan;
+    private KaryawanModel karyawan; 
+
+    public void setKaryawan(KaryawanModel karyawan){
+        this.karyawan = karyawan;
+    }
+
+    public KaryawanModel getKaryawan(){
+        return karyawan;
+    }
 
     @OneToMany(mappedBy = "idReqLoker", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -168,6 +184,14 @@ public class RequestLowonganModel implements Serializable {
     public void setDetailOfRequirement(List<DetailOfRequirementModel> detailOfRequirement) {
         this.detailOfRequirement = detailOfRequirement;
     }
+
+    // public Integer getIdKaryawanDummy(){
+    //     return id_karyawan_dummy;
+    // }
+
+    // public void setIdKaryawanDummy(Integer id_karyawan_dummy ){
+    //     this.id_karyawan_dummy = id_karyawan_dummy;
+    // }
 
 //    public List<String> getNamaReplacement() {
 //        return namaReplacement;
