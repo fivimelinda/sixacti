@@ -7,8 +7,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import propensi.sixacti.model.BerkasModel;
 import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.model.LowonganKerjaModel;
+import propensi.sixacti.service.BerkasService;
 import propensi.sixacti.service.LamaranService;
 import propensi.sixacti.service.LowonganKerjaService;
 

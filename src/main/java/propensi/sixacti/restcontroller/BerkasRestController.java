@@ -23,9 +23,12 @@ public class BerkasRestController {
     @Autowired
     BerkasService berkasService;
 
+    @Autowired
+    LamaranService lamaranService;
+
     @PostMapping("/uploadFile")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file){
-        BerkasModel berkasModel = berkasService.storeFile(file);
+        berkasService.storeFile(file);
         return ResponseEntity.ok("Berkas with ID " + file.getOriginalFilename() + " Has been upload");
     }
 
