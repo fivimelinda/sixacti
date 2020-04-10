@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -50,7 +51,7 @@ public class RequestLowonganModel implements Serializable {
     private boolean shift;
 
     @NotNull
-//    @Size(max = 2)
+    @Min(1)
     @Column(name="jumlah", nullable = false)
     private Integer jumlah;
 
