@@ -50,6 +50,19 @@ public class LowonganKerjaRestController {
         }
     }
 
+//    @PutMapping(value = "/hapusLoker/{idLowongan}")
+//    private LowonganKerjaModel deleteLoker(@PathVariable Long idLowongan, @RequestBody LowonganKerjaModel loker){
+//        try{
+//            return lowonganKerjaService.deleteLowonganKerja(idLowongan, loker);
+//
+//        }
+//        catch (NoSuchElementException e){
+//            throw new ResponseStatusException(
+//                    HttpStatus.NOT_FOUND, "ID Lowongan" + idLowongan + "Not Found"
+//            );
+//        }
+//    }
+
     @PutMapping(value = "/ubahLoker/{idLowongan}")
     private LowonganKerjaModel updateLoker(@PathVariable Long idLowongan, @RequestBody LowonganKerjaModel loker){
         try{
@@ -74,8 +87,10 @@ public class LowonganKerjaRestController {
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }else{
             RequestLowonganModel reqLoker = requestLowonganService.getRequestLowonganById(idReqLowongan);
+            reqLoker.setStatus("Diterima");
             loker.setDepartement(reqLoker.getDepartement());
             loker.setSection(reqLoker.getSection());
+            loker.setDeleted(false);
             loker.setRequestLowongan(reqLoker);
             lowonganKerjaService.addLowonganKerja(loker);
             return new ResponseEntity<>(HttpStatus.OK);
