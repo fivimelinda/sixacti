@@ -9,6 +9,7 @@ import java.util.List;
 public interface LamaranService {
     LamaranModel findByIdLamaran(Long id);
     void addLamaran(LamaranModel lamaran);
+    List<LamaranModel> getLamaranByLowonganId (Long idLowongan);
     List<LamaranModel> getLamaran();
 
 }

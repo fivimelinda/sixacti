@@ -12,6 +12,7 @@ public interface LowonganKerjaService {
     LowonganKerjaModel changeLowonganKerja (Long idLowongan, LowonganKerjaModel newLoker);
     List<LowonganKerjaModel> getListLowonganKerja();
     void deleteLowonganKerja(Long idLowongan);
+//    LowonganKerjaModel deleteLowonganKerja(Long id, LowonganKerjaModel newLoker);
 
 
 }

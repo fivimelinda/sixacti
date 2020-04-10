@@ -50,7 +50,7 @@ public class RequestLowonganModel implements Serializable {
     private boolean shift;
 
     @NotNull
-    @Size(max = 2)
+//    @Size(max = 2)
     @Column(name="jumlah", nullable = false)
     private Integer jumlah;
 
