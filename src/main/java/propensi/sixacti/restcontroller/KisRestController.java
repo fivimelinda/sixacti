@@ -22,7 +22,8 @@ public class KisRestController {
 
     @PostMapping("/uploadKis/{idLamaran}")
     public ResponseEntity<String> uploadKis(@PathVariable Long idLamaran, @RequestParam("file") MultipartFile file){
-        kisService.storeFile(file);
+        LamaranModel lamaranModel = lamaranService.findByIdLamaran(idLamaran);
+        KisModel kisModel = kisService.storeFile(lamaranModel, file);
         return ResponseEntity.ok("Kis with ID " + file.getOriginalFilename() + " Has been upload");
     }
 

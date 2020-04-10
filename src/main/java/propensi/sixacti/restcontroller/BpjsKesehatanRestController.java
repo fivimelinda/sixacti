@@ -19,9 +19,10 @@ public class BpjsKesehatanRestController {
     @Autowired
     LamaranService lamaranService;
 
-    @PostMapping("/uploadBpjsKesehatan")
-    public ResponseEntity<String> uploadBpjsKesehatan(@RequestParam("file") MultipartFile file){
-        BpjsKesehatanModel bpjsKesehatanModel = bpjsKesehatanService.storeFile(file);
+    @PostMapping("/uploadBpjsKesehatan/{idLamaran}")
+    public ResponseEntity<String> uploadBpjsKesehatan(@PathVariable Long idLamaran, @RequestParam("file") MultipartFile file){
+        LamaranModel lamaranModel = lamaranService.findByIdLamaran(idLamaran);
+        BpjsKesehatanModel bpjsKesehatanModel = bpjsKesehatanService.storeFile(lamaranModel, file);
         return ResponseEntity.ok("Bpjs Kesehatan with ID " + file.getOriginalFilename() + " Has been upload");
     }
 }

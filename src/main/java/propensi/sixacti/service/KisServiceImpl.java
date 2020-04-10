@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import propensi.sixacti.exception.FileStorageException;
 import propensi.sixacti.model.BerkasModel;
 import propensi.sixacti.model.KisModel;
+import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.repository.KisDB;
 
 import java.io.IOException;
@@ -19,13 +20,14 @@ public class KisServiceImpl implements KisService{
     KisDB kisDB;
 
     @Override
-    public KisModel storeFile(MultipartFile file){
+    public KisModel storeFile(LamaranModel lamaran, MultipartFile file){
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if(fileName.contains("..")){
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
             KisModel kisModel= new KisModel(fileName, file.getBytes());
+            kisModel.setLamaran(lamaran);
             return kisDB.save(kisModel);
         } catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ", Please try again!", ex);
