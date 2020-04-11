@@ -39,6 +39,10 @@ public class TesWawancaraModel implements Serializable{
     @Column(name = "feedback", nullable = false)
     private String feedback;
 
+    @NotNull
+    @Column(name = "isEdit", nullable = false)
+    private Boolean isEdit;
+
     // reference ke pelamar
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
@@ -86,6 +90,14 @@ public class TesWawancaraModel implements Serializable{
      */
     public void setFeedback(String feedback) {
         this.feedback = feedback;
+    }
+
+    public Boolean getIsEdit(){
+        return isEdit;
+    }
+
+    public void setIsEdit(Boolean isEdit){
+        this.isEdit = isEdit;
     }
 
     /**

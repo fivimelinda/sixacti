@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import propensi.sixacti.model.BpjsKesehatanModel;
 import propensi.sixacti.model.BpjsKetenagakerjaanModel;
+import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.service.BpjsKesehatanService;
+import propensi.sixacti.service.LamaranService;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
 @RestController
@@ -14,6 +16,8 @@ import propensi.sixacti.service.BpjsKesehatanService;
 public class BpjsKesehatanRestController {
     @Autowired
     BpjsKesehatanService bpjsKesehatanService;
+    @Autowired
+    LamaranService lamaranService;
 
     @PostMapping("/uploadBpjsKesehatan")
     public ResponseEntity<String> uploadBpjsKesehatan(@RequestParam("file") MultipartFile file){

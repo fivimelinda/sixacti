@@ -34,6 +34,10 @@ public class TesTulisModel implements Serializable{
     @Column(name = "nilai", nullable = false)
     private String nilai;
 
+    @NotNull
+    @Column(name="isEdit", nullable=false)
+    private Boolean isEdit;
+
     // reference ke pelamar
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY )
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
@@ -67,6 +71,14 @@ public class TesTulisModel implements Serializable{
      */
     public void setNilai(String nilai) {
         this.nilai = nilai;
+    }
+
+    public Boolean getIsEdit(){
+        return isEdit;
+    }
+
+    public void setIsEdit(Boolean isEdit){
+        this.isEdit = isEdit;
     }
 
     /**

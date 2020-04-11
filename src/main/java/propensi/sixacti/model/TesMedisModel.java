@@ -52,6 +52,10 @@ public class TesMedisModel implements Serializable{
     @Size(max = 255)
     @Column(name = "riwayatPenyakit", nullable = false)
     private String riwayatPenyakit;
+
+    @NotNull
+    @Column(name="isEdit", nullable=false)
+    private Boolean isEdit;
     
     // reference ke pelamar
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
@@ -143,6 +147,14 @@ public class TesMedisModel implements Serializable{
      */
     public void setRiwayatPenyakit(String riwayatPenyakit) {
         this.riwayatPenyakit = riwayatPenyakit;
+    }
+
+    public Boolean getIsEdit(){
+        return isEdit;
+    }
+
+    public void setIsEdit(Boolean isEdit){
+        this.isEdit = isEdit;
     }
 
     /**
