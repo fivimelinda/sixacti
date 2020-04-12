@@ -24,7 +24,7 @@ public class KtpRestController {
     public ResponseEntity<String> uploadKtp(@PathVariable Long idLamaran, @RequestParam("file") MultipartFile file){
         LamaranModel lamaranModel = lamaranService.findByIdLamaran(idLamaran);
         KtpModel ktpModel = ktpService.storeFile(lamaranModel, file);
-        
+
         return ResponseEntity.ok("KTP with ID " + file.getOriginalFilename() + " Has been upload");
     }
 }

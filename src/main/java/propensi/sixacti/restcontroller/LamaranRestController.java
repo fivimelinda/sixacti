@@ -31,7 +31,7 @@ public class LamaranRestController {
     private LowonganKerjaService lowonganKerjaService;
 
     @PostMapping(value = "/addLamaran/{idLowongan}")
-    private ResponseEntity<Void> createLamaran(@PathVariable Long idLowongan, @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
+    private ResponseEntity<Long> createLamaran(@PathVariable Long idLowongan, @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
@@ -41,7 +41,8 @@ public class LamaranRestController {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             lamaranModel.setTimestampPelamar(timestamp);
             lamaranService.addLamaran(lamaranModel);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok(lamaranModel.getId());
+//            return new ResponseEntity<>(HttpStatus.OK);
         }
     }
 
