@@ -22,7 +22,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "tesMedis")
-
 public class TesMedisModel implements Serializable{
 
     @Id
@@ -57,13 +56,12 @@ public class TesMedisModel implements Serializable{
     @Column(name="isEdit", nullable=false)
     private Boolean isEdit;
     
-    // reference ke pelamar
+    //reference ke pelamar
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     @OnDelete(action= OnDeleteAction.CASCADE)
     @JsonIgnore
     private PelamarModel pelamarTesMedis;
-
 
     /**
      * @return the idTesMedis
@@ -149,14 +147,6 @@ public class TesMedisModel implements Serializable{
         this.riwayatPenyakit = riwayatPenyakit;
     }
 
-    public Boolean getIsEdit(){
-        return isEdit;
-    }
-
-    public void setIsEdit(Boolean isEdit){
-        this.isEdit = isEdit;
-    }
-
     /**
      * @return the pelamarTesMedis
      */
@@ -169,6 +159,20 @@ public class TesMedisModel implements Serializable{
      */
     public void setPelamarTesMedis(PelamarModel pelamarTesMedis) {
         this.pelamarTesMedis = pelamarTesMedis;
+    }
+
+    /**
+     * @return the isEdit
+     */
+    public Boolean getIsEdit() {
+        return isEdit;
+    }
+    
+    /**
+     * @param isEdit the isEdit to set
+     */
+    public void setIsEdit(Boolean isEdit) {
+        this.isEdit = isEdit;
     }
 
 }
