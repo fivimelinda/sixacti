@@ -54,6 +54,15 @@ public class RequestLowonganModel implements Serializable {
 
     @NotNull
     @Min(1)
+    @Column(name="periode_kontrak", nullable = false)
+    private Integer periodeKontrak;
+
+    @NotNull
+    @Column(name="addition", nullable = false)
+    private boolean addition;
+
+    @NotNull
+    @Min(1)
     @Column(name="jumlah", nullable = false)
     private Integer jumlah;
 
@@ -61,6 +70,10 @@ public class RequestLowonganModel implements Serializable {
     @Size(max = 10)
     @Column(name = "gaji", nullable = false)
     private String gaji;
+
+    @Size(max = 100)
+    @Column(name = "nama_replacement", nullable = true)
+    private String namaReplacement;
 
     // @Nullable
     // @Range(min=0, max = 1000)
@@ -184,6 +197,32 @@ public class RequestLowonganModel implements Serializable {
     public void setDetailOfRequirement(List<DetailOfRequirementModel> detailOfRequirement) {
         this.detailOfRequirement = detailOfRequirement;
     }
+
+    public String getNamaReplacement() {
+        return namaReplacement;
+    }
+
+    public Integer getPeriodeKontrak() {
+        return periodeKontrak;
+    }
+
+    public void setPeriodeKontrak(Integer periodeKontrak) {
+        this.periodeKontrak = periodeKontrak;
+    }
+
+    public boolean isAddition() {
+        return addition;
+    }
+
+    public void setAddition(boolean addition) {
+        this.addition = addition;
+    }
+
+    public void setNamaReplacement(String namaReplacement) {
+        this.namaReplacement = namaReplacement;
+    }
+
+
 
     // public Integer getIdKaryawanDummy(){
     //     return id_karyawan_dummy;
