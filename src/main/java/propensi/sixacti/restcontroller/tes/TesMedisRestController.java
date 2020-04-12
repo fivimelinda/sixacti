@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.model.TesMedisModel;
+import propensi.sixacti.service.tes.PelamarRestService;
 import propensi.sixacti.service.tes.tesMedis.TesMedisRestService;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +32,8 @@ public class TesMedisRestController{
     @Autowired
     private TesMedisRestService tesMedisRestService;
 
-    // @Autowired
-    // private UserRestService userRestService;
+    @Autowired
+    private PelamarRestService pelamarRestService;
 
     //add new tes medis
     @PostMapping(value="/medis")
@@ -45,7 +47,9 @@ public class TesMedisRestController{
                 HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }
         else{
-            System.out.println(tesMedis.getPelamarTesMedis());
+            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesMedis.getPelamarTesMedis().getIdPelamar());
+            pelamar.setTesMedis(tesMedis);
+            pelamarRestService.saveUpdatePelamar(pelamar);
             return tesMedisRestService.buatTesMedis(tesMedis);
         }
     }
