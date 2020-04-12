@@ -54,8 +54,16 @@ public class RequestLowonganRestController {
 
     @CrossOrigin
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    private void RequestLowonganModel(@PathVariable("id") Long id){
+    private String RequestLowonganModel(@PathVariable("id") Long id){
+        // try{
+        //     requestLowonganService.deleteRequestLowonganById(id);
+        //     return "success";
+        // }
+        // catch (Exception e){
+        //     return "error";
+        // }
         requestLowonganService.deleteRequestLowonganById(id);
+        return "success";
     }
 
 
