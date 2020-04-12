@@ -39,10 +39,10 @@ public class TesTulisModel implements Serializable{
     private Boolean isEdit;
 
     // reference ke pelamar
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY )
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     @OnDelete(action= OnDeleteAction.CASCADE)
-    @JsonIgnore
+    // @JsonIgnore
     private PelamarModel pelamarTesTulis;
 
     /**

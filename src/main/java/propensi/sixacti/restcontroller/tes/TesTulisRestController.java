@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -40,6 +41,19 @@ public class TesTulisRestController {
         }
         else{
             return tesTulisRestService.buatTesTulis(tesTulis);
+        }
+    }
+
+    @GetMapping(value = "/tulis/get/{idTesTulis}")
+    public TesTulisModel getTesTulis(
+        @PathVariable (value = "idTesTulis") Long idTesTulis
+    ){
+        try{
+            return tesTulisRestService.getTesTulisByIdTesTulis(idTesTulis);
+        }catch(NoSuchElementException e){
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "ID Tes Tulis " + String.valueOf(idTesTulis+ " Not Found"
+            ));
         }
     }
 

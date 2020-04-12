@@ -22,6 +22,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "tesMedis")
+
 public class TesMedisModel implements Serializable{
 
     @Id
@@ -56,12 +57,14 @@ public class TesMedisModel implements Serializable{
     @Column(name="isEdit", nullable=false)
     private Boolean isEdit;
     
+    
     //reference ke pelamar
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     @OnDelete(action= OnDeleteAction.CASCADE)
-    @JsonIgnore
+    //@JsonIgnore
     private PelamarModel pelamarTesMedis;
+
 
     /**
      * @return the idTesMedis

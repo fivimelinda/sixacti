@@ -23,7 +23,7 @@ public class PelamarModel implements Serializable{
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamarTesTulis")
     private TesTulisModel tesTulis;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamarTesMedis")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "pelamarTesMedis")
     private TesMedisModel tesMedis;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pelamarTesWawancara")
@@ -56,4 +56,5 @@ public class PelamarModel implements Serializable{
     public UserModel getUserPelamar() {
         return userPelamar;
     }
+
 }

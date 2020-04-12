@@ -45,7 +45,22 @@ public class TesMedisRestController{
                 HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }
         else{
+            System.out.println(tesMedis.getPelamarTesMedis());
             return tesMedisRestService.buatTesMedis(tesMedis);
+        }
+    }
+
+    //get tes medis
+    @GetMapping(value = "/medis/get/{idTesMedis}")
+    public TesMedisModel getTesMedis(
+        @PathVariable (value = "idTesMedis") Long idTesMedis
+    ){
+        try{
+            return tesMedisRestService.getTesMedisByIdTesMedis(idTesMedis);
+        }catch(NoSuchElementException e){
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "ID Tes Medis " + String.valueOf(idTesMedis+ " Not Found"
+            ));
         }
     }
 
