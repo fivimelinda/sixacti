@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import propensi.sixacti.exception.FileStorageException;
 import propensi.sixacti.model.KkModel;
 import propensi.sixacti.model.KtpModel;
+import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.repository.KkDB;
 
 import java.io.IOException;
@@ -19,13 +20,14 @@ public class KkServiceImpl implements KkService{
     KkDB kkDB;
 
     @Override
-    public KkModel storeFile(MultipartFile file){
+    public KkModel storeFile(LamaranModel lamaran, MultipartFile file){
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if(fileName.contains("..")){
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
             KkModel kkModel = new KkModel(fileName, file.getBytes());
+            kkModel.setLamaran(lamaran);
             return kkDB.save(kkModel);
         } catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ", Please try again!", ex);

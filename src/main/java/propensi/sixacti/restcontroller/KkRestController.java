@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import propensi.sixacti.model.KkModel;
 import propensi.sixacti.model.KtpModel;
+import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.service.KkService;
+import propensi.sixacti.service.LamaranService;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
 @RestController
@@ -14,10 +16,14 @@ import propensi.sixacti.service.KkService;
 public class KkRestController {
     @Autowired
     KkService kkService;
+    @Autowired
+    LamaranService lamaranService;
 
-    @PostMapping("/uploadKk")
-    public ResponseEntity<String> uploadKk(@RequestParam("file") MultipartFile file){
-        KkModel kkModel = kkService.storeFile(file);
+    @PostMapping("/uploadKk/{idLamaran}")
+    public ResponseEntity<String> uploadKk(@PathVariable Long idLamaran, @RequestParam("file") MultipartFile file){
+        LamaranModel lamaranModel = lamaranService.findByIdLamaran(idLamaran);
+        KkModel kkModel = kkService.storeFile(lamaranModel, file);
+
         return ResponseEntity.ok("Kk with ID " + file.getOriginalFilename() + " Has been upload");
     }
 }

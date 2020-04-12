@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import propensi.sixacti.exception.FileStorageException;
 import propensi.sixacti.model.BerkasModel;
 import propensi.sixacti.model.BpjsKesehatanModel;
+import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.repository.BpjsKesehatanDB;
 
 import java.io.IOException;
@@ -19,13 +20,14 @@ public class BpjsKesehatanServiceImpl implements BpjsKesehatanService {
     BpjsKesehatanDB bpjsKesehatanDB;
 
     @Override
-    public BpjsKesehatanModel storeFile(MultipartFile file){
+    public BpjsKesehatanModel storeFile(LamaranModel lamaran, MultipartFile file){
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if(fileName.contains("..")){
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
             BpjsKesehatanModel bpjsKesehatanModel= new BpjsKesehatanModel(fileName, file.getBytes());
+            bpjsKesehatanModel.setLamaran(lamaran);
             return bpjsKesehatanDB.save(bpjsKesehatanModel);
         } catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ", Please try again!", ex);

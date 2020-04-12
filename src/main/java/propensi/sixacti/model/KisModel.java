@@ -24,6 +24,9 @@ public class KisModel implements Serializable {
     @JoinColumn(name = "lamaranId", referencedColumnName = "id")
     private LamaranModel lamaran;
 
+    public KisModel(){
+
+    }
     public KisModel(@NotNull String fileName, @NotNull byte[] data) {
         this.fileName = fileName;
         this.data = data;
