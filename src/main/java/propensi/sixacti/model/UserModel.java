@@ -87,14 +87,14 @@ public class UserModel implements Serializable {
     Relation
     **/
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userAkun")
+    @OneToOne(cascade = CascadeType.ALL)
     private AkunModel akun;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private KaryawanModel karyawan;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // private KaryawanModel karyawan;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userPelamar")
-    private PelamarModel pelamar;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // private PelamarModel pelamar;
 
     /*
     setter getter
@@ -212,13 +212,13 @@ public class UserModel implements Serializable {
         this.NPWP = nPWP;
     }
 
-    public KaryawanModel getKaryawan() {
-        return karyawan;
-    }
+    // public KaryawanModel getKaryawan() {
+    //     return karyawan;
+    // }
 
-    public void setKaryawan(KaryawanModel karyawan) {
-        this.karyawan = karyawan;
-    }
+    // public void setKaryawan(KaryawanModel karyawan) {
+    //     this.karyawan = karyawan;
+    // }
 }
 
 

@@ -1,9 +1,12 @@
 package propensi.sixacti.service.tes.tesMedis;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.model.TesMedisModel;
 import propensi.sixacti.repository.tes.TesMedisDb;
 
@@ -27,6 +30,7 @@ public class TesMedisRestServiceImpl implements TesMedisRestService{
         updateTesMedis.setButaWarna(tesMedis.getButaWarna());
         updateTesMedis.setRiwayatPenyakit(tesMedis.getRiwayatPenyakit());
         updateTesMedis.setTekananDarah(tesMedis.getTekananDarah());
+        updateTesMedis.setIsEdit(tesMedis.getIsEdit());
         return tesMedisDb.save(updateTesMedis);
     }
 
@@ -39,5 +43,15 @@ public class TesMedisRestServiceImpl implements TesMedisRestService{
         // }else{
         //     throw new NoSuchElementException();
         // }
+    }
+
+    @Override 
+    public TesMedisModel getTesMedisByPelamar(PelamarModel pelamar){
+        List<TesMedisModel> listTesMedis = tesMedisDb.findByPelamarTesMedis(pelamar);
+        if(listTesMedis.size() != 0){
+            return listTesMedis.get(0);
+        }else{
+            return null;
+        }
     }
 }

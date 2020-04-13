@@ -57,14 +57,12 @@ public class TesMedisModel implements Serializable{
     @Column(name="isEdit", nullable=false)
     private Boolean isEdit;
     
-    
     //reference ke pelamar
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     @OnDelete(action= OnDeleteAction.CASCADE)
     //@JsonIgnore
     private PelamarModel pelamarTesMedis;
-
 
     /**
      * @return the idTesMedis

@@ -47,9 +47,9 @@ public class TesMedisRestController{
                 HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }
         else{
-            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesMedis.getPelamarTesMedis().getIdPelamar());
-            pelamar.setTesMedis(tesMedis);
-            pelamarRestService.saveUpdatePelamar(pelamar);
+            // PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesMedis.getPelamarTesMedis().getIdPelamar());
+            // pelamar.setTesMedis(tesMedis);
+            // pelamarRestService.saveUpdatePelamar(pelamar);
             return tesMedisRestService.buatTesMedis(tesMedis);
         }
     }
@@ -65,6 +65,20 @@ public class TesMedisRestController{
             throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "ID Tes Medis " + String.valueOf(idTesMedis+ " Not Found"
             ));
+        }
+    }
+
+    @GetMapping(value = "/medis/pelamar/{idPelamar}")
+    public TesMedisModel getTesMedisByPelamar(
+        @PathVariable (value = "idPelamar") Long idPelamar
+    ){
+        try{
+            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
+            return tesMedisRestService.getTesMedisByPelamar(pelamar);
+        }catch(NoSuchElementException e){
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Tes Medis Not Found"
+            );
         }
     }
 
