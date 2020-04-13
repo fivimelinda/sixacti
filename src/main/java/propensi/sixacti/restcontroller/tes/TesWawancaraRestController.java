@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.model.TesWawancaraModel;
+import propensi.sixacti.service.tes.PelamarRestService;
 import propensi.sixacti.service.tes.tesWawancara.TesWawancaraRestService;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
@@ -27,6 +29,9 @@ public class TesWawancaraRestController {
 
     @Autowired
     private TesWawancaraRestService tesWawancaraRestService;
+
+    @Autowired
+    private PelamarRestService pelamarRestService;
 
     //tambah tes wawancara
     @PostMapping(value = "/wawancara")
@@ -41,6 +46,20 @@ public class TesWawancaraRestController {
         }
         else{
             return tesWawancaraRestService.buatTesWawancara(tesWawancara);
+        }
+    }
+
+    @GetMapping(value = "/wawancara/pelamar/{idPelamar}")
+    public TesWawancaraModel getTesWawancaraByPelamar(
+        @PathVariable (value = "idPelamar") Long idPelamar
+    ){
+        try{
+            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
+            return tesWawancaraRestService.getTesWawancaraByPelamar(pelamar);
+        }catch(NoSuchElementException e){
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Tes Wawancara Not Found"
+            );
         }
     }
 

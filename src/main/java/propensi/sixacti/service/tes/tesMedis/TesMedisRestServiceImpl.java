@@ -45,7 +45,6 @@ public class TesMedisRestServiceImpl implements TesMedisRestService{
         // }
     }
 
-    @Override 
     public TesMedisModel getTesMedisByPelamar(PelamarModel pelamar){
         List<TesMedisModel> listTesMedis = tesMedisDb.findByPelamarTesMedis(pelamar);
         if(listTesMedis.size() != 0){

@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.model.TesTulisModel;
+
+import propensi.sixacti.service.tes.PelamarRestService;
 import propensi.sixacti.service.tes.tesTulis.TesTulisRestService;
+
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
 @RestController
@@ -27,6 +31,9 @@ public class TesTulisRestController {
 
     @Autowired
     private TesTulisRestService tesTulisRestService;
+
+    @Autowired
+    private PelamarRestService pelamarRestService;
 
     @PostMapping(value = "/tulis")
     public TesTulisModel tambahTesTulis(
@@ -41,6 +48,20 @@ public class TesTulisRestController {
         }
         else{
             return tesTulisRestService.buatTesTulis(tesTulis);
+        }
+    }
+
+    @GetMapping(value = "/tulis/pelamar/{idPelamar}")
+    public TesTulisModel getTesTulisByPelamar(
+        @PathVariable (value = "idPelamar") Long idPelamar
+    ){
+        try{
+            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
+            return tesTulisRestService.getTesTulisByPelamar(pelamar);
+        }catch(NoSuchElementException e){
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Tes Tulis Not Found"
+            );
         }
     }
 

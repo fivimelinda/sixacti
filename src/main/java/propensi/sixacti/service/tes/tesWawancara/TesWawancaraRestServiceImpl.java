@@ -1,9 +1,12 @@
 package propensi.sixacti.service.tes.tesWawancara;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.model.TesWawancaraModel;
 import propensi.sixacti.repository.tes.TesWawancaraDb;
 
@@ -21,6 +24,7 @@ public class TesWawancaraRestServiceImpl implements TesWawancaraRestService{
         TesWawancaraModel updateTesWawancara = getTesWawancaraByIdTesWawancara(idTesWawancara);
         updateTesWawancara.setNilai(tesWawancara.getNilai());
         updateTesWawancara.setFeedback(tesWawancara.getFeedback());
+        updateTesWawancara.setIsEdit(tesWawancara.getIsEdit());
         return tesWawancaraDb.save(updateTesWawancara);
     }
 
@@ -32,5 +36,15 @@ public class TesWawancaraRestServiceImpl implements TesWawancaraRestService{
         // }else{
         //     throw new NoSuchElementException();
         // }
+    }
+
+    @Override 
+    public TesWawancaraModel getTesWawancaraByPelamar(PelamarModel pelamar){
+        List<TesWawancaraModel> listTesWawancara = tesWawancaraDb.findByPelamarTesWawancara(pelamar);
+        if(listTesWawancara.size() != 0){
+            return listTesWawancara.get(0);
+        }else{
+            return null;
+        }
     }
 }

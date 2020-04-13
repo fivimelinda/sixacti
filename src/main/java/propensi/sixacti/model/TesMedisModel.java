@@ -45,8 +45,9 @@ public class TesMedisModel implements Serializable{
     private String tekananDarah;
   
     @NotNull
+    @Size(max = 255)
     @Column(name = "butaWarna", nullable = false)
-    private Boolean butaWarna;
+    private String butaWarna;
 
     @NotNull
     @Size(max = 255)
@@ -109,14 +110,14 @@ public class TesMedisModel implements Serializable{
     /**
      * @return the butaWarna
      */
-    public Boolean getButaWarna() {
+    public String getButaWarna() {
         return butaWarna;
     }
     
     /**
      * @param butaWarna the butaWarna to set
      */
-    public void setButaWarna(Boolean butaWarna) {
+    public void setButaWarna(String butaWarna) {
         this.butaWarna = butaWarna;
     }
 
