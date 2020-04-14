@@ -24,7 +24,7 @@ import propensi.sixacti.service.tes.PelamarRestService;
 import propensi.sixacti.service.tes.tesTulis.TesTulisRestService;
 
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/tes")
 public class TesTulisRestController {
@@ -35,9 +35,10 @@ public class TesTulisRestController {
     @Autowired
     private PelamarRestService pelamarRestService;
 
-    @PostMapping(value = "/tulis")
+    @PostMapping(value = "/tulis/{idPelamar}")
     public TesTulisModel tambahTesTulis(
         @Valid @RequestBody TesTulisModel tesTulis,
+        @PathVariable (value = "idPelamar") Long idPelamar,
         BindingResult bindingResult
     )
     {   
@@ -47,6 +48,8 @@ public class TesTulisRestController {
                 HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }
         else{
+            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
+            tesTulis.setPelamarTesTulis(pelamar);
             return tesTulisRestService.buatTesTulis(tesTulis);
         }
     }

@@ -63,7 +63,7 @@ public class TesMedisModel implements Serializable{
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     @OnDelete(action= OnDeleteAction.CASCADE)
-    //@JsonIgnore
+    @JsonIgnore
     private PelamarModel pelamarTesMedis;
 
     /**

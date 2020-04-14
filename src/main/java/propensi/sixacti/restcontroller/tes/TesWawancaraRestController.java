@@ -22,7 +22,7 @@ import propensi.sixacti.model.TesWawancaraModel;
 import propensi.sixacti.service.tes.PelamarRestService;
 import propensi.sixacti.service.tes.tesWawancara.TesWawancaraRestService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/tes")
 public class TesWawancaraRestController {
@@ -34,9 +34,10 @@ public class TesWawancaraRestController {
     private PelamarRestService pelamarRestService;
 
     //tambah tes wawancara
-    @PostMapping(value = "/wawancara")
+    @PostMapping(value = "/wawancara/{idPelamar}")
     public TesWawancaraModel tambahTesWawancara(
         @Valid @RequestBody TesWawancaraModel tesWawancara,
+        @PathVariable (value = "idPelamar") Long idPelamar,
         BindingResult bindingResult
     ){
         //TODO: process POST request
@@ -45,6 +46,8 @@ public class TesWawancaraRestController {
                 HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }
         else{
+            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
+            tesWawancara.setPelamarTesWawancara(pelamar);
             return tesWawancaraRestService.buatTesWawancara(tesWawancara);
         }
     }

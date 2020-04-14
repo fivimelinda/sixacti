@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
 @Entity
 @Table(name = "pelamar")
-
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class PelamarModel implements Serializable{
 
     @Id
@@ -17,17 +20,17 @@ public class PelamarModel implements Serializable{
     @JoinColumn(name = "nik", referencedColumnName = "nik")
     private UserModel userPelamar;
 
-    // @OneToOne(cascade = CascadeType.ALL)
-    // private LamaranModel lamaran;
+    @OneToOne(cascade = CascadeType.ALL)
+    private LamaranModel lamaran;
 
-    // @OneToOne(cascade = CascadeType.ALL)
-    // private TesTulisModel tesTulis;
+    @OneToOne(cascade = CascadeType.ALL)
+    private TesTulisModel tesTulis;
 
-    // @OneToOne(cascade = CascadeType.MERGE)
-    // private TesMedisModel tesMedis;
+    @OneToOne(cascade = CascadeType.MERGE)
+    private TesMedisModel tesMedis;
 
-    // @OneToOne(cascade = CascadeType.ALL)
-    // private TesWawancaraModel tesWawancara;
+    @OneToOne(cascade = CascadeType.ALL)
+    private TesWawancaraModel tesWawancara;
 
     /**
      * @param idPelamar the idPelamar to set

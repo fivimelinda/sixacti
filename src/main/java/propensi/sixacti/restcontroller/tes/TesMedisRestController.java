@@ -24,7 +24,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
+
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/tes")
 public class TesMedisRestController{
@@ -36,9 +37,10 @@ public class TesMedisRestController{
     private PelamarRestService pelamarRestService;
 
     //add new tes medis
-    @PostMapping(value="/medis")
+    @PostMapping(value="/medis/{idPelamar}")
     public TesMedisModel tambahTesMedis(
         @Valid @RequestBody TesMedisModel tesMedis,
+        @PathVariable (value = "idPelamar") Long idPelamar,
         BindingResult bindingResult) 
         {
         //TODO: process POST request
@@ -47,13 +49,14 @@ public class TesMedisRestController{
                 HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }
         else{
-            // PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesMedis.getPelamarTesMedis().getIdPelamar());
-            // pelamar.setTesMedis(tesMedis);
+            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
+            tesMedis.setPelamarTesMedis(pelamar);
             // pelamarRestService.saveUpdatePelamar(pelamar);
             return tesMedisRestService.buatTesMedis(tesMedis);
         }
     }
 
+    
     //get tes medis
     @GetMapping(value = "/medis/get/{idTesMedis}")
     public TesMedisModel getTesMedis(
