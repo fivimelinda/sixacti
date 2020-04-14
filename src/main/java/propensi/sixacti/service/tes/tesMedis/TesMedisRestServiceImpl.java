@@ -29,7 +29,8 @@ public class TesMedisRestServiceImpl implements TesMedisRestService{
         updateTesMedis.setTinggiBadan(tesMedis.getTinggiBadan());
         updateTesMedis.setButaWarna(tesMedis.getButaWarna());
         updateTesMedis.setRiwayatPenyakit(tesMedis.getRiwayatPenyakit());
-        updateTesMedis.setTekananDarah(tesMedis.getTekananDarah());
+        updateTesMedis.setTdBatasAtas(tesMedis.getTdBatasAtas());
+        updateTesMedis.setTdBatasBawah(tesMedis.getTdBatasBawah());
         updateTesMedis.setIsEdit(tesMedis.getIsEdit());
         return tesMedisDb.save(updateTesMedis);
     }

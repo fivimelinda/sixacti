@@ -30,9 +30,8 @@ public class TesTulisModel implements Serializable{
     private Long idTesTulis;
 
     @NotNull
-    @Size(max = 255)
     @Column(name = "nilai", nullable = false)
-    private String nilai;
+    private Integer nilai;
 
     @NotNull
     @Column(name="isEdit", nullable=false)
@@ -62,14 +61,14 @@ public class TesTulisModel implements Serializable{
     /**
      * @return the nilai
      */
-    public String getNilai() {
+    public Integer getNilai() {
         return nilai;
     }
 
     /**
      * @param nilai the nilai to set
      */
-    public void setNilai(String nilai) {
+    public void setNilai(Integer nilai) {
         this.nilai = nilai;
     }
 
