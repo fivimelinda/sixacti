@@ -87,6 +87,13 @@ public class LamaranModel implements Serializable {
     @Column(name="pengalamanKerja", nullable = true)
     private String pengalamanKerja;
 
+    @Column(name="tahunKerja", nullable=true)
+    private String tahunKerja;
+
+    @Size(max=255)
+    @Column(name="namaPekerjaan", nullable = true)
+    private String namaPekerjaan;
+
     @Size(max=13)
     @Column(name="noBpjsKesehatan", nullable = true)
     private String noBpjsKesehatan;

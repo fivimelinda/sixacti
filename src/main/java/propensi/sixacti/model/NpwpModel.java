@@ -1,5 +1,7 @@
 package propensi.sixacti.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -22,6 +24,7 @@ public class NpwpModel implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "lamaranId", referencedColumnName = "id")
+    @JsonIgnore
     private LamaranModel lamaran;
 
     public NpwpModel(){
