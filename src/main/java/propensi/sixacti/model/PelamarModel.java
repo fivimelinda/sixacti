@@ -67,12 +67,12 @@ public class PelamarModel implements Serializable{
     //     return tesMedis;
     // }
 
-    // /**
-    //  * @param tesMedis the tesMedis to set
-    //  */
-    // public void setTesMedis(TesMedisModel tesMedis) {
-    //     this.tesMedis = tesMedis;
-    // }
+    /**
+     * @param tesMedis the tesMedis to set
+     */
+    public void setTesMedis(TesMedisModel tesMedis) {
+        this.tesMedis = tesMedis;
+    }
 
     // /**
     //  * @return the tesTulis
@@ -81,12 +81,12 @@ public class PelamarModel implements Serializable{
     //     return tesTulis;
     // }
 
-    // /**
-    //  * @param tesTulis the tesTulis to set
-    //  */
-    // public void setTesTulis(TesTulisModel tesTulis) {
-    //     this.tesTulis = tesTulis;
-    // }
+    /**
+     * @param tesTulis the tesTulis to set
+     */
+    public void setTesTulis(TesTulisModel tesTulis) {
+        this.tesTulis = tesTulis;
+    }
 
     // /**
     //  * @return the tesWawancara
@@ -95,12 +95,12 @@ public class PelamarModel implements Serializable{
     //     return tesWawancara;
     // }
 
-    // /**
-    //  * @param tesWawancara the tesWawancara to set
-    //  */
-    // public void setTesWawancara(TesWawancaraModel tesWawancara) {
-    //     this.tesWawancara = tesWawancara;
-    // }
+    /**
+     * @param tesWawancara the tesWawancara to set
+     */
+    public void setTesWawancara(TesWawancaraModel tesWawancara) {
+        this.tesWawancara = tesWawancara;
+    }
 
     // /**
     //  * @return the lamaran

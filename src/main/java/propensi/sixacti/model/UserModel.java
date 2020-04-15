@@ -12,7 +12,6 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "userRole")
-
 public class UserModel implements Serializable {
 
     @Id
@@ -99,7 +98,7 @@ public class UserModel implements Serializable {
     /*
     setter getter
     **/
-   
+       
     public String getNPWP() {
         return NPWP;
     }

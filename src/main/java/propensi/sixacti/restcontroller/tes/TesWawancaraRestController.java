@@ -47,6 +47,7 @@ public class TesWawancaraRestController {
         }
         else{
             PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
+            pelamar.setTesWawancara(tesWawancara);
             tesWawancara.setPelamarTesWawancara(pelamar);
             return tesWawancaraRestService.buatTesWawancara(tesWawancara);
         }

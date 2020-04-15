@@ -50,6 +50,7 @@ public class TesMedisRestController{
         }
         else{
             PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
+            pelamar.setTesMedis(tesMedis);
             tesMedis.setPelamarTesMedis(pelamar);
             // pelamarRestService.saveUpdatePelamar(pelamar);
             return tesMedisRestService.buatTesMedis(tesMedis);

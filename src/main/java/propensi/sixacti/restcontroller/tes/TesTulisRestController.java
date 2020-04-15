@@ -49,6 +49,7 @@ public class TesTulisRestController {
         }
         else{
             PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
+            pelamar.setTesTulis(tesTulis);
             tesTulis.setPelamarTesTulis(pelamar);
             return tesTulisRestService.buatTesTulis(tesTulis);
         }
