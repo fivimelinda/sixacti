@@ -2,6 +2,7 @@ package propensi.sixacti.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.model.LowonganKerjaModel;
 import propensi.sixacti.model.RequestLowonganModel;
 import propensi.sixacti.repository.LowonganKerjaDB;
@@ -20,6 +21,9 @@ public class LowonganKerjaServiceImpl implements LowonganKerjaService {
 
     @Autowired
     RequestLowonganService requestLowonganService;
+
+    @Autowired
+    LamaranService lamaranService;
 
     @Override
     public LowonganKerjaModel getLowonganKerjaById(Long id) {
@@ -50,15 +54,28 @@ public class LowonganKerjaServiceImpl implements LowonganKerjaService {
         return lowonganKerjaDB.findAllByOrderByTanggalMulaiAsc();
     }
 
+//    @Override
+//    public LowonganKerjaModel deleteLowonganKerja(Long idLowongan, LowonganKerjaModel newLoker) {
+//        LowonganKerjaModel targetLoker = getLowonganKerjaById(idLowongan);
+//        targetLoker.setDeleted(newLoker.isDeleted());
+//        return lowonganKerjaDB.save(targetLoker);
+//    }
+
     @Override
     public void deleteLowonganKerja(Long idLowongan) {
         LowonganKerjaModel loker = getLowonganKerjaById(idLowongan);
 
         if(loker != null){
-            lowonganKerjaDB.delete(loker);
+            List<LamaranModel> listLamaran = lamaranService.getLamaranByLowonganId(loker.getIdLowongan());
+            if(listLamaran.size() == 0){
+                lowonganKerjaDB.delete(loker);
+            }
+
 
         }
 
     }
+
+
 
 }

@@ -45,24 +45,18 @@ public class LowonganKerjaModel implements Serializable {
     @Column(name = "deskripsi", nullable = false)
     private String deskripsi;
 
-//    @NotNull
-//    @Column(name = "nomorLowongan", nullable = false)
-//    private Integer nomorLowongan;
+    @NotNull
+    @Column(name = "isDeleted", nullable = false)
+    private boolean isDeleted;
 
     @OneToMany(mappedBy = "lowongan", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     private List<LamaranModel> listLamaran;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="requestLowonganId", referencedColumnName = "id")
     private RequestLowonganModel requestLowongan; 
 
-//    public List<LamaranModel> getListLamaran() {
-//        return listLamaran;
-//    }
-//
-//    public void setListLamaran(List<LamaranModel> listLamaran) {
-//        this.listLamaran = listLamaran;
-//    }
+
 
     public Long getIdLowongan() {
         return idLowongan;
@@ -128,12 +122,20 @@ public class LowonganKerjaModel implements Serializable {
         this.requestLowongan = requestLowongan;
     }
 
-    //    public Integer getNomorLowongan() {
-//        return nomorLowongan;
-//    }
-//
-//    public void setNomorLowongan(Integer nomorLowongan) {
-//        this.nomorLowongan = nomorLowongan;
-//    }
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public List<LamaranModel> getListLamaran() {
+        return listLamaran;
+    }
+
+    public void setListLamaran(List<LamaranModel> listLamaran) {
+        this.listLamaran = listLamaran;
+    }
 }
 

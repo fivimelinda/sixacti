@@ -32,6 +32,11 @@ public class LamaranServiceImpl implements LamaranService {
     }
 
     @Override
+    public List<LamaranModel> getLamaranByLowonganId(Long idLowongan) {
+        return lamaranDB.findByLowonganIdLowongan(idLowongan);
+    }
+
+    @Override
     public List<LamaranModel> getLamaran() {
         return lamaranDB.findAll();
     }
