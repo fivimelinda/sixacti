@@ -3,6 +3,7 @@ package propensi.sixacti.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,6 +23,7 @@ public class BerkasModel implements Serializable {
     @NotNull
     @Column(name = "data", nullable = false)
     @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] data;
 
 //    @ManyToOne

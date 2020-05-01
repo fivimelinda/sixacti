@@ -1,6 +1,7 @@
 package propensi.sixacti.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,6 +21,7 @@ public class NpwpModel implements Serializable {
     @NotNull
     @Column(name = "data", nullable = false)
     @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] data;
 
     @OneToOne(cascade = CascadeType.ALL)
