@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "pelamar")
@@ -21,6 +22,7 @@ public class PelamarModel implements Serializable{
     private UserModel userPelamar;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private LamaranModel lamaran;
 
     @OneToOne(cascade = CascadeType.ALL)
