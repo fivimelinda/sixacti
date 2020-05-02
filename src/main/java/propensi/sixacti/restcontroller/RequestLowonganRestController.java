@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -45,10 +46,43 @@ public class RequestLowonganRestController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
 
         } else {
+            if(requestLowongan.getJobTitle().matches("^.*[^a-zA-Z0-9 ].*$")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+            }
+            if(requestLowongan.getJobTitle().matches("[0-9]+")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+            }
+            if(requestLowongan.getSection().matches("^.*[^a-zA-Z0-9 ].*$")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+            }
+            if(requestLowongan.getSection().matches("[0-9]+")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+            }
+            if(requestLowongan.getDepartement().matches("^.*[^a-zA-Z0-9 ].*$")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+            }
+            if(requestLowongan.getDepartement().matches("[0-9]+")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+            }
+            if(requestLowongan.getSupervisor().matches("^.*[^a-zA-Z0-9 ].*$")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+            }
+            if(requestLowongan.getSupervisor().matches("[0-9]+")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+            }
+            if(requestLowongan.getNamaReplacement().matches("^.*[^a-zA-Z0-9 ].*$")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+            }
+            if(requestLowongan.getNamaReplacement().matches("[0-9]+")){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
+            }
+            else{
+                KaryawanModel karyawan = karyawanService.getKaryawanById(Long.parseLong("1"));
+                requestLowongan.setKaryawan(karyawan);
+                return requestLowonganService.addRequestLowongan(requestLowongan);
+            }
             // mekanismennya nanti diubah pas udh ada login di front end
-            KaryawanModel karyawan = karyawanService.getKaryawanById(Long.parseLong("1"));
-            requestLowongan.setKaryawan(karyawan);
-            return requestLowonganService.addRequestLowongan(requestLowongan);
+           
         }
     }
 

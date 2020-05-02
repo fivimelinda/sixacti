@@ -10,9 +10,8 @@ import org.springframework.web.server.ResponseStatusException;
 import propensi.sixacti.model.BerkasModel;
 import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.model.LowonganKerjaModel;
-import propensi.sixacti.service.BerkasService;
-import propensi.sixacti.service.LamaranService;
-import propensi.sixacti.service.LowonganKerjaService;
+import propensi.sixacti.repository.PelamarDB;
+import propensi.sixacti.service.*;
 
 
 import javax.swing.*;
@@ -29,6 +28,10 @@ public class LamaranRestController {
     private LamaranService lamaranService;
     @Autowired
     private LowonganKerjaService lowonganKerjaService;
+    @Autowired
+    private PelamarService pelamarService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping(value = "/addLamaran/{idLowongan}")
     private ResponseEntity<Long> createLamaran(@PathVariable Long idLowongan, @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
@@ -45,6 +48,12 @@ public class LamaranRestController {
 //            return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+
+//    @GetMapping(value = "/listLamaran/{idLowongan}")
+//    private List<LamaranModel> getLamaranByIdLowongan(@PathVariable Long idLowongan){
+//        return lamaranService.getLamaranByLowonganId(idLowongan);
+//    }
+
 
 
 

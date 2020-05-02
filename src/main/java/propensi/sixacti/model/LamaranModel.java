@@ -153,24 +153,31 @@ public class LamaranModel implements Serializable {
 //    private List<BerkasModel> listBerkas;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    @JsonIgnore
     private BerkasModel berkasModel;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    @JsonIgnore
     private KtpModel ktpModel;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    @JsonIgnore
     private KkModel kkModel;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    @JsonIgnore
     private NpwpModel npwpModel;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    @JsonIgnore
     private BpjsKetenagakerjaanModel bpjsKetenagakerjaan;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    @JsonIgnore
     private BpjsKesehatanModel bpjsKesehatanModel;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
+    @JsonIgnore
     private KisModel kisModel;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -195,13 +202,6 @@ public class LamaranModel implements Serializable {
         this.lowongan = lowongan;
     }
 
-//    public LowonganKerjaModel getLamaran() {
-//        return lowongan;
-//    }
-//
-//    public void setLamaran(LowonganKerjaModel lowongan) {
-//        this.lowongan = lowongan;
-//    }
 
 //    public byte[] getFotoKtp() {
 //        return fotoKtp;
