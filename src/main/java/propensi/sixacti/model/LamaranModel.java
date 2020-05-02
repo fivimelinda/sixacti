@@ -195,13 +195,13 @@ public class LamaranModel implements Serializable {
         this.lowongan = lowongan;
     }
 
-    public LowonganKerjaModel getLamaran() {
-        return lowongan;
-    }
-
-    public void setLamaran(LowonganKerjaModel lowongan) {
-        this.lowongan = lowongan;
-    }
+//    public LowonganKerjaModel getLamaran() {
+//        return lowongan;
+//    }
+//
+//    public void setLamaran(LowonganKerjaModel lowongan) {
+//        this.lowongan = lowongan;
+//    }
 
 //    public byte[] getFotoKtp() {
 //        return fotoKtp;

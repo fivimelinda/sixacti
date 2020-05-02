@@ -37,7 +37,7 @@ public class LamaranRestController {
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }else{
             LowonganKerjaModel lowonganKerjaModel = lowonganKerjaService.getLowonganKerjaById(idLowongan);
-            lamaranModel.setLamaran(lowonganKerjaModel);
+            lamaranModel.setLowongan(lowonganKerjaModel);
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             lamaranModel.setTimestampPelamar(timestamp);
             lamaranService.addLamaran(lamaranModel);
