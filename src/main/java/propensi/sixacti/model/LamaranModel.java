@@ -144,8 +144,9 @@ public class LamaranModel implements Serializable {
         this.pelamar = pelamar;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private PelamarModel pelamar;
 
 //    @OneToMany(mappedBy = "lamaran")
