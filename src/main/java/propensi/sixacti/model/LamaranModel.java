@@ -103,6 +103,9 @@ public class LamaranModel implements Serializable {
     @Column(name= "npwp", nullable = true)
     private String npwp;
 
+    @Column(name = "statusLamaran", nullable = true)
+    private String statusLamaran;
+
 //
 //    @Column(name = "fotoKtp", nullable=true)
 //    @Lob
@@ -393,6 +396,14 @@ public class LamaranModel implements Serializable {
 
     public void setKisModel(KisModel kisModel) {
         this.kisModel = kisModel;
+    }
+
+    public String getStatusLamaran() {
+        return statusLamaran;
+    }
+
+    public void setStatusLamaran(String statusLamaran) {
+        this.statusLamaran = statusLamaran;
     }
 }
 
