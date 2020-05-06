@@ -1,5 +1,6 @@
 package propensi.sixacti.restcontroller;
 
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +11,10 @@ import org.springframework.web.server.ResponseStatusException;
 import propensi.sixacti.model.BerkasModel;
 import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.model.LowonganKerjaModel;
+import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.repository.PelamarDB;
 import propensi.sixacti.service.*;
+import propensi.sixacti.service.tes.PelamarRestService;
 
 
 import javax.swing.*;
@@ -32,6 +35,8 @@ public class LamaranRestController {
     private PelamarService pelamarService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private PelamarRestService pelamarRestService;
 
     @PostMapping(value = "/addLamaran/{idLowongan}")
     private ResponseEntity<Long> createLamaran(@PathVariable Long idLowongan, @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
