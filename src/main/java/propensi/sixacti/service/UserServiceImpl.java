@@ -14,12 +14,12 @@ public class UserServiceImpl implements UserService {
     UserDB userDB;
 
 
-    @Override
-    public UserModel getuserByNIK(String nik) {
-        Optional<UserModel> user = userDB.findPelamarModelByNIK(nik);
-        if(user.isPresent()){
-            return user.get();
-        }
-        return null;
-    }
+//    @Override
+//    public UserModel getuserByNIK(String nik) {
+//        Optional<UserModel> user = userDB.findPelamarModelByNIK(nik);
+//        if(user.isPresent()){
+//            return user.get();
+//        }
+//        return null;
+//    }
 }
