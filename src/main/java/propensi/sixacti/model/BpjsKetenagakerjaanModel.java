@@ -1,5 +1,6 @@
 package propensi.sixacti.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class BpjsKetenagakerjaanModel implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "lamaranId", referencedColumnName = "id")
+    @JsonIgnore
     private LamaranModel lamaran;
 
     public Long getId() {

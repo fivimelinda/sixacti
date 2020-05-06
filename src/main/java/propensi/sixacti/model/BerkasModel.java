@@ -47,6 +47,7 @@ public class BerkasModel implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "lamaranId", referencedColumnName = "id")
+    @JsonIgnore
     private LamaranModel lamaran;
 
     public LamaranModel getLamaran() {

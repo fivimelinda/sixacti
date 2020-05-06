@@ -10,8 +10,9 @@ import org.springframework.web.server.ResponseStatusException;
 import propensi.sixacti.model.BerkasModel;
 import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.model.LowonganKerjaModel;
-import propensi.sixacti.repository.PelamarDB;
+
 import propensi.sixacti.service.*;
+import propensi.sixacti.service.tes.PelamarRestService;
 
 
 import javax.swing.*;
@@ -29,7 +30,7 @@ public class LamaranRestController {
     @Autowired
     private LowonganKerjaService lowonganKerjaService;
     @Autowired
-    private PelamarService pelamarService;
+    private PelamarRestService pelamarRestService;
     @Autowired
     private UserService userService;
 
@@ -47,6 +48,11 @@ public class LamaranRestController {
             return ResponseEntity.ok(lamaranModel.getId());
 //            return new ResponseEntity<>(HttpStatus.OK);
         }
+    }
+
+    @GetMapping(value = "/detailLamaran/{id}")
+    private LamaranModel getLamaranById(@PathVariable Long id){
+        return lamaranService.findByIdLamaran(id);
     }
 
 //    @GetMapping(value = "/listLamaran/{idLowongan}")
