@@ -30,27 +30,31 @@ public class KaryawanModel {
     
     @Column(name="sisa", nullable = false)
     private Integer sisaCuti;
+    
+//    @NotNull
+//    @Column(name="hutangCuti", nullable = false)
+//    private Integer hutangCuti;
 
-    @Column(name="id_dept_mngr", insertable=false, updatable=false)
-    private Long idDeptManager;
-    
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-    @JoinColumn(name="id_dept_mngr")
-    private Set<KaryawanModel> deptManager;
-    
-    @Column(name="id_sect_mngr", insertable=false, updatable=false)
-    private Long idSectManager;
-    
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-    @JoinColumn(name="id_sect_mngr")
-    private Set<KaryawanModel> sectManager;
-    
-    @Column(name="id_assist_mngr", insertable=false, updatable=false)
-    private Long idAssistManager;
-    
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-    @JoinColumn(name="id_assist_mngr")
-    private Set<KaryawanModel> assistManager;
+//    @Column(name="id_dept_mngr", insertable=false, updatable=false)
+//    private Long idDeptManager;
+//    
+//    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+//    @JoinColumn(name="id_dept_mngr")
+//    private Set<KaryawanModel> deptManager;
+//    
+//    @Column(name="id_sect_mngr", insertable=false, updatable=false)
+//    private Long idSectManager;
+//    
+//    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+//    @JoinColumn(name="id_sect_mngr")
+//    private Set<KaryawanModel> sectManager;
+//    
+//    @Column(name="id_assist_mngr", insertable=false, updatable=false)
+//    private Long idAssistManager;
+//    
+//    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+//    @JoinColumn(name="id_assist_mngr")
+//    private Set<KaryawanModel> assistManager;
 
     @OneToOne(mappedBy = "karyawan")
     private AtributModel atributModel;
@@ -62,13 +66,13 @@ public class KaryawanModel {
     @JoinColumn(name = "nik", referencedColumnName = "nik")
     private UserModel user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private RoleModel role;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_dept", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
@@ -79,12 +83,7 @@ public class KaryawanModel {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
     private List<RequestLowonganModel> requestLowongan;
-
-
-
-//    
-//    @OneToOne(mappedBy = "detailKontrak", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private DetailKontrakModel detailKontrak;
+    
 
     /*
     Section Setter Getter===============================================================================================
@@ -122,109 +121,119 @@ public class KaryawanModel {
 		this.sisaCuti = sisaCuti;
 	}
 
-	public Long getIdDeptManager() {
-		return idDeptManager;
-	}
+//	public Long getIdDeptManager() {
+//		return idDeptManager;
+//	}
+//
+//	public void setIdDeptManager(Long idDeptManager) {
+//		this.idDeptManager = idDeptManager;
+//	}
+//    
+//    public Set<KaryawanModel> getDeptManager() {
+//        return deptManager;
+//    }
+//
+//    public void setDeptManager(Set<KaryawanModel> deptManager) {
+//        this.deptManager = deptManager;
+//    }
 
-	public void setIdDeptManager(Long idDeptManager) {
-		this.idDeptManager = idDeptManager;
-	}
+    /**
+     * this function is to get id of sect. manager
+     * @return idSectManager
+     */
+//    public Long getIdSectManager() {
+//        return idSectManager;
+//    }
+//
+//    public void setIdSectManager(Long idSectManager) {
+//        this.idSectManager = idSectManager;
+//    }
+//
+//    /**
+//     * this function is to get information that list of employess are led by this sect. manager
+//     * @return sectManager
+//     */
+//    public Set<KaryawanModel> getSectManager() {
+//        return sectManager;
+//    }
+//
+//    public void setSectManager(Set<KaryawanModel> sectManager) {
+//        this.sectManager = sectManager;
+//    }
+//
+//    public Long getIdAssistManager() {
+//        return idAssistManager;
+//    }
+//
+//    public void setIdAssistManager(Long idAssistManager) {
+//        this.idAssistManager = idAssistManager;
+//    }
 
-	public Set<KaryawanModel> getDeptManager() {
-		return deptManager;
-	}
+    /**
+     * this function is to get information that list of employess are led by this asst. manager
+     * @return asstManager
+     */
+//    public Set<KaryawanModel> getAssistManager() {
+//        return assistManager;
+//    }
+//
+//    public void setAssistManager(Set<KaryawanModel> assistManager) {
+//        this.assistManager = assistManager;
+//    }
 
-	public void setDeptManager(Set<KaryawanModel> deptManager) {
-		this.deptManager = deptManager;
-	}
+    public AtributModel getAtributModel() {
+        return atributModel;
+    }
 
-	public Long getIdSectManager() {
-		return idSectManager;
-	}
+    public void setAtributModel(AtributModel atributModel) {
+        this.atributModel = atributModel;
+    }
 
-	public void setIdSectManager(Long idSectManager) {
-		this.idSectManager = idSectManager;
-	}
+    public DetailKontrakModel getDetailKontrakModel() {
+        return detailKontrakModel;
+    }
 
-	public Set<KaryawanModel> getSectManager() {
-		return sectManager;
-	}
+    public void setDetailKontrakModel(DetailKontrakModel detailKontrakModel) {
+        this.detailKontrakModel = detailKontrakModel;
+    }
 
-	public void setSectManager(Set<KaryawanModel> sectManager) {
-		this.sectManager = sectManager;
-	}
+    public UserModel getUser() {
+        return user;
+    }
 
-	public Long getIdAssistManager() {
-		return idAssistManager;
-	}
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
 
-	public void setIdAssistManager(Long idAssistManager) {
-		this.idAssistManager = idAssistManager;
-	}
+    public RoleModel getRole() {
+        return role;
+    }
 
-	public Set<KaryawanModel> getAssistManager() {
-		return assistManager;
-	}
+    public void setRole(RoleModel role) {
+        this.role = role;
+    }
 
-	public void setAssistManager(Set<KaryawanModel> assistManager) {
-		this.assistManager = assistManager;
-	}
+    public DepartemenModel getDepartemen() {
+        return departemen;
+    }
 
-	public AtributModel getAtributModel() {
-		return atributModel;
-	}
+    public void setDepartemen(DepartemenModel departemen) {
+        this.departemen = departemen;
+    }
 
-	public void setAtributModel(AtributModel atributModel) {
-		this.atributModel = atributModel;
-	}
+    public List<CutiModel> getCuti() {
+        return cuti;
+    }
 
-	public DetailKontrakModel getDetailKontrakModel() {
-		return detailKontrakModel;
-	}
+    public void setCuti(List<CutiModel> cuti) {
+        this.cuti = cuti;
+    }
 
-	public void setDetailKontrakModel(DetailKontrakModel detailKontrakModel) {
-		this.detailKontrakModel = detailKontrakModel;
-	}
+    public List<RequestLowonganModel> getRequestLowongan() {
+        return requestLowongan;
+    }
 
-	public UserModel getUser() {
-		return user;
-	}
-
-	public void setUser(UserModel user) {
-		this.user = user;
-	}
-
-	public RoleModel getRole() {
-		return role;
-	}
-
-	public void setRole(RoleModel role) {
-		this.role = role;
-	}
-
-	public DepartemenModel getDepartemen() {
-		return departemen;
-	}
-
-	public void setDepartemen(DepartemenModel departemen) {
-		this.departemen = departemen;
-	}
-
-	public List<CutiModel> getCuti() {
-		return cuti;
-	}
-
-	public void setCuti(List<CutiModel> cuti) {
-		this.cuti = cuti;
-	}
-
-	public List<RequestLowonganModel> getRequestLowongan() {
-		return requestLowongan;
-	}
-
-	public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
-		this.requestLowongan = requestLowongan;
-	}
-
-    
+    public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
+        this.requestLowongan = requestLowongan;
+    }
 }

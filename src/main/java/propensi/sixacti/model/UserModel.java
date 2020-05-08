@@ -90,11 +90,11 @@ public class UserModel implements Serializable {
     @JoinColumn(name = "id_akun", referencedColumnName = "idAkun")
     private AkunModel akun;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private KaryawanModel karyawan;
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+//    private KaryawanModel karyawan;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userPelamar")
-    private PelamarModel pelamar;
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userPelamar")
+//    private PelamarModel pelamar;
 
     /*
     setter getter
@@ -212,13 +212,13 @@ public class UserModel implements Serializable {
         this.NPWP = nPWP;
     }
 
-    public KaryawanModel getKaryawan() {
-        return karyawan;
-    }
-
-    public void setKaryawan(KaryawanModel karyawan) {
-        this.karyawan = karyawan;
-    }
+//    public KaryawanModel getKaryawan() {
+//        return karyawan;
+//    }
+//
+//    public void setKaryawan(KaryawanModel karyawan) {
+//        this.karyawan = karyawan;
+//    }
 }
 
 

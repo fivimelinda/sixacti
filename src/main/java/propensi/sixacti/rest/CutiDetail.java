@@ -23,6 +23,17 @@ public class CutiDetail {
     
     @JsonProperty("idKategori")
     private Integer idKategori;
+    
+    @JsonProperty("keterangan")
+    private String keterangan;
+
+	public String getKeterangan() {
+		return keterangan;
+	}
+
+	public void setKeterangan(String keterangan) {
+		this.keterangan = keterangan;
+	}
 
 	public Date getTanggalMulai() {
 		return tanggalMulai;

@@ -47,10 +47,6 @@ public class DetailOfRequirementModel implements Serializable {
     @Column(name = "job_duty", nullable = false)
     private String jobDuty;
 
-    // @NotNull
-    // @Column(name = "job_duty", nullable = false)
-    // private String jobDuty;
-
 
     public Long getId() {
         return id;
