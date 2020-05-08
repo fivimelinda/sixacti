@@ -6,5 +6,6 @@ import propensi.sixacti.model.KaryawanModel;
 
 
 public interface KaryawanService {
-	Optional<KaryawanModel> getKaryawanById(Long idKaryawan);
+	KaryawanModel getKaryawanById(Long id);
 }
+

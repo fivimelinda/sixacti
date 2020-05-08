@@ -56,7 +56,7 @@ public class CutiController {
 					HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
 		} else {
 			try {
-				KaryawanModel karyawan = karyawanService.getKaryawanById(cuti.getIdKaryawan()).get();
+				KaryawanModel karyawan = karyawanService.getKaryawanById(cuti.getIdKaryawan());
 				CutiModel newCuti = new CutiModel();
 				newCuti.setKaryawan(karyawan);
 				newCuti.setStatus("Diajukan");
@@ -121,7 +121,7 @@ public class CutiController {
 	
 	@GetMapping(value="/api/cuti/diajukan/get")
 	private HashMap<String, String> retrieveCutiDiajukan(@RequestParam("karyawanId") Long karyawanId) {
-			KaryawanModel karyawan = karyawanService.getKaryawanById(karyawanId).get();
+			KaryawanModel karyawan = karyawanService.getKaryawanById(karyawanId);
 			HashMap<String, String> cutiResponse = new HashMap<String, String>();
 		try {
 			CutiModel cuti = cutiService.getCutiOnProcess(karyawan).get();
@@ -144,7 +144,7 @@ public class CutiController {
 	
 	@GetMapping(value="/api/cuti/riwayat")
 	private List<CutiModel> retrieveRiwayatCuti(@RequestParam("karyawanId") Long karyawanId){
-		KaryawanModel karyawan = karyawanService.getKaryawanById(karyawanId).get();
+		KaryawanModel karyawan = karyawanService.getKaryawanById(karyawanId);
 		try {
 			List<CutiModel> listCuti = cutiService.getCutiDoneByKaryawan(karyawan);
 			return listCuti;

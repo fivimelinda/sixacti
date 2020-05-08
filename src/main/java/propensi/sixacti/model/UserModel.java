@@ -12,7 +12,6 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "userRole")
-
 public class UserModel implements Serializable {
 
     @Id
@@ -86,20 +85,20 @@ public class UserModel implements Serializable {
     /*
     Relation
     **/
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_akun", referencedColumnName = "idAkun")
     private AkunModel akun;
 
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-//    private KaryawanModel karyawan;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // private KaryawanModel karyawan;
 
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userPelamar")
-//    private PelamarModel pelamar;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // private PelamarModel pelamar;
 
     /*
     setter getter
     **/
-   
+       
     public String getNPWP() {
         return NPWP;
     }
@@ -219,6 +218,7 @@ public class UserModel implements Serializable {
 //    public void setKaryawan(KaryawanModel karyawan) {
 //        this.karyawan = karyawan;
 //    }
+
 }
 
 

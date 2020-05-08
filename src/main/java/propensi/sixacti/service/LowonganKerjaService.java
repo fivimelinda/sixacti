@@ -2,15 +2,17 @@ package propensi.sixacti.service;
 
 import propensi.sixacti.model.LowonganKerjaModel;
 
+import java.util.Date;
 import java.util.List;
 
 public interface LowonganKerjaService {
 
     LowonganKerjaModel getLowonganKerjaById(Long id);
     void addLowonganKerja (LowonganKerjaModel lowonganKerja);
-    LowonganKerjaModel changeLowonganKerja (LowonganKerjaModel newLoker);
+    LowonganKerjaModel changeLowonganKerja (Long idLowongan, LowonganKerjaModel newLoker);
     List<LowonganKerjaModel> getListLowonganKerja();
     void deleteLowonganKerja(Long idLowongan);
+//    LowonganKerjaModel deleteLowonganKerja(Long id, LowonganKerjaModel newLoker);
 
 
 }

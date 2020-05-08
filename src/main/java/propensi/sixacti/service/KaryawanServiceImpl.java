@@ -8,17 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import propensi.sixacti.model.KaryawanModel;
-import propensi.sixacti.repository.KaryawanDb;
+import propensi.sixacti.repository.KaryawanDB;
 
 @Service
 @Transactional
 public class KaryawanServiceImpl implements KaryawanService{
 	@Autowired
-	KaryawanDb karyawanDb;
+	KaryawanDB karyawanDb;
 	
 	@Override
-	public Optional<KaryawanModel> getKaryawanById(Long idKaryawan) {
-		return karyawanDb.findById(idKaryawan);
-	}
+    public KaryawanModel getKaryawanById(Long id) {
+        Optional<KaryawanModel> karyawan = karyawanDb.findById(id);
+        if(karyawan.isPresent()){
+            return karyawan.get();
+        }
+        return null;
+    }
 
 }

@@ -2,17 +2,30 @@ package propensi.sixacti.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.model.LowonganKerjaModel;
+import propensi.sixacti.model.RequestLowonganModel;
 import propensi.sixacti.repository.LowonganKerjaDB;
 
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class LowonganKerjaServiceImpl implements LowonganKerjaService {
 
     @Autowired
     LowonganKerjaDB lowonganKerjaDB;
+
+    @Autowired
+    RequestLowonganService requestLowonganService;
+
+    @Autowired
+    LamaranService lamaranService;
 
     @Override
     public LowonganKerjaModel getLowonganKerjaById(Long id) {
@@ -30,14 +43,12 @@ public class LowonganKerjaServiceImpl implements LowonganKerjaService {
     }
 
     @Override
-    public LowonganKerjaModel changeLowonganKerja(LowonganKerjaModel newLoker) {
-        LowonganKerjaModel targetLoker = lowonganKerjaDB.findById(newLoker.getIdLowongan()).get();
-        targetLoker.setDeskripsi(newLoker.getDeskripsi());
-        targetLoker.setNomorLowongan(newLoker.getNomorLowongan());
-        targetLoker.setTanggalBerakhir(newLoker.getTanggalBerakhir());
+    public LowonganKerjaModel changeLowonganKerja(Long idLowongan, LowonganKerjaModel newLoker) {
+        LowonganKerjaModel targetLoker = getLowonganKerjaById(idLowongan);
         targetLoker.setTanggalMulai(newLoker.getTanggalMulai());
-        lowonganKerjaDB.save(targetLoker);
-        return targetLoker;
+        targetLoker.setTanggalBerakhir(newLoker.getTanggalBerakhir());
+        targetLoker.setDeskripsi(newLoker.getDeskripsi());
+        return lowonganKerjaDB.save(targetLoker);
     }
 
     @Override
@@ -45,14 +56,28 @@ public class LowonganKerjaServiceImpl implements LowonganKerjaService {
         return lowonganKerjaDB.findAllByOrderByTanggalMulaiAsc();
     }
 
+//    @Override
+//    public LowonganKerjaModel deleteLowonganKerja(Long idLowongan, LowonganKerjaModel newLoker) {
+//        LowonganKerjaModel targetLoker = getLowonganKerjaById(idLowongan);
+//        targetLoker.setDeleted(newLoker.isDeleted());
+//        return lowonganKerjaDB.save(targetLoker);
+//    }
+
     @Override
     public void deleteLowonganKerja(Long idLowongan) {
         LowonganKerjaModel loker = getLowonganKerjaById(idLowongan);
 
         if(loker != null){
-            lowonganKerjaDB.delete(loker);
+            List<LamaranModel> listLamaran = lamaranService.getLamaranByLowonganId(loker.getIdLowongan());
+            if(listLamaran.size() == 0){
+                lowonganKerjaDB.delete(loker);
+            }
+
 
         }
 
     }
+
+
+
 }
