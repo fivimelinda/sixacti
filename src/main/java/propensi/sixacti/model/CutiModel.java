@@ -27,12 +27,12 @@ public class CutiModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private KaryawanModel karyawan;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_kategori", referencedColumnName = "id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
@@ -42,23 +42,24 @@ public class CutiModel implements Serializable {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name="tanggal_mulai", nullable = false)
     private Date tanggalMulai;
+    
+    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Column(name="tanggal_diajukan", nullable = false)
+    private Date tanggalDiajukan;
 
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Column(name="tanggal_selesai", nullable = false)
-    private Date tanggalSelesai;
+    @Column(name="tanggal_sampai", nullable = false)
+    private Date tanggalSampai;
 
     @NotNull
     @Column(name="status", nullable = false)
     private String status;
-
+    
     @NotNull
-    @Column(name="sisa", nullable = false)
-    private Integer sisaCuti;
-
-    @NotNull
-    @Column(name="carry", nullable = false)
-    private Integer carry;
+    @Column(name="keterangan", nullable = false)
+    private String keterangan;
 
 	public Long getId() {
 		return id;
@@ -76,14 +77,6 @@ public class CutiModel implements Serializable {
 		this.karyawan = karyawan;
 	}
 
-	public KategoriCutiModel getKategoriModel() {
-		return kategori;
-	}
-
-	public void setKategori(KategoriCutiModel kategori) {
-		this.kategori = kategori;
-	}
-
 	public Date getTanggalMulai() {
 		return tanggalMulai;
 	}
@@ -92,12 +85,12 @@ public class CutiModel implements Serializable {
 		this.tanggalMulai = tanggalMulai;
 	}
 
-	public Date getTanggalSelesai() {
-		return tanggalSelesai;
+	public Date getTanggalSampai() {
+		return tanggalSampai;
 	}
 
-	public void setTanggalSelesai(Date tanggalSelesai) {
-		this.tanggalSelesai = tanggalSelesai;
+	public void setTanggalSampai(Date tanggalSampai) {
+		this.tanggalSampai = tanggalSampai;
 	}
 
 	public String getStatus() {
@@ -108,21 +101,28 @@ public class CutiModel implements Serializable {
 		this.status = status;
 	}
 
-	public Integer getSisaCuti() {
-		return sisaCuti;
+	public KategoriCutiModel getKategori() {
+		return kategori;
 	}
 
-	public void setSisaCuti(Integer sisaCuti) {
-		this.sisaCuti = sisaCuti;
+	public void setKategori(KategoriCutiModel kategori) {
+		this.kategori = kategori;
 	}
 
-	public Integer getCarry() {
-		return carry;
+	public Date getTanggalDiajukan() {
+		return tanggalDiajukan;
 	}
 
-	public void setCarry(Integer carry) {
-		this.carry = carry;
+	public void setTanggalDiajukan(Date tanggalDiajukan) {
+		this.tanggalDiajukan = tanggalDiajukan;
 	}
-    
+
+	public String getKeterangan() {
+		return keterangan;
+	}
+
+	public void setKeterangan(String keterangan) {
+		this.keterangan = keterangan;
+	}
     
 }

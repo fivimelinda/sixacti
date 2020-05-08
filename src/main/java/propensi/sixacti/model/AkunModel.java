@@ -24,10 +24,10 @@ public class AkunModel implements Serializable{
     @Size(max = 50)
     @Column(name = "password", nullable = false)
     private String password;
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "akun")
+    private UserModel user;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nikUser", referencedColumnName = "nik")
-    private UserModel userAkun;
 
     /**
      * @return the idAkun
