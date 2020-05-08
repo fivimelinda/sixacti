@@ -35,6 +35,14 @@ public class DetailKontrakModel implements Serializable {
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
     private KaryawanModel karyawan;
 
+    public KaryawanModel getKaryawan() {
+        return karyawan;
+    }
+
+    public void setKaryawan(KaryawanModel karyawan){
+        this.karyawan = karyawan;
+    }
+
     public Integer getPeriode() {
         return periode;
     }
