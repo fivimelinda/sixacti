@@ -38,6 +38,14 @@ public class AtributModel implements Serializable {
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
     private KaryawanModel karyawan;
 
+    public KaryawanModel getKaryawan() {
+        return karyawan;
+    }
+
+    public void setKaryawan(KaryawanModel karyawan) {
+        this.karyawan = karyawan;
+    }
+
     public String getUkuran_baju() {
         return ukuran_baju;
     }

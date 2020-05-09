@@ -30,7 +30,6 @@ public class AtributRestController {
 
     @GetMapping(value = "/listAtribut")
     private List<AtributModel> retrieveListAtribut(){
-
         return atributService.getListAtribut();
     }
 
