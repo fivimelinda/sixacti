@@ -33,7 +33,8 @@ public class LamaranRestController {
     private LowonganKerjaService lowonganKerjaService;
     @Autowired
     private PelamarService pelamarService;
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private PelamarRestService pelamarRestService;
 

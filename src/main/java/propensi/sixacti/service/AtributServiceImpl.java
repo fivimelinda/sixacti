@@ -17,7 +17,6 @@ public class AtributServiceImpl implements AtributService{
 
     @Override
     public List<AtributModel> getListAtribut(){
-
         return atributDB.findAll();
     }
 
@@ -36,5 +35,4 @@ public class AtributServiceImpl implements AtributService{
         atribut.setStatus(atributModel.getStatus());
         return atributDB.save(atribut);
     }
-
 }

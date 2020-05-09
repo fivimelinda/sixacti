@@ -86,7 +86,5 @@ public class AtributModel implements Serializable {
         this.status = status;
     }
 
-
-
 }
 
