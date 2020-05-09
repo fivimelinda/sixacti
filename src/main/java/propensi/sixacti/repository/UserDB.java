@@ -7,6 +7,6 @@ import propensi.sixacti.model.UserModel;
 import java.util.Optional;
 
 @Repository
-public interface UserDB extends JpaRepository<UserModel, Long> {
-//    Optional<UserModel> findPelamarModelByNIK(String nik);
+public interface UserDB extends JpaRepository<UserModel, String> {
+    Optional<UserModel> findUserModelByNik(String nik);
 }
