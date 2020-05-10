@@ -148,7 +148,7 @@ public class LamaranModel implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar", nullable = false)
+    @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private PelamarModel pelamar;
 

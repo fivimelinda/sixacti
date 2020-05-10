@@ -7,9 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-import propensi.sixacti.model.BerkasModel;
-import propensi.sixacti.model.LamaranModel;
-import propensi.sixacti.model.LowonganKerjaModel;
+import propensi.sixacti.model.*;
 
 import propensi.sixacti.service.*;
 import propensi.sixacti.service.tes.PelamarRestService;
@@ -41,9 +39,14 @@ public class LamaranRestController {
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }else{
             LowonganKerjaModel lowonganKerjaModel = lowonganKerjaService.getLowonganKerjaById(idLowongan);
+            UserModel user = userService.getuserByNIK("1234567890123456");
+            PelamarModel pelamarModel = pelamarRestService.getPelamarByUser(user);
+
+            lamaranModel.setPelamar(pelamarModel);
             lamaranModel.setLowongan(lowonganKerjaModel);
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             lamaranModel.setTimestampPelamar(timestamp);
+
             lamaranService.addLamaran(lamaranModel);
             return ResponseEntity.ok(lamaranModel.getId());
 //            return new ResponseEntity<>(HttpStatus.OK);
