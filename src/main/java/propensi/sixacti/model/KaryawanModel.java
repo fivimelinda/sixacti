@@ -27,27 +27,34 @@ public class KaryawanModel {
     @Size(max = 10)
     @Column(name="gaji", nullable = false)
     private Integer gaji;
+    
+    @Column(name="sisa", nullable = false)
+    private Integer sisaCuti;
+    
+//    @NotNull
+//    @Column(name="hutangCuti", nullable = false)
+//    private Integer hutangCuti;
 
-    @Column(name="id_dept_mngr", insertable=false, updatable=false)
-    private Long idDeptManager;
-    
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-    @JoinColumn(name="id_dept_mngr")
-    private Set<KaryawanModel> deptManager;
-    
-    @Column(name="id_sect_mngr", insertable=false, updatable=false)
-    private Long idSectManager;
-    
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-    @JoinColumn(name="id_sect_mngr")
-    private Set<KaryawanModel> sectManager;
-    
-    @Column(name="id_assist_mngr", insertable=false, updatable=false)
-    private Long idAssistManager;
-    
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-    @JoinColumn(name="id_assist_mngr")
-    private Set<KaryawanModel> assistManager;
+//    @Column(name="id_dept_mngr", insertable=false, updatable=false)
+//    private Long idDeptManager;
+//    
+//    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+//    @JoinColumn(name="id_dept_mngr")
+//    private Set<KaryawanModel> deptManager;
+//    
+//    @Column(name="id_sect_mngr", insertable=false, updatable=false)
+//    private Long idSectManager;
+//    
+//    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+//    @JoinColumn(name="id_sect_mngr")
+//    private Set<KaryawanModel> sectManager;
+//    
+//    @Column(name="id_assist_mngr", insertable=false, updatable=false)
+//    private Long idAssistManager;
+//    
+//    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+//    @JoinColumn(name="id_assist_mngr")
+//    private Set<KaryawanModel> assistManager;
 
     @OneToOne(mappedBy = "karyawan")
     private AtributModel atributModel;
@@ -59,13 +66,13 @@ public class KaryawanModel {
     @JoinColumn(name = "nik", referencedColumnName = "nik")
     private UserModel user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private RoleModel role;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_dept", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
@@ -76,131 +83,103 @@ public class KaryawanModel {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
     private List<RequestLowonganModel> requestLowongan;
+    
 
     /*
     Section Setter Getter===============================================================================================
      */
-
-    /**
-     *
-     * @return id Karyawan
-     */
+    
     public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    /**
-     * Normally this method is prohibited to be used
-     * because this method can cause primary key of karyawan scheme to chaneg
-     * @param id Karyawan
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    /**
-     * this function is used to get type of the employee
-     * @return true if karyawan tetap
-     */
-    public boolean isJenisKaryawan() {
-        return jenisKaryawan;
-    }
+	public boolean isJenisKaryawan() {
+		return jenisKaryawan;
+	}
 
-    /**
-     *
-     * @param jenisKaryawan
-     */
-    public void setJenisKaryawan(boolean jenisKaryawan) {
-        this.jenisKaryawan = jenisKaryawan;
-    }
+	public void setJenisKaryawan(boolean jenisKaryawan) {
+		this.jenisKaryawan = jenisKaryawan;
+	}
 
-    /**
-     * this funtion to get sallary
-     * @return gaji
-     */
-    public Integer getGaji() {
-        return gaji;
-    }
+	public Integer getGaji() {
+		return gaji;
+	}
 
-    /**
-     * this function is to set sallary information
-     * @param gaji
-     */
-    public void setGaji(Integer gaji) {
-        this.gaji = gaji;
-    }
+	public void setGaji(Integer gaji) {
+		this.gaji = gaji;
+	}
 
-    /**
-     *
-     * @return idDeptManager
-     */
-    public Long getIdDeptManager() {
-        return idDeptManager;
-    }
+	public Integer getSisaCuti() {
+		return sisaCuti;
+	}
 
-    /**
-     *
-     * @param idDeptManager
-     */
-    public void setIdDeptManager(Long idDeptManager) {
-        this.idDeptManager = idDeptManager;
-    }
+	public void setSisaCuti(Integer sisaCuti) {
+		this.sisaCuti = sisaCuti;
+	}
 
-    /**
-     * this function is to get information that list of employess are led by this dept. manager
-     * @return deptManager
-     */
-    public Set<KaryawanModel> getDeptManager() {
-        return deptManager;
-    }
-
-    public void setDeptManager(Set<KaryawanModel> deptManager) {
-        this.deptManager = deptManager;
-    }
+//	public Long getIdDeptManager() {
+//		return idDeptManager;
+//	}
+//
+//	public void setIdDeptManager(Long idDeptManager) {
+//		this.idDeptManager = idDeptManager;
+//	}
+//    
+//    public Set<KaryawanModel> getDeptManager() {
+//        return deptManager;
+//    }
+//
+//    public void setDeptManager(Set<KaryawanModel> deptManager) {
+//        this.deptManager = deptManager;
+//    }
 
     /**
      * this function is to get id of sect. manager
      * @return idSectManager
      */
-    public Long getIdSectManager() {
-        return idSectManager;
-    }
-
-    public void setIdSectManager(Long idSectManager) {
-        this.idSectManager = idSectManager;
-    }
-
-    /**
-     * this function is to get information that list of employess are led by this sect. manager
-     * @return sectManager
-     */
-    public Set<KaryawanModel> getSectManager() {
-        return sectManager;
-    }
-
-    public void setSectManager(Set<KaryawanModel> sectManager) {
-        this.sectManager = sectManager;
-    }
-
-    public Long getIdAssistManager() {
-        return idAssistManager;
-    }
-
-    public void setIdAssistManager(Long idAssistManager) {
-        this.idAssistManager = idAssistManager;
-    }
+//    public Long getIdSectManager() {
+//        return idSectManager;
+//    }
+//
+//    public void setIdSectManager(Long idSectManager) {
+//        this.idSectManager = idSectManager;
+//    }
+//
+//    /**
+//     * this function is to get information that list of employess are led by this sect. manager
+//     * @return sectManager
+//     */
+//    public Set<KaryawanModel> getSectManager() {
+//        return sectManager;
+//    }
+//
+//    public void setSectManager(Set<KaryawanModel> sectManager) {
+//        this.sectManager = sectManager;
+//    }
+//
+//    public Long getIdAssistManager() {
+//        return idAssistManager;
+//    }
+//
+//    public void setIdAssistManager(Long idAssistManager) {
+//        this.idAssistManager = idAssistManager;
+//    }
 
     /**
      * this function is to get information that list of employess are led by this asst. manager
      * @return asstManager
      */
-    public Set<KaryawanModel> getAssistManager() {
-        return assistManager;
-    }
-
-    public void setAssistManager(Set<KaryawanModel> assistManager) {
-        this.assistManager = assistManager;
-    }
+//    public Set<KaryawanModel> getAssistManager() {
+//        return assistManager;
+//    }
+//
+//    public void setAssistManager(Set<KaryawanModel> assistManager) {
+//        this.assistManager = assistManager;
+//    }
 
     public AtributModel getAtributModel() {
         return atributModel;
