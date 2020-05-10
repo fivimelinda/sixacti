@@ -9,5 +9,4 @@ public class SixactiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SixactiApplication.class, args);
 	}
-
 }

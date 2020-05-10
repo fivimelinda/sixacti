@@ -1,5 +1,6 @@
 package propensi.sixacti.service.tes.tesTulis;
 
+import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.model.TesTulisModel;
 
 public interface TesTulisRestService {
@@ -8,4 +9,6 @@ public interface TesTulisRestService {
     TesTulisModel ubahTesTulis(Long idTesTulis, TesTulisModel tesTulis);
 
     TesTulisModel getTesTulisByIdTesTulis(Long idTesTulis);
+
+    TesTulisModel getTesTulisByPelamar(PelamarModel pelamar);
 }

@@ -28,20 +28,9 @@ public class KategoriCutiModel implements Serializable {
 	@Size(max = 100)
     @Column(name="keterangan", nullable = true)
     private String keterangan;
-	
-	@OneToMany(mappedBy = "kategori", fetch=FetchType.LAZY, cascade = CascadeType.ALL )
-	private List<CutiModel> listCuti;
 
 	public Integer getId() {
 		return id;
-	}
-
-	public List<CutiModel> getListCuti() {
-		return listCuti;
-	}
-
-	public void setListCuti(List<CutiModel> listCuti) {
-		this.listCuti = listCuti;
 	}
 
 	public void setId(Integer id) {

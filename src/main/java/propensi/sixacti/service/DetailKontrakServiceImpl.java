@@ -1,5 +1,6 @@
 package propensi.sixacti.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -33,8 +34,18 @@ public class DetailKontrakServiceImpl implements DetailKontrakService {
 
     @Override
     public List<DetailKontrakModel> retrieveListDetailKontrak() {
-        return detailKontrakDb.findAll();
+       return detailKontrakDb.findAll();
     }
-    
+
+    @Override
+    public List<String> getDetailKontrakWithName(){
+        List <String> all = new ArrayList<>();
+        List<DetailKontrakModel> detailKontrakAll = detailKontrakDb.findAll();
+        for (DetailKontrakModel d : detailKontrakAll) {
+            String b = d.getKaryawan().getUser().getNama();
+            all.add(b);
+        }
+        return all;
+    }
 
 }

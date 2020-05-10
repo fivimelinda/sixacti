@@ -1,5 +1,6 @@
 package propensi.sixacti.service.tes.tesWawancara;
 
+import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.model.TesWawancaraModel;
 
 public interface TesWawancaraRestService {
@@ -8,4 +9,6 @@ public interface TesWawancaraRestService {
     TesWawancaraModel ubahTesWawancara(Long idTesWawancara, TesWawancaraModel tesWawancara);
 
     TesWawancaraModel getTesWawancaraByIdTesWawancara(Long idTesWawancara);
+
+    TesWawancaraModel getTesWawancaraByPelamar(PelamarModel pelamar);
 }

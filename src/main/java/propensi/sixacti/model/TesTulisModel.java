@@ -30,12 +30,15 @@ public class TesTulisModel implements Serializable{
     private Long idTesTulis;
 
     @NotNull
-    @Size(max = 255)
     @Column(name = "nilai", nullable = false)
-    private String nilai;
+    private Integer nilai;
+
+    @NotNull
+    @Column(name="isEdit", nullable=false)
+    private Boolean isEdit;
 
     // reference ke pelamar
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY )
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     @OnDelete(action= OnDeleteAction.CASCADE)
     @JsonIgnore
@@ -58,15 +61,23 @@ public class TesTulisModel implements Serializable{
     /**
      * @return the nilai
      */
-    public String getNilai() {
+    public Integer getNilai() {
         return nilai;
     }
 
     /**
      * @param nilai the nilai to set
      */
-    public void setNilai(String nilai) {
+    public void setNilai(Integer nilai) {
         this.nilai = nilai;
+    }
+
+    public Boolean getIsEdit(){
+        return isEdit;
+    }
+
+    public void setIsEdit(Boolean isEdit){
+        this.isEdit = isEdit;
     }
 
     /**

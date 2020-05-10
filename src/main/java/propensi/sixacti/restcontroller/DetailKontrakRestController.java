@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,5 +25,17 @@ public class DetailKontrakRestController {
     @RequestMapping(value = "/all" , method = RequestMethod.GET)
     private List<DetailKontrakModel> retrieveListDetailKontrak() {
         return detailKontrakService.retrieveListDetailKontrak();
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/get/{id}")
+    private DetailKontrakModel getDetailKontrakById(@PathVariable("id") Long id){
+        return detailKontrakService.getDetailKontrakById(id);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/getName", method = RequestMethod.GET)
+    private List<String> getDetailKontrakName() {
+        return detailKontrakService.getDetailKontrakWithName();
     }
 }

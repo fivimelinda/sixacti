@@ -1,5 +1,7 @@
 package propensi.sixacti.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -18,6 +20,7 @@ public class KtpModel implements Serializable {
     @NotNull
     @Column(name = "data", nullable = false)
     @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] data;
 
     @OneToOne(cascade = CascadeType.ALL)

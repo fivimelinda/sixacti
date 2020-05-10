@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -31,9 +33,15 @@ public class DetailKontrakModel implements Serializable {
     @Column(name = "periode",nullable = false)
     private Integer periode;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
+    @JsonIgnore
     private KaryawanModel karyawan;
+
+    // @Size(max = 100)
+    // @Column(name = "nama_karyawan", nullable = true)
+    // private String namaKaryawan = this.karyawan.getUser().getNama();
+
 
     public KaryawanModel getKaryawan() {
         return karyawan;
