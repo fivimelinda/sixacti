@@ -36,25 +36,12 @@ public class AtributModel implements Serializable {
     private String ukuran_helm;
 
     @NotNull
-    @Size(max = 5)
-    @Column(name = "ukuran_baju", nullable = false)
-    private String ukuran_baju;
-
-    @NotNull
     @Column(name = "status", nullable = false)
     private Boolean status;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
     private KaryawanModel karyawan;
-
-    public String getUkuran_baju() {
-        return ukuran_baju;
-    }
-
-    public void setUkuran_baju(String ukuran_baju) {
-        this.ukuran_baju = ukuran_baju;
-    }
 
     /**
      * @return the ukuran_baju
