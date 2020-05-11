@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class LamaranRestController {
@@ -56,6 +56,19 @@ public class LamaranRestController {
     @GetMapping(value = "/detailLamaran/{id}")
     private LamaranModel getLamaranById(@PathVariable Long id){
         return lamaranService.findByIdLamaran(id);
+    }
+
+    @PutMapping(value = "/setStatus/{id}")
+    private LamaranModel setStatus(@PathVariable Long id, @RequestBody LamaranModel lamaran){
+        try{
+            return lamaranService.setStatus(id, lamaran);
+
+        }
+        catch (NoSuchElementException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "ID Lowongan" + id + "Not Found"
+            );
+        }
     }
 
 //    @GetMapping(value = "/listLamaran/{idLowongan}")
