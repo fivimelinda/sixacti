@@ -2,6 +2,7 @@ package propensi.sixacti.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.model.LowonganKerjaModel;
 import propensi.sixacti.model.RequestLowonganModel;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class LowonganKerjaServiceImpl implements LowonganKerjaService {
 
     @Autowired

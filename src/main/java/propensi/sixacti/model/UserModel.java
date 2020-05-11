@@ -211,13 +211,14 @@ public class UserModel implements Serializable {
         this.NPWP = nPWP;
     }
 
-    // public KaryawanModel getKaryawan() {
-    //     return karyawan;
-    // }
+//    public KaryawanModel getKaryawan() {
+//        return karyawan;
+//    }
+//
+//    public void setKaryawan(KaryawanModel karyawan) {
+//        this.karyawan = karyawan;
+//    }
 
-    // public void setKaryawan(KaryawanModel karyawan) {
-    //     this.karyawan = karyawan;
-    // }
 }
 
 

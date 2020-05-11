@@ -16,6 +16,16 @@ public class AtributModel implements Serializable {
     private Long id_atribut;
 
     @NotNull
+    @Size(max = 10)
+    @Column(name = "ukuran_sepatu", nullable = false)
+    private String ukuran_sepatu;
+
+    @NotNull
+    @Size(max = 5)
+    @Column(name = "ukuran_baju", nullable = false)
+    private String ukuran_baju;
+
+    @NotNull
     @Size(max = 5)
     @Column(name = "ukuran_jas_lab", nullable = false)
     private String ukuran_jas_lab;
@@ -27,15 +37,53 @@ public class AtributModel implements Serializable {
 
     @NotNull
     @Column(name = "status", nullable = false)
-    private boolean status;
+    private Boolean status;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
     private KaryawanModel karyawan;
 
+    /**
+     * @return the ukuran_baju
+     */
+    public String getUkuran_baju() {
+        return ukuran_baju;
+    }
 
-    public boolean isStatus() {
-        return status;
+    /**
+     * @param ukuran_baju the ukuran_baju to set
+     */
+    public void setUkuran_baju(String ukuran_baju) {
+        this.ukuran_baju = ukuran_baju;
+    }
+
+    /**
+     * @return the ukuran_sepatu
+     */
+    public String getUkuran_sepatu() {
+        return ukuran_sepatu;
+    }
+
+    /**
+     * @param ukuran_sepatu the ukuran_sepatu to set
+     */
+    public void setUkuran_sepatu(String ukuran_sepatu) {
+        this.ukuran_sepatu = ukuran_sepatu;
+    }
+
+    /**
+     * @return the karyawan
+     */
+    public KaryawanModel getKaryawan() {
+        return karyawan;
+    }
+    
+    /**
+     * @param karyawan the karyawan to set
+     */
+    public void setKaryawan(KaryawanModel karyawan) {
+        this.karyawan = karyawan;
+
     }
 
     public Long getId_atribut() {
@@ -62,8 +110,18 @@ public class AtributModel implements Serializable {
         this.ukuran_helm = ukuran_helm;
     }
 
-    public void setStatus(boolean status) {
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    /**
+     * @return the status
+     */
+    public Boolean getStatus() {
+        return status;
     }
 
 }
