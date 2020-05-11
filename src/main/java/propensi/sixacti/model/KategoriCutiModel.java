@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "kategori")
 public class KategoriCutiModel implements Serializable {
@@ -28,6 +30,10 @@ public class KategoriCutiModel implements Serializable {
 	@Size(max = 100)
     @Column(name="keterangan", nullable = true)
     private String keterangan;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kategori")
+    @JsonIgnore
+    private List<CutiModel> cuti;
 
 	public Integer getId() {
 		return id;

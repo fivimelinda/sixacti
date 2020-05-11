@@ -57,31 +57,38 @@ public class KaryawanModel {
 //    private Set<KaryawanModel> assistManager;
 
     @OneToOne(mappedBy = "karyawan")
+    @JsonIgnore
     private AtributModel atributModel;
 
     @OneToOne(mappedBy = "karyawan")
+    @JsonIgnore
     private DetailKontrakModel detailKontrakModel;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nik", referencedColumnName = "nik")
     private UserModel user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private RoleModel role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_dept", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private DepartemenModel departemen;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_sect", referencedColumnName = "idSection", nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private SectionModel section;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
+    @JsonIgnore
     private List<CutiModel> cuti;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
+    @JsonIgnore
     private List<RequestLowonganModel> requestLowongan;
     
 
@@ -229,11 +236,19 @@ public class KaryawanModel {
         this.cuti = cuti;
     }
 
-    // public List<RequestLowonganModel> getRequestLowongan() {
-    //     return requestLowongan;
-    // }
+	public SectionModel getSection() {
+		return section;
+	}
 
-    // public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
-    //     this.requestLowongan = requestLowongan;
-    // }
+	public void setSection(SectionModel section) {
+		this.section = section;
+	}
+
+	public List<RequestLowonganModel> getRequestLowongan() {
+		return requestLowongan;
+	}
+
+	public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
+		this.requestLowongan = requestLowongan;
+	}
 }
