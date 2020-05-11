@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "userRole")
 public class UserModel implements Serializable {
@@ -87,13 +89,17 @@ public class UserModel implements Serializable {
     **/
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_akun", referencedColumnName = "idAkun")
+    @JsonIgnore
     private AkunModel akun;
 
-    // @OneToOne(cascade = CascadeType.ALL)
-    // private KaryawanModel karyawan;
+    @OneToOne(mappedBy = "user")
+    @JsonIgnore
+    private KaryawanModel karyawan;
 
-    // @OneToOne(cascade = CascadeType.ALL)
-    // private PelamarModel pelamar;
+    @OneToOne(mappedBy = "userPelamar")
+    @JsonIgnore
+    private PelamarModel pelamar;
 
     /*
     setter getter
