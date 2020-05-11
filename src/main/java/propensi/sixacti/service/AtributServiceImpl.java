@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import propensi.sixacti.model.AtributModel;
-import propensi.sixacti.repository.AtributDB;
+import propensi.sixacti.repository.AtributDb;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import java.util.Optional;
 @Transactional
 public class AtributServiceImpl implements AtributService{
     @Autowired
-    AtributDB atributDB ;
+    AtributDb atributDB ;
 
     @Override
     public List<AtributModel> getListAtribut(){

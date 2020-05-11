@@ -11,5 +11,6 @@ public interface LamaranService {
     void addLamaran(LamaranModel lamaran);
     List<LamaranModel> getLamaranByLowonganId (Long idLowongan);
     List<LamaranModel> getLamaran();
+    LamaranModel setStatus(Long id, LamaranModel lamaran);
 
 }
