@@ -64,6 +64,11 @@ public class LamaranModel implements Serializable {
     private String kelurahanDomisili;
 
     @NotNull
+    @Size(max=50)
+    @Column(name="kecamatanDomisili", nullable=false)
+    private String kecamatanDomisili;
+
+    @NotNull
     @Column(name= "kodePosDomisili",  nullable = false)
     private Integer kodePosDomisili;
 
@@ -404,6 +409,14 @@ public class LamaranModel implements Serializable {
 
     public void setStatusLamaran(String statusLamaran) {
         this.statusLamaran = statusLamaran;
+    }
+
+    public String getKecamatanDomisili() {
+        return kecamatanDomisili;
+    }
+
+    public void setKecamatanDomisili(String kecamatanDomisili) {
+        this.kecamatanDomisili = kecamatanDomisili;
     }
 }
 
