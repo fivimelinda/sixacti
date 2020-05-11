@@ -13,6 +13,7 @@ import propensi.sixacti.model.NpwpModel;
 import propensi.sixacti.repository.NpwpDB;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -33,5 +34,14 @@ public class NpwpServiceImpl implements NpwpService{
         } catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ", Please try again!", ex);
         }
+    }
+
+    @Override
+    public NpwpModel getFileByName(String fileName) {
+        Optional<NpwpModel> berkas = npwpDB.findByFileName(fileName);
+        if(berkas.isPresent()){
+            return berkas.get();
+        }
+        return null;
     }
 }
