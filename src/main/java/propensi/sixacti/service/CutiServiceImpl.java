@@ -44,4 +44,8 @@ public class CutiServiceImpl implements CutiService{
 		return cutiDb.findCutiDone(karyawan, "Disetujui", "Ditolak");
 	}
 	
+	@Override
+	public List<CutiModel> getCutiByKaryawanAndStatus(List<KaryawanModel> karyawan, String status){
+		return cutiDb.findUnreviewed(karyawan, status);
+	}
 }
