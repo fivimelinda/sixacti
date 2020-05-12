@@ -68,7 +68,7 @@ public class LamaranRestController {
         }
         catch (NoSuchElementException e){
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "ID Lowongan" + id + "Not Found"
+                    HttpStatus.NOT_FOUND, "ID Lamaran" + id + "Not Found"
             );
         }
     }
