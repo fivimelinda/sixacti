@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -89,8 +90,9 @@ public class UserModel implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private AkunModel akun;
 
-    // @OneToOne(cascade = CascadeType.ALL)
-    // private KaryawanModel karyawan;
+     @OneToOne(cascade = CascadeType.ALL)
+     @JsonIgnore
+     private KaryawanModel karyawan;
 
     // @OneToOne(cascade = CascadeType.ALL)
     // private PelamarModel pelamar;

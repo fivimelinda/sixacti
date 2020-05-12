@@ -58,6 +58,10 @@ public class TesMedisModel implements Serializable{
     @NotNull
     @Column(name="isEdit", nullable=false)
     private Boolean isEdit;
+
+    @NotNull
+    @Column(name="status", nullable = false)
+    private Boolean status;
     
     //reference ke pelamar
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
@@ -65,6 +69,14 @@ public class TesMedisModel implements Serializable{
     @OnDelete(action= OnDeleteAction.CASCADE)
     @JsonIgnore
     private PelamarModel pelamarTesMedis;
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
     /**
      * @return the idTesMedis

@@ -57,9 +57,11 @@ public class KaryawanModel {
 //    private Set<KaryawanModel> assistManager;
 
     @OneToOne(mappedBy = "karyawan")
+    @JsonIgnore
     private AtributModel atributModel;
 
     @OneToOne(mappedBy = "karyawan")
+    @JsonIgnore
     private DetailKontrakModel detailKontrakModel;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -180,14 +182,14 @@ public class KaryawanModel {
 //    public void setAssistManager(Set<KaryawanModel> assistManager) {
 //        this.assistManager = assistManager;
 //    }
-
-    public AtributModel getAtributModel() {
-        return atributModel;
-    }
-
-    public void setAtributModel(AtributModel atributModel) {
-        this.atributModel = atributModel;
-    }
+//
+//    public AtributModel getAtributModel() {
+//        return atributModel;
+//    }
+//
+//    public void setAtributModel(AtributModel atributModel) {
+//        this.atributModel = atributModel;
+//    }
 
     public DetailKontrakModel getDetailKontrakModel() {
         return detailKontrakModel;

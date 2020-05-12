@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import propensi.sixacti.model.AtributModel;
+import propensi.sixacti.model.KaryawanModel;
 import propensi.sixacti.repository.AtributDB;
 
 import java.util.List;
