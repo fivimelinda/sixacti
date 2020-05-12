@@ -25,6 +25,8 @@ public class TesTulisRestServiceImpl implements TesTulisRestService{
         TesTulisModel updateTesTulis = getTesTulisByIdTesTulis(idTesTulis);
         updateTesTulis.setNilai(tesTulis.getNilai());
         updateTesTulis.setIsEdit(tesTulis.getIsEdit());
+        updateTesTulis.setIsLolos(tesTulis.getIsLolos());
+        updateTesTulis.setIsGagal(tesTulis.getIsGagal());
         return tesTulisDb.save(updateTesTulis);
     }
 

@@ -28,7 +28,7 @@ public class PelamarModel implements Serializable{
     @OneToOne(cascade = CascadeType.ALL)
     private TesTulisModel tesTulis;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     private TesMedisModel tesMedis;
 
     @OneToOne(cascade = CascadeType.ALL)
