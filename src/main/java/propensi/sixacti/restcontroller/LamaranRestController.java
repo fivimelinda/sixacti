@@ -33,8 +33,6 @@ public class LamaranRestController {
     private PelamarRestService pelamarRestService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private PelamarRestService pelamarRestService;
 
     @PostMapping(value = "/addLamaran/{idLowongan}")
     private ResponseEntity<Long> createLamaran(@PathVariable Long idLowongan, @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
@@ -70,7 +68,7 @@ public class LamaranRestController {
         }
         catch (NoSuchElementException e){
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "ID Lowongan" + id + "Not Found"
+                    HttpStatus.NOT_FOUND, "ID Lamaran" + id + "Not Found"
             );
         }
     }
