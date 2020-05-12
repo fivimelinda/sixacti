@@ -33,8 +33,6 @@ public class LamaranRestController {
     private PelamarRestService pelamarRestService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private PelamarRestService pelamarRestService;
 
     @PostMapping(value = "/addLamaran/{idLowongan}")
     private ResponseEntity<Long> createLamaran(@PathVariable Long idLowongan, @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
