@@ -41,7 +41,6 @@ public class LowonganKerjaModel implements Serializable {
     private Date tanggalBerakhir;
 
     @NotNull
-    @Size(max = 255)
     @Column(name = "deskripsi", nullable = false)
     private String deskripsi;
 

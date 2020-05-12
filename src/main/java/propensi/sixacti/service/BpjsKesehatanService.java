@@ -7,4 +7,5 @@ import propensi.sixacti.model.LamaranModel;
 
 public interface BpjsKesehatanService {
     BpjsKesehatanModel storeFile(LamaranModel lamaran, MultipartFile file);
+    BpjsKesehatanModel getFileByName(String fileName);
 }

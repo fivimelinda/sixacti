@@ -1,6 +1,7 @@
 package propensi.sixacti.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -31,6 +32,10 @@ public class SectionModel implements Serializable{
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private DepartemenModel departemen;
+    
+    @OneToMany(mappedBy = "section", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    @JsonIgnore
+    private List<KaryawanModel> listKaryawan;
 
     /**
      * @return the idSection
@@ -59,5 +64,21 @@ public class SectionModel implements Serializable{
     public void setNamaSection(String namaSection) {
         this.namaSection = namaSection;
     }
+
+	public DepartemenModel getDepartemen() {
+		return departemen;
+	}
+
+	public void setDepartemen(DepartemenModel departemen) {
+		this.departemen = departemen;
+	}
+
+	public List<KaryawanModel> getListKaryawan() {
+		return listKaryawan;
+	}
+
+	public void setListKaryawan(List<KaryawanModel> listKaryawan) {
+		this.listKaryawan = listKaryawan;
+	}
 
 }

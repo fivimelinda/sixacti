@@ -6,4 +6,5 @@ import propensi.sixacti.model.LamaranModel;
 
 public interface BerkasService {
     BerkasModel storeFile(LamaranModel lamaran, MultipartFile file);
+    BerkasModel getFileByName(String fileName);
 }

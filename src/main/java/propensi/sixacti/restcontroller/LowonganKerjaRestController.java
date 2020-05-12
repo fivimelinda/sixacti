@@ -76,10 +76,6 @@ public class LowonganKerjaRestController {
         }
     }
 
-
-    /*Untuk addLoker, nunggu requestLoker dulu Nanti di serviceLokerIMPLnya
-    yang add parameternya req.Loker id, dicari terus oper oper data. save
-     */
     @PostMapping(value = "/addLoker/{idReqLowongan}")
     private ResponseEntity<Void> createLoker(@PathVariable Long idReqLowongan, @RequestBody LowonganKerjaModel loker, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){

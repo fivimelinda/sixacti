@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.jpa.repository.Query;
 
+import propensi.sixacti.model.AtributModel;
 import propensi.sixacti.model.KaryawanModel;
 
 @Repository
+public interface AtributDb extends JpaRepository<AtributModel, Long>{
 
-public interface KaryawanDB extends JpaRepository<KaryawanModel, Long> {
-
+    List<AtributModel> findByKaryawan(KaryawanModel karyawan);
+    
 }

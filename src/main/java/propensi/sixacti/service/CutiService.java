@@ -13,4 +13,5 @@ public interface CutiService {
 	Optional<CutiModel> getCutiById(Long id);
 	Optional<CutiModel> getCutiOnProcess(KaryawanModel karyawan);
 	List<CutiModel> getCutiDoneByKaryawan(KaryawanModel karyawan);
+	List<CutiModel> getCutiByKaryawanAndStatus(List<KaryawanModel> idKaryawan, String status);
 }

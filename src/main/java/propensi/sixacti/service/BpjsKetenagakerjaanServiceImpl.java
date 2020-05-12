@@ -6,12 +6,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import propensi.sixacti.exception.FileStorageException;
-import propensi.sixacti.model.BerkasModel;
 import propensi.sixacti.model.BpjsKetenagakerjaanModel;
 import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.repository.BpjsKetenagakerjaanDB;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -31,5 +31,14 @@ public class BpjsKetenagakerjaanServiceImpl implements BpjsKetenagakerjaanServic
         } catch (IOException ex) {
             throw new FileStorageException("Could not store file " + fileName + ", Please try again!", ex);
         }
+    }
+
+    @Override
+    public BpjsKetenagakerjaanModel getFileByName(String fileName) {
+        Optional<BpjsKetenagakerjaanModel> berkas = bpjsKetenagakerjaanDB.findByFileName(fileName);
+        if(berkas.isPresent()){
+            return berkas.get();
+        }
+        return null;
     }
 }
