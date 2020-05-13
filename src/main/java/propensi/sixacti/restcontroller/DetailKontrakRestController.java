@@ -38,4 +38,10 @@ public class DetailKontrakRestController {
     private List<String> getDetailKontrakName() {
         return detailKontrakService.getDetailKontrakWithName();
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/getDepartemen", method = RequestMethod.GET)
+    private List<String> getDetailKontrakDepartemen() {
+        return detailKontrakService.getDetailKontrakDepartemen();
+    }
 }

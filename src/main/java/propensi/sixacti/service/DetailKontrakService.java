@@ -8,4 +8,5 @@ public interface DetailKontrakService {
     DetailKontrakModel getDetailKontrakById(Long id);
     List<DetailKontrakModel> retrieveListDetailKontrak();
     List<String> getDetailKontrakWithName();
+    List<String> getDetailKontrakDepartemen();
 }

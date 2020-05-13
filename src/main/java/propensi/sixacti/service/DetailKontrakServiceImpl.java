@@ -48,4 +48,15 @@ public class DetailKontrakServiceImpl implements DetailKontrakService {
         return all;
     }
 
+    @Override
+    public List<String> getDetailKontrakDepartemen() {
+        List <String> all = new ArrayList<>();
+        List<DetailKontrakModel> detailKontrakAll = detailKontrakDb.findAll();
+        for (DetailKontrakModel d : detailKontrakAll) {
+            String b = d.getKaryawan().getDepartemen().getNamaDepartemen();
+            all.add(b);
+        }
+        return all;
+    }
+
 }
