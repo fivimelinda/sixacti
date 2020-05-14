@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import propensi.sixacti.service.AtributService;
-
+import propensi.sixacti.service.KaryawanService;
+import propensi.sixacti.service.tes.PelamarRestService;
 import propensi.sixacti.model.AtributModel;
+import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.repository.AtributDb;
 import propensi.sixacti.service.AtributRestService;
 
@@ -36,10 +38,16 @@ public class AtributRestController {
     @Autowired
     AtributService atributService;
 
-    @PostMapping(value="/tambahAtribut")
+    @Autowired
+    private PelamarRestService pelamarRestService;
+
+    @Autowired
+    private KaryawanService karyawanService;
+
+    @PostMapping(value="/tambahAtribut/{idPelamar}")
     public AtributModel tambahAtribut(
         @Valid @RequestBody AtributModel atribut,
-        // @PathVariable (value = "idPelamar") Long idPelamar,
+        @PathVariable (value = "idPelamar") Long idPelamar,
         BindingResult bindingResult) 
         {
         //TODO: process POST request
@@ -48,11 +56,24 @@ public class AtributRestController {
                 HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }
         else{
-            // PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
-            // pelamar.setTesMedis(tesMedis);
-            // tesMedis.setPelamarTesMedis(pelamar);
-            // pelamarRestService.saveUpdatePelamar(pelamar);
+            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
+            pelamar.setAtribut(atribut);;
+            atribut.setPelamarAtribut(pelamar);
             return atributRestService.buatAtribut(atribut);
+        }
+    }
+
+    @PutMapping(value = "/atribut/ubah/{idAtribut}")
+    public AtributModel updateAtribut(
+        @PathVariable (value = "idAtribut") Long idAtribut,
+        @RequestBody AtributModel atribut
+    ){
+        try{
+            return atributRestService.ubahAtribut(idAtribut, atribut);
+        }catch(NoSuchElementException e){
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "ID Tes Medis " + String.valueOf(idAtribut+ " Not Found"
+            ));
         }
     }
 

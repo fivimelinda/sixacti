@@ -6,4 +6,5 @@ import propensi.sixacti.model.LamaranModel;
 
 public interface KisService {
     KisModel storeFile(LamaranModel lamaran, MultipartFile file);
+    KisModel getFileByName(String fileName);
 }

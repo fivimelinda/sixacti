@@ -3,6 +3,9 @@ package propensi.sixacti.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,9 +23,11 @@ public class DepartemenModel implements Serializable {
     private String namaDepartemen;
     
     @OneToMany(mappedBy = "departemen", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    @JsonIgnore
     private List<KaryawanModel> listKaryawan;
 
     @OneToMany(mappedBy = "departemen", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    @JsonIgnore
     private List<SectionModel> listSection;
     /*
     Section Setter Getter===============================================================================================

@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 import propensi.sixacti.model.KkModel;
 import propensi.sixacti.model.KtpModel;
 
+import java.util.Optional;
+
 @Repository
 public interface KkDB extends JpaRepository<KkModel, Long> {
+    Optional<KkModel> findByFileName(String fileName);
 }

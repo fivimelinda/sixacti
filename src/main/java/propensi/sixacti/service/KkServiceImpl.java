@@ -12,6 +12,7 @@ import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.repository.KkDB;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,5 +33,14 @@ public class KkServiceImpl implements KkService{
         } catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ", Please try again!", ex);
         }
+    }
+
+    @Override
+    public KkModel getFileByName(String fileName) {
+        Optional<KkModel> berkas = kkDB.findByFileName(fileName);
+        if(berkas.isPresent()){
+            return berkas.get();
+        }
+        return null;
     }
 }

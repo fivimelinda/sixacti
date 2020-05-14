@@ -1,5 +1,6 @@
 package propensi.sixacti.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -24,5 +25,10 @@ public class KaryawanServiceImpl implements KaryawanService{
         }
         return null;
     }
+	
+	@Override
+	public void addKaryawan(KaryawanModel cuti) {
+		karyawanDb.save(cuti);
+	}
 
 }

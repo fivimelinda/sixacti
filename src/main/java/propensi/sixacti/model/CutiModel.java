@@ -27,15 +27,14 @@ public class CutiModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private KaryawanModel karyawan;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_kategori", referencedColumnName = "id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private KategoriCutiModel kategori;
 
     @NotNull

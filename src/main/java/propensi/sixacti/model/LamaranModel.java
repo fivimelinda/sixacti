@@ -64,6 +64,11 @@ public class LamaranModel implements Serializable {
     private String kelurahanDomisili;
 
     @NotNull
+    @Size(max=50)
+    @Column(name="kecamatanDomisili", nullable=false)
+    private String kecamatanDomisili;
+
+    @NotNull
     @Column(name= "kodePosDomisili",  nullable = false)
     private Integer kodePosDomisili;
 
@@ -102,6 +107,9 @@ public class LamaranModel implements Serializable {
     @Size(max=13)
     @Column(name= "npwp", nullable = true)
     private String npwp;
+
+    @Column(name = "statusLamaran", nullable = true)
+    private String statusLamaran;
 
 //
 //    @Column(name = "fotoKtp", nullable=true)
@@ -144,8 +152,9 @@ public class LamaranModel implements Serializable {
         this.pelamar = pelamar;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private PelamarModel pelamar;
 
 //    @OneToMany(mappedBy = "lamaran")
@@ -153,31 +162,31 @@ public class LamaranModel implements Serializable {
 //    private List<BerkasModel> listBerkas;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
-    @JsonIgnore
+//    @JsonIgnore
     private BerkasModel berkasModel;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
-    @JsonIgnore
+//    @JsonIgnore
     private KtpModel ktpModel;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
-    @JsonIgnore
+//    @JsonIgnore
     private KkModel kkModel;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
-    @JsonIgnore
+//    @JsonIgnore
     private NpwpModel npwpModel;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
-    @JsonIgnore
+//    @JsonIgnore
     private BpjsKetenagakerjaanModel bpjsKetenagakerjaan;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
-    @JsonIgnore
+//    @JsonIgnore
     private BpjsKesehatanModel bpjsKesehatanModel;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lamaran")
-    @JsonIgnore
+//    @JsonIgnore
     private KisModel kisModel;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -202,55 +211,6 @@ public class LamaranModel implements Serializable {
         this.lowongan = lowongan;
     }
 
-
-//    public byte[] getFotoKtp() {
-//        return fotoKtp;
-//    }
-//
-//    public void setFotoKtp(byte[] fotoKtp) {
-//        this.fotoKtp = fotoKtp;
-//    }
-//
-//    public byte[] getFotoKk() {
-//        return fotoKk;
-//    }
-//
-//    public void setFotoKk(byte[] fotoKk) {
-//        this.fotoKk = fotoKk;
-//    }
-//
-//    public byte[] getFotoNpwp() {
-//        return fotoNpwp;
-//    }
-//
-//    public void setFotoNpwp(byte[] fotoNpwp) {
-//        this.fotoNpwp = fotoNpwp;
-//    }
-//
-//    public byte[] getFotoBpjsKes() {
-//        return fotoBpjsKes;
-//    }
-//
-//    public void setFotoBpjsKes(byte[] fotoBpjsKes) {
-//        this.fotoBpjsKes = fotoBpjsKes;
-//    }
-//
-//    public byte[] getFotoBpjsKet() {
-//        return fotoBpjsKet;
-//    }
-//
-//    public void setFotoBpjsKet(byte[] fotoBpjsKet) {
-//        this.fotoBpjsKet = fotoBpjsKet;
-//    }
-//
-//    public byte[] getResume() {
-//        return resume;
-//    }
-//
-//    public void setResume(byte[] resume) {
-//        this.resume = resume;
-//    }
-
     public Long getId() {
         return id;
     }
@@ -274,14 +234,6 @@ public class LamaranModel implements Serializable {
     public void setNoBpjsKetenagakerjaan(String noBpjsKetenagakerjaan) {
         this.noBpjsKetenagakerjaan = noBpjsKetenagakerjaan;
     }
-
-//    public String getNama() {
-//        return nama;
-//    }
-//
-//    public void setNama(String nama) {
-//        this.nama = nama;
-//    }
 
     public Date getTimestampPelamar() {
         return timestampPelamar;
@@ -385,6 +337,86 @@ public class LamaranModel implements Serializable {
 
     public void setNpwp(String npwp) {
         this.npwp = npwp;
+    }
+
+    public String getTahunKerja() {
+        return tahunKerja;
+    }
+
+    public void setTahunKerja(String tahunKerja) {
+        this.tahunKerja = tahunKerja;
+    }
+
+    public String getNamaPekerjaan() {
+        return namaPekerjaan;
+    }
+
+    public void setNamaPekerjaan(String namaPekerjaan) {
+        this.namaPekerjaan = namaPekerjaan;
+    }
+
+    public KtpModel getKtpModel() {
+        return ktpModel;
+    }
+
+    public void setKtpModel(KtpModel ktpModel) {
+        this.ktpModel = ktpModel;
+    }
+
+    public KkModel getKkModel() {
+        return kkModel;
+    }
+
+    public void setKkModel(KkModel kkModel) {
+        this.kkModel = kkModel;
+    }
+
+    public NpwpModel getNpwpModel() {
+        return npwpModel;
+    }
+
+    public void setNpwpModel(NpwpModel npwpModel) {
+        this.npwpModel = npwpModel;
+    }
+
+    public BpjsKetenagakerjaanModel getBpjsKetenagakerjaan() {
+        return bpjsKetenagakerjaan;
+    }
+
+    public void setBpjsKetenagakerjaan(BpjsKetenagakerjaanModel bpjsKetenagakerjaan) {
+        this.bpjsKetenagakerjaan = bpjsKetenagakerjaan;
+    }
+
+    public BpjsKesehatanModel getBpjsKesehatanModel() {
+        return bpjsKesehatanModel;
+    }
+
+    public void setBpjsKesehatanModel(BpjsKesehatanModel bpjsKesehatanModel) {
+        this.bpjsKesehatanModel = bpjsKesehatanModel;
+    }
+
+    public KisModel getKisModel() {
+        return kisModel;
+    }
+
+    public void setKisModel(KisModel kisModel) {
+        this.kisModel = kisModel;
+    }
+
+    public String getStatusLamaran() {
+        return statusLamaran;
+    }
+
+    public void setStatusLamaran(String statusLamaran) {
+        this.statusLamaran = statusLamaran;
+    }
+
+    public String getKecamatanDomisili() {
+        return kecamatanDomisili;
+    }
+
+    public void setKecamatanDomisili(String kecamatanDomisili) {
+        this.kecamatanDomisili = kecamatanDomisili;
     }
 }
 

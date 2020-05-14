@@ -6,4 +6,5 @@ import propensi.sixacti.model.LamaranModel;
 
 public interface KtpService {
     KtpModel storeFile(LamaranModel lamaran, MultipartFile file);
+    KtpModel getFileByName(String fileName);
 }

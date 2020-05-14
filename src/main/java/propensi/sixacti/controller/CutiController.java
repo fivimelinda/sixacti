@@ -10,7 +10,6 @@ import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,12 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import propensi.sixacti.model.CutiModel;
+import propensi.sixacti.model.DepartemenModel;
 import propensi.sixacti.model.KaryawanModel;
 import propensi.sixacti.model.KategoriCutiModel;
+import propensi.sixacti.model.SectionModel;
 import propensi.sixacti.rest.CutiDetail;
 import propensi.sixacti.service.CutiService;
 import propensi.sixacti.service.KaryawanService;
@@ -67,6 +64,7 @@ public class CutiController {
 				KategoriCutiModel kategori = kategoriCutiService.getKategoriById(cuti.getIdKategori()).get();
 				newCuti.setKategori(kategori);
 				cutiService.addCuti(newCuti);
+				karyawan.getCuti().add(newCuti);
 				return cuti;
 			} catch (NoSuchElementException e) {
 				throw new ResponseStatusException(
@@ -153,4 +151,65 @@ public class CutiController {
 					HttpStatus.NOT_FOUND, "Riwayat not exist!");
 		}
 	}
+	
+	@GetMapping(value="/api/listCuti/unreview")
+	private List<CutiModel> allCutiUnreviewed(@RequestParam("reviewerId") Long reviewerId){
+		KaryawanModel reviewer = karyawanService.getKaryawanById(reviewerId);
+		String statusDicari = "";
+		List<KaryawanModel> karyawanFiltered = null;
+		String role = reviewer.getRole().getNamaRole().toLowerCase();
+		if (role.equals("assistant manager")){
+			statusDicari = "Diajukan";
+			SectionModel sect = reviewer.getSection();
+			karyawanFiltered = sect.getListKaryawan();
+		} else if(role.equals("department manager")) {
+			statusDicari = "Diproses";
+			DepartemenModel dept = reviewer.getDepartemen();
+			karyawanFiltered = dept.getListKaryawan();
+		}
+		
+		try {
+			List<CutiModel> listCuti = cutiService.getCutiByKaryawanAndStatus(karyawanFiltered, statusDicari);
+			return listCuti;
+		} catch (NoSuchElementException e) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, "List Cuti not exist!");
+		}
+		
+	}
+	
+	@PutMapping(value="/api/cuti/approved")
+	private ResponseEntity<String> approveCuti(@RequestParam("cutiId") Long cutiId){
+		try {
+			CutiModel cutiTarget = cutiService.getCutiById(cutiId).get();
+			KaryawanModel karyawanCuti = cutiTarget.getKaryawan();
+			String currStat = cutiTarget.getStatus().toLowerCase();
+			if (currStat.equals("Diajukan")) {
+				cutiTarget.setStatus("Diproses");
+			} else if (currStat.equals("Diproses")) {
+				cutiTarget.setStatus("Disetujui");
+				karyawanCuti.setSisaCuti(karyawanCuti.getSisaCuti()-1);
+			}
+			cutiService.addCuti(cutiTarget);
+			karyawanService.addKaryawan(karyawanCuti);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, "Cuti not exist!");
+		}
+	}
+	
+	@PutMapping(value="/api/cuti/rejected")
+	private ResponseEntity<String> rejectCuti(@RequestParam("cutiId") Long cutiId){
+		try {
+			CutiModel cutiTarget = cutiService.getCutiById(cutiId).get();
+			cutiTarget.setStatus("Ditolak");
+			cutiService.addCuti(cutiTarget);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, "Cuti not exist!");
+		}
+	}
+	
 }

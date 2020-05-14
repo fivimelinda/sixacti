@@ -1,6 +1,7 @@
 package propensi.sixacti.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -21,9 +22,9 @@ public class PelamarModel implements Serializable{
     @JoinColumn(name = "nik", referencedColumnName = "nik")
     private UserModel userPelamar;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pelamar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    private LamaranModel lamaran;
+    private List<LamaranModel> listLamaran;
 
     @OneToOne(cascade = CascadeType.ALL)
     private TesTulisModel tesTulis;
@@ -34,6 +35,23 @@ public class PelamarModel implements Serializable{
     @OneToOne(cascade = CascadeType.ALL)
     private TesWawancaraModel tesWawancara;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private AtributModel atribut;
+
+    /**
+     * @param atribut the atribut to set
+     */
+    public void setAtribut(AtributModel atribut) {
+        this.atribut = atribut;
+    }
+
+    /**
+     * @return the atribut
+     */
+    public AtributModel getAtribut() {
+        return atribut;
+    }
+    
     /**
      * @param idPelamar the idPelamar to set
      */
@@ -117,4 +135,13 @@ public class PelamarModel implements Serializable{
     // public void setLamaran(LamaranModel lamaran) {
     //     this.lamaran = lamaran;
     // }
+
+
+    public List<LamaranModel> getListLamaran() {
+        return listLamaran;
+    }
+
+    public void setListLamaran(List<LamaranModel> listLamaran) {
+        this.listLamaran = listLamaran;
+    }
 }
