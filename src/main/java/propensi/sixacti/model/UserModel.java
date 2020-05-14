@@ -84,6 +84,7 @@ public class UserModel implements Serializable {
     @Column(name = "NPWP", nullable = false)
     private String NPWP;
 
+
     /*
     Relation
     **/
