@@ -12,6 +12,7 @@ import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.repository.BpjsKesehatanDB;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,5 +33,14 @@ public class BpjsKesehatanServiceImpl implements BpjsKesehatanService {
         } catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ", Please try again!", ex);
         }
+    }
+
+    @Override
+    public BpjsKesehatanModel getFileByName(String fileName) {
+        Optional<BpjsKesehatanModel> berkas = bpjsKesehatanDB.findByFileName(fileName);
+        if(berkas.isPresent()){
+            return berkas.get();
+        }
+        return null;
     }
 }

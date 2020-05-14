@@ -59,4 +59,11 @@ public class DetailKontrakServiceImpl implements DetailKontrakService {
         return all;
     }
 
+    @Override
+    public DetailKontrakModel ubahStatus(Long id) {
+        DetailKontrakModel kontrak = getDetailKontrakById(id);
+        kontrak.setStatus(true);
+        return detailKontrakDb.save(kontrak);
+    }
+
 }

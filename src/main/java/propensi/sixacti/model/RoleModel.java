@@ -3,6 +3,9 @@ package propensi.sixacti.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,8 +22,9 @@ public class RoleModel implements Serializable {
     @Column (name = "nama_role")
     private String namaRole;
     
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
-    private List<KaryawanModel> listKaryawan; 
+    @OneToMany(fetch=FetchType.LAZY, mappedBy = "role")
+    @JsonIgnore
+    private List<KaryawanModel> listKaryawan;
 
     /*
     Section Setter Getter===============================================================================================

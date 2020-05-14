@@ -12,6 +12,7 @@ import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.repository.KisDB;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,5 +33,14 @@ public class KisServiceImpl implements KisService{
         } catch (IOException ex){
             throw new FileStorageException("Could not store file " + fileName + ", Please try again!", ex);
         }
+    }
+
+    @Override
+    public KisModel getFileByName(String fileName) {
+        Optional<KisModel> berkas = kisDB.findByFileName(fileName);
+        if(berkas.isPresent()){
+            return berkas.get();
+        }
+        return null;
     }
 }

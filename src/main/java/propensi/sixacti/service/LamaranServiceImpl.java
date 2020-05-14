@@ -41,6 +41,12 @@ public class LamaranServiceImpl implements LamaranService {
         return lamaranDB.findAll();
     }
 
+    @Override
+    public LamaranModel setStatus(Long id, LamaranModel lamaran) {
+        LamaranModel targetLamaran = findByIdLamaran(id);
+        targetLamaran.setStatusLamaran(lamaran.getStatusLamaran());
+        return lamaranDB.save(targetLamaran);
+    }
 
 
 }
