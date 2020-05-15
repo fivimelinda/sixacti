@@ -21,11 +21,13 @@ public class KaryawanModel {
     
     @NotNull
     @Column(name="jenis_karyawan", nullable = false)
+    @JsonIgnore
     private boolean jenisKaryawan;
 
     @NotNull
     @Size(max = 10)
     @Column(name="gaji", nullable = false)
+    @JsonIgnore
     private Integer gaji;
     
     @Column(name="sisa", nullable = false)

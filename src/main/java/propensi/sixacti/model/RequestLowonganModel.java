@@ -108,6 +108,7 @@ public class RequestLowonganModel implements Serializable {
     private List<DetailOfRequirementModel> detailOfRequirement;
     
     @OneToOne(mappedBy = "requestLowongan")
+    @JsonIgnore
     private LowonganKerjaModel lowonganKerja; 
 
     public Long getId() {
@@ -222,7 +223,15 @@ public class RequestLowonganModel implements Serializable {
         this.namaReplacement = namaReplacement;
     }
 
+	public LowonganKerjaModel getLowonganKerja() {
+		return lowonganKerja;
+	}
 
+	public void setLowonganKerja(LowonganKerjaModel lowonganKerja) {
+		this.lowonganKerja = lowonganKerja;
+	}
+
+    
 
     // public Integer getIdKaryawanDummy(){
     //     return id_karyawan_dummy;

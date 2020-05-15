@@ -107,15 +107,15 @@ public class CutiController {
 		}
 	}
 	
-//	@GetMapping(value="/api/cuti/get")
-//	private CutiModel retrieveCuti(@PathVariable("cutiId") Long cutiId) {
-//		try {
-//			return cutiService.getCutiById(cutiId).get();
-//		} catch (NoSuchElementException e) {
-//			throw new ResponseStatusException(
-//				HttpStatus.NOT_FOUND);
-//		}
-//	}
+	@GetMapping(value="/api/cuti/get")
+	private CutiModel retrieveCuti(@RequestParam("cutiId") Long cutiId) {
+		try {
+			return cutiService.getCutiById(cutiId).get();
+		} catch (NoSuchElementException e) {
+			throw new ResponseStatusException(
+				HttpStatus.NOT_FOUND);
+		}
+	}
 	
 	@GetMapping(value="/api/cuti/diajukan/get")
 	private HashMap<String, String> retrieveCutiDiajukan(@RequestParam("karyawanId") Long karyawanId) {
@@ -152,7 +152,7 @@ public class CutiController {
 		}
 	}
 	
-	@GetMapping(value="/api/listCuti/unreview")
+	@GetMapping(value="/api/listCuti/unreviewed")
 	private List<CutiModel> allCutiUnreviewed(@RequestParam("reviewerId") Long reviewerId){
 		KaryawanModel reviewer = karyawanService.getKaryawanById(reviewerId);
 		String statusDicari = "";
@@ -178,15 +178,15 @@ public class CutiController {
 		
 	}
 	
-	@PutMapping(value="/api/cuti/approved")
+	@PutMapping(value="/api/cuti/approve")
 	private ResponseEntity<String> approveCuti(@RequestParam("cutiId") Long cutiId){
 		try {
 			CutiModel cutiTarget = cutiService.getCutiById(cutiId).get();
 			KaryawanModel karyawanCuti = cutiTarget.getKaryawan();
 			String currStat = cutiTarget.getStatus().toLowerCase();
-			if (currStat.equals("Diajukan")) {
+			if (currStat.equals("diajukan")) {
 				cutiTarget.setStatus("Diproses");
-			} else if (currStat.equals("Diproses")) {
+			} else if (currStat.equals("diproses")) {
 				cutiTarget.setStatus("Disetujui");
 				karyawanCuti.setSisaCuti(karyawanCuti.getSisaCuti()-1);
 			}
@@ -199,7 +199,7 @@ public class CutiController {
 		}
 	}
 	
-	@PutMapping(value="/api/cuti/rejected")
+	@PutMapping(value="/api/cuti/reject")
 	private ResponseEntity<String> rejectCuti(@RequestParam("cutiId") Long cutiId){
 		try {
 			CutiModel cutiTarget = cutiService.getCutiById(cutiId).get();

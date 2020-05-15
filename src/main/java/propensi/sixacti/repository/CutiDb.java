@@ -17,9 +17,9 @@ public interface CutiDb extends JpaRepository<CutiModel, Long>{
 	@Query(value = "SELECT c FROM CutiModel c WHERE c.karyawan = ?1 and c.status = ?2 or c.status = ?3")
     Optional<CutiModel> findCutionProcess(KaryawanModel karyawan, String status, String status2);
 	
-	@Query(value = "SELECT c FROM CutiModel c WHERE c.karyawan = ?1 and c.status = ?2")
-	List<CutiModel> findCutiDone(KaryawanModel karyawan, String status, String status2);
+	@Query(value = "SELECT b FROM CutiModel b WHERE b.karyawan = :karyawan and b.status IN :status ")
+	List<CutiModel> findCutiDone(@Param("karyawan") KaryawanModel karyawan, @Param("status") Collection<String> status);
 	
-	@Query(value = "SELECT c FROM CutiModel c WHERE c.status = :status and c.karyawan IN :karyawans")
-	List<CutiModel> findUnreviewed(@Param("karyawans") Collection<KaryawanModel> karyawans, @Param("status") String status);
+	@Query(value = "SELECT k FROM CutiModel k WHERE k.status = :mystatus and k.karyawan IN :karyawans")
+	List<CutiModel> findUnreviewed(@Param("karyawans") Collection<KaryawanModel> karyawans, @Param("mystatus") String status);
 }
