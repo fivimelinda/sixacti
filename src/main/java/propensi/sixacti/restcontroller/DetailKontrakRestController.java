@@ -54,4 +54,10 @@ public class DetailKontrakRestController {
     ){
         return detailKontrakService.ubahStatus(id);
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/gaji/{id}")
+    private Integer getGaji(@PathVariable("id") Long id){
+        return detailKontrakService.getGaji(id);
+    }
 }

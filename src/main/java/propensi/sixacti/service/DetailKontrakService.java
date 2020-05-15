@@ -10,4 +10,5 @@ public interface DetailKontrakService {
     List<String> getDetailKontrakWithName();
     List<String> getDetailKontrakDepartemen();
     DetailKontrakModel ubahStatus(Long id);
+    Integer getGaji(Long id);
 }

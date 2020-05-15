@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import propensi.sixacti.model.DetailKontrakModel;
 import propensi.sixacti.repository.DetailKontrakDB;
+import propensi.sixacti.repository.KaryawanDB;
 
 @Service
 @Transactional
@@ -19,6 +20,9 @@ public class DetailKontrakServiceImpl implements DetailKontrakService {
 
     @Autowired
     private DetailKontrakDB detailKontrakDb;
+
+    @Autowired
+    private KaryawanDB karyawanDb;
 
 
     @Override
@@ -64,6 +68,12 @@ public class DetailKontrakServiceImpl implements DetailKontrakService {
         DetailKontrakModel kontrak = getDetailKontrakById(id);
         kontrak.setStatus(true);
         return detailKontrakDb.save(kontrak);
+    }
+
+    @Override
+    public Integer getGaji(Long id) {
+        return getDetailKontrakById(id).getKaryawan().getGaji();
+        
     }
 
 }
