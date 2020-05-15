@@ -58,6 +58,14 @@ public class TesMedisModel implements Serializable{
     @NotNull
     @Column(name="isEdit", nullable=false)
     private Boolean isEdit;
+
+    @NotNull
+    @Column(name="isLolos", nullable=false)
+    private Boolean isLolos;
+
+    @NotNull
+    @Column(name="isGagal", nullable=false)
+    private Boolean isGagal;
     
     //reference ke pelamar
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
@@ -191,4 +199,31 @@ public class TesMedisModel implements Serializable{
         this.isEdit = isEdit;
     }
 
+    /**
+     * @return the isLolos
+     */
+    public Boolean getIsLolos() {
+        return isLolos;
+    }
+
+    /**
+     * @param isLolos the isLolos to set
+     */
+    public void setIsLolos(Boolean isLolos) {
+        this.isLolos = isLolos;
+    }
+
+    /**
+     * @param isGagal the isGagal to set
+     */
+    public void setIsGagal(Boolean isGagal) {
+        this.isGagal = isGagal;
+    }
+
+    /**
+     * @return the isGagal
+     */
+    public Boolean getIsGagal() {
+        return isGagal;
+    }
 }

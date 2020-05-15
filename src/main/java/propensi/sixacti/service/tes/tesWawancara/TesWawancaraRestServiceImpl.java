@@ -25,6 +25,8 @@ public class TesWawancaraRestServiceImpl implements TesWawancaraRestService{
         updateTesWawancara.setNilai(tesWawancara.getNilai());
         updateTesWawancara.setFeedback(tesWawancara.getFeedback());
         updateTesWawancara.setIsEdit(tesWawancara.getIsEdit());
+        updateTesWawancara.setIsLolos(tesWawancara.getIsLolos());
+        updateTesWawancara.setIsGagal(tesWawancara.getIsGagal());
         return tesWawancaraDb.save(updateTesWawancara);
     }
 
