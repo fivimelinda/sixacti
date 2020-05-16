@@ -7,6 +7,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "atribut")
 public class AtributModel implements Serializable {
@@ -21,17 +26,17 @@ public class AtributModel implements Serializable {
     private String ukuran_sepatu;
 
     @NotNull
-    @Size(max = 5)
+    @Size(max = 20)
     @Column(name = "ukuran_baju", nullable = false)
     private String ukuran_baju;
 
     @NotNull
-    @Size(max = 5)
+    @Size(max = 20)
     @Column(name = "ukuran_jas_lab", nullable = false)
     private String ukuran_jas_lab;
 
     @NotNull
-    @Size(max = 5)
+    @Size(max = 20)
     @Column(name = "ukuran_helm", nullable = false)
     private String ukuran_helm;
 
@@ -41,7 +46,29 @@ public class AtributModel implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private KaryawanModel karyawan;
+
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private PelamarModel pelamarAtribut;
+
+    /**
+     * @param pelamarAtribut the pelamarAtribut to set
+     */
+    public void setPelamarAtribut(PelamarModel pelamarAtribut) {
+        this.pelamarAtribut = pelamarAtribut;
+    }
+
+    /**
+     * @return the pelamarAtribut
+     */
+    public PelamarModel getPelamarAtribut() {
+        return pelamarAtribut;
+    }
 
     /**
      * @return the ukuran_baju

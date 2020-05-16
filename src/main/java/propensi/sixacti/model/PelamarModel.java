@@ -22,19 +22,35 @@ public class PelamarModel implements Serializable{
     @JoinColumn(name = "nik", referencedColumnName = "nik")
     private UserModel userPelamar;
 
-    @OneToMany(mappedBy = "pelamar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<LamaranModel> listLamaran;
+    @OneToOne(mappedBy = "pelamar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private LamaranModel lamaran;
 
     @OneToOne(cascade = CascadeType.ALL)
     private TesTulisModel tesTulis;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     private TesMedisModel tesMedis;
 
     @OneToOne(cascade = CascadeType.ALL)
     private TesWawancaraModel tesWawancara;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private AtributModel atribut;
+
+    /**
+     * @param atribut the atribut to set
+     */
+    public void setAtribut(AtributModel atribut) {
+        this.atribut = atribut;
+    }
+
+    /**
+     * @return the atribut
+     */
+    public AtributModel getAtribut() {
+        return atribut;
+    }
+    
     /**
      * @param idPelamar the idPelamar to set
      */
@@ -120,11 +136,17 @@ public class PelamarModel implements Serializable{
     // }
 
 
-    public List<LamaranModel> getListLamaran() {
-        return listLamaran;
+    /**
+     * @return the lamaran
+     */
+    public LamaranModel getLamaran() {
+        return lamaran;
     }
 
-    public void setListLamaran(List<LamaranModel> listLamaran) {
-        this.listLamaran = listLamaran;
+    /**
+     * @param lamaran the lamaran to set
+     */
+    public void setLamaran(LamaranModel lamaran) {
+        this.lamaran = lamaran;
     }
 }
