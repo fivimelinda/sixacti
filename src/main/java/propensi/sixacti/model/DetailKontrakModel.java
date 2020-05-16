@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -27,13 +30,38 @@ public class DetailKontrakModel implements Serializable {
     private Date tanggal_berakhir;
 
     @NotNull
-    @Size(max = 2)
+    @Min(1)
     @Column(name = "periode",nullable = false)
     private Integer periode;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @Column(name = "status", nullable = false, columnDefinition = "boolean default false")
+    private Boolean status;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
+    @JsonIgnore
     private KaryawanModel karyawan;
+
+    // @Size(max = 100)
+    // @Column(name = "nama_karyawan", nullable = true)
+    // private String namaKaryawan = this.karyawan.getUser().getNama();
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public KaryawanModel getKaryawan() {
+        return karyawan;
+    }
+
+    public void setKaryawan(KaryawanModel karyawan){
+        this.karyawan = karyawan;
+    }
 
     public Integer getPeriode() {
         return periode;

@@ -46,6 +46,7 @@ public class LamaranRestController {
 
             lamaranModel.setPelamar(pelamarModel);
             lamaranModel.setLowongan(lowonganKerjaModel);
+            lamaranModel.setLolos(false);
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             lamaranModel.setTimestampPelamar(timestamp);
 
