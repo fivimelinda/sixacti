@@ -60,7 +60,7 @@ public class KaryawanModel {
     @JsonIgnore
     private AtributModel atributModel;
 
-    @OneToOne(mappedBy = "karyawan")
+    @OneToOne(mappedBy = "karyawan", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
     @JsonIgnore
     private DetailKontrakModel detailKontrakModel;
 
