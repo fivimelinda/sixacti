@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import propensi.sixacti.model.FulfillmentModel;
 import propensi.sixacti.model.RequestLowonganModel;
+import propensi.sixacti.service.FulfillmentService;
 import propensi.sixacti.service.RequestLowonganService;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8081", "http://localhost:8080" })
@@ -22,13 +23,17 @@ public class FulfillmentRestController {
 	@Autowired
     private RequestLowonganService  requestLowonganService;
 	
+	@Autowired
+	private FulfillmentService fulfilService;
+	
 	@GetMapping(value="/api/fulfillment/get")
 	private List<FulfillmentModel> retrieveProgres(@RequestParam("reqLokerId") Long reqLokerId){
 		try {
 			RequestLowonganModel target = requestLowonganService.getRequestLowonganById(reqLokerId);
-			return target.getLowonganKerja().getListFulfillment();
+			return fulfilService.getFulfillmentByLoker(target.getLowonganKerja());
 		} catch (NoSuchElementException e) {
-			return null;
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND);
 		}
 	}
 	
