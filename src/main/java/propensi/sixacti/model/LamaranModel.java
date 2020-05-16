@@ -37,7 +37,7 @@ public class LamaranModel implements Serializable {
 //    private String nama;
 
 
-    @Column(name="timestampPelamar", nullable=false)
+    @Column(name="timestampPelamar", nullable=true)
     private Date timestampPelamar;
 
     @NotNull

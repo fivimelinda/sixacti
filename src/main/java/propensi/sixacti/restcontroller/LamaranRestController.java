@@ -33,8 +33,7 @@ public class LamaranRestController {
     private PelamarRestService pelamarRestService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private PelamarRestService pelamarRestService;
+
 
     @PostMapping(value = "/addLamaran/{idLowongan}")
     private ResponseEntity<Long> createLamaran(@PathVariable Long idLowongan, @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
@@ -43,11 +42,13 @@ public class LamaranRestController {
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }else{
             LowonganKerjaModel lowonganKerjaModel = lowonganKerjaService.getLowonganKerjaById(idLowongan);
-            UserModel user = userService.getuserByNIK("1234567890123456");
-            PelamarModel pelamarModel = pelamarRestService.getPelamarByUser(user);
-
-            lamaranModel.setPelamar(pelamarModel);
+//            UserModel user = userService.getuserByNIK("1234567890123456");
+//            PelamarModel pelamarModel = pelamarRestService.getPelamarByUser(user);
+//
+//            lamaranModel.setPelamar(pelamarModel);
             lamaranModel.setLowongan(lowonganKerjaModel);
+            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar((long) 1);
+            lamaranModel.setPelamar(pelamar);
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             lamaranModel.setTimestampPelamar(timestamp);
 
@@ -80,7 +81,19 @@ public class LamaranRestController {
 //        return lamaranService.getLamaranByLowonganId(idLowongan);
 //    }
 
-
+//    @GetMapping(value = "/lamaran/pelamar/{idPelamar}")
+//    public LamaranModel getLamaranByPelamar(
+//            @PathVariable (value = "idPelamar") Long idPelamar
+//    ){
+//        try{
+//            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
+//            return lamaranService.getLamaranByPelamar(pelamar);
+//        }catch(NoSuchElementException e){
+//            throw new ResponseStatusException(
+//                    HttpStatus.NOT_FOUND, "Lamaran Not Found"
+//            );
+//        }
+//    }
 
 
 }
