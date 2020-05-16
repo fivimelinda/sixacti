@@ -23,6 +23,7 @@ public class PelamarModel implements Serializable{
     private UserModel userPelamar;
 
     @OneToOne(mappedBy = "pelamar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private LamaranModel lamaran;
 
     @OneToOne(cascade = CascadeType.ALL)
