@@ -53,7 +53,7 @@ public class UserModel implements Serializable {
     @NotNull
     @Size(max = 3)
     @Column(name = "RW", nullable = false)
-    private String RW;
+    private Integer RW;
     
     @NotNull
     @Size(max = 50)
@@ -84,6 +84,7 @@ public class UserModel implements Serializable {
     @Size(max = 15)
     @Column(name = "NPWP", nullable = false)
     private String NPWP;
+
 
     /*
     Relation
@@ -166,11 +167,11 @@ public class UserModel implements Serializable {
         this.RT = rT;
     }
 
-    public String getRW() {
+    public Integer getRW() {
         return RW;
     }
 
-    public void setRW(String rW) {
+    public void setRW(Integer rW) {
         this.RW = rW;
     }
 

@@ -31,13 +31,8 @@ public class LamaranModel implements Serializable {
     @Column(name="noBpjsKetenagakerjaan", nullable=true)
     private String noBpjsKetenagakerjaan;
 
-//    @NotNull
-//    @Size(max=50)
-//    @Column(name="nama", nullable=false)
-//    private String nama;
-
-
-    @Column(name="timestampPelamar", nullable=true)
+    @NotNull
+    @Column(name="timestampPelamar", nullable=false)
     private Date timestampPelamar;
 
     @NotNull
@@ -111,6 +106,15 @@ public class LamaranModel implements Serializable {
     @Column(name = "statusLamaran", nullable = true)
     private String statusLamaran;
 
+    @NotNull
+    @Column(name = "lolos", nullable = false)
+    private Boolean lolos;
+
+//    @NotNull
+//    @Size(max=50)
+//    @Column(name="nama", nullable=false)
+//    private String nama;
+
 //
 //    @Column(name = "fotoKtp", nullable=true)
 //    @Lob
@@ -142,19 +146,10 @@ public class LamaranModel implements Serializable {
     relasi---------------------------------------------------------
     **/
 
-
-
-    public PelamarModel getPelamar() {
-        return pelamar;
-    }
-
-    public void setPelamar(PelamarModel pelamar) {
-        this.pelamar = pelamar;
-    }
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private PelamarModel pelamar;
 
 //    @OneToMany(mappedBy = "lamaran")
@@ -194,6 +189,28 @@ public class LamaranModel implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private LowonganKerjaModel lowongan;
+
+    /**
+     * @return the lolos
+     */
+    public Boolean getLolos() {
+        return lolos;
+    }
+
+    /**
+     * @param lolos the lolos to set
+     */
+    public void setLolos(Boolean lolos) {
+        this.lolos = lolos;
+    }
+
+    public PelamarModel getPelamar() {
+        return pelamar;
+    }
+
+    public void setPelamar(PelamarModel pelamar) {
+        this.pelamar = pelamar;
+    }
 
     public BerkasModel getBerkasModel() {
         return berkasModel;

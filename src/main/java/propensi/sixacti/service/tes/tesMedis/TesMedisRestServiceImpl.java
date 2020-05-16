@@ -32,6 +32,8 @@ public class TesMedisRestServiceImpl implements TesMedisRestService{
         updateTesMedis.setTdBatasAtas(tesMedis.getTdBatasAtas());
         updateTesMedis.setTdBatasBawah(tesMedis.getTdBatasBawah());
         updateTesMedis.setIsEdit(tesMedis.getIsEdit());
+        updateTesMedis.setIsLolos(tesMedis.getIsLolos());
+        updateTesMedis.setIsGagal(tesMedis.getIsGagal());
         return tesMedisDb.save(updateTesMedis);
     }
 

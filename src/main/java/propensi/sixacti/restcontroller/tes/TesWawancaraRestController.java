@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.model.TesWawancaraModel;
+import propensi.sixacti.service.LamaranService;
 import propensi.sixacti.service.tes.PelamarRestService;
 import propensi.sixacti.service.tes.tesWawancara.TesWawancaraRestService;
 
@@ -32,6 +34,9 @@ public class TesWawancaraRestController {
 
     @Autowired
     private PelamarRestService pelamarRestService;
+
+    @Autowired
+    private LamaranService lamaranService;
 
     //tambah tes wawancara
     @PostMapping(value = "/wawancara/{idPelamar}")
@@ -87,6 +92,11 @@ public class TesWawancaraRestController {
         @RequestBody TesWawancaraModel tesWawancara
     ){
         try{
+            if (tesWawancara.getIsLolos()){
+                PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesWawancara.getPelamarTesWawancara().getIdPelamar());
+                LamaranModel lamaran = lamaranService.findByIdLamaran(pelamar.getLamaran().getId());
+                lamaran.setLolos(true);
+            }
             return tesWawancaraRestService.ubahTesWawancara(idTesWawancara, tesWawancara);
         }catch(NoSuchElementException e){
             throw new ResponseStatusException(
