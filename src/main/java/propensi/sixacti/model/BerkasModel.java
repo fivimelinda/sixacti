@@ -23,7 +23,7 @@ public class BerkasModel implements Serializable {
     @NotNull
     @Column(name = "data", nullable = false)
     @Lob
-    @Type(type = "org.hibernate.type.ImageType")
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] data;
 
 //    @ManyToOne
