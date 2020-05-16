@@ -28,7 +28,7 @@ public class AkunModel implements Serializable{
     private String password;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "akun")
-    private UserModel user;
+    private ProfileModel profile;
 
 
     /**

@@ -13,8 +13,8 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "userRole")
-public class UserModel implements Serializable {
+@Table(name = "profile")
+public class ProfileModel implements Serializable {
 
     @Id
     @Size(max = 16)
@@ -93,6 +93,11 @@ public class UserModel implements Serializable {
     @JoinColumn(name = "id_akun", referencedColumnName = "idAkun")
     @JsonIgnore
     private AkunModel akun;
+
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "idUser", referencedColumnName = "id")
+    @JsonIgnore
+    private Users user;
 
     @OneToOne(mappedBy = "user")
     @JsonIgnore

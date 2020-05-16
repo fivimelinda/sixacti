@@ -10,5 +10,4 @@ import propensi.sixacti.model.KaryawanModel;
 @Repository
 public interface AtributDb extends JpaRepository<AtributModel, Long>{
     List<AtributModel> findByKaryawan(KaryawanModel karyawan);
-    
 }

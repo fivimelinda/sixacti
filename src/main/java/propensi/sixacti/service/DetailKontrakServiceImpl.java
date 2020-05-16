@@ -46,7 +46,7 @@ public class DetailKontrakServiceImpl implements DetailKontrakService {
         List <String> all = new ArrayList<>();
         List<DetailKontrakModel> detailKontrakAll = detailKontrakDb.findAll();
         for (DetailKontrakModel d : detailKontrakAll) {
-            String b = d.getKaryawan().getUser().getNama();
+            String b = d.getKaryawan().getProfile().getNama();
             all.add(b);
         }
         return all;

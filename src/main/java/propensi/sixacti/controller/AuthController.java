@@ -103,7 +103,6 @@ public class AuthController {
 					Roles modRole = roleRepository.findByRoleName(ERole.ROLE_PELAMAR)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 					roles.add(modRole);
-
 					break;
 				default:
 					Roles userRole = roleRepository.findByRoleName(ERole.ROLE_KARYAWAN)

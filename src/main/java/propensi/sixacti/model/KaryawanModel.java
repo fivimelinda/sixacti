@@ -66,7 +66,7 @@ public class KaryawanModel {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nik", referencedColumnName = "nik")
-    private UserModel user;
+    private ProfileModel profile;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
@@ -204,12 +204,12 @@ public class KaryawanModel {
         this.detailKontrakModel = detailKontrakModel;
     }
 
-    public UserModel getUser() {
-        return user;
+    public ProfileModel getProfile() {
+        return profile;
     }
 
-    public void setUser(UserModel user) {
-        this.user = user;
+    public void setProfile(ProfileModel profile) {
+        this.profile = profile;
     }
 
     public RoleModel getRole() {

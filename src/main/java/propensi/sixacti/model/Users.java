@@ -31,6 +31,9 @@ public class Users {
     inverseJoinColumns = @JoinColumn(name = "roleId"))
     private Set<Roles> roles = new HashSet<>();
 
+    // @OneToOne(cascade = CascadeType.ALL, mappedBy = "akun")
+    // private ProfileModel profile;
+
     public Users(){
 
     }
@@ -88,4 +91,19 @@ public class Users {
     public void setRoles(Set<Roles> roles) {
         this.roles = roles;
     }
+
+    /**
+     * @return the profile
+     */
+    public ProfileModel getProfile() {
+        return profile;
+    }
+
+    /**
+     * @param profile the profile to set
+     */
+    public void setProfile(ProfileModel profile) {
+        this.profile = profile;
+    }
+
 }
