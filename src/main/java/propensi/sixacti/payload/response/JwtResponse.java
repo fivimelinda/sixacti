@@ -3,20 +3,24 @@ package propensi.sixacti.payload.response;
 import java.util.List;
 import java.util.Set;
 
+import propensi.sixacti.model.UserModel;
+
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer";
 	private Long id;
 	private String username;
-    private List<String> role;
+	private List<String> role;
+	private UserModel user;
     // private String departement;
     // private String section;
 
-	public JwtResponse(String accessToken, Long id, String username, List<String> role) {
+	public JwtResponse(String accessToken, Long id, String username, List<String> role, UserModel user) {
 		this.token = accessToken;
 		this.id = id;
 		this.username = username;
-        this.role = role;
+		this.role = role;
+		this.user = user;
         // this.departement = departement;
         // this.section = section;
 	}
@@ -66,5 +70,19 @@ public class JwtResponse {
     public List<String> getRole() {
         return role;
     }
-    
+	
+	/**
+	 * @return the users
+	 */
+	public UserModel getUser() {
+		return user;
+	}
+
+	/**
+	 * @param users the users to set
+	 */
+	public void setUser(UserModel user) {
+		this.user = user;
+	}
+
 }

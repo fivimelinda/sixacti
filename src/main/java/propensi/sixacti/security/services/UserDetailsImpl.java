@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
+import propensi.sixacti.model.UserModel;
 import propensi.sixacti.model.Users;
 
 public class UserDetailsImpl implements UserDetails{
@@ -23,14 +24,17 @@ public class UserDetailsImpl implements UserDetails{
     @JsonIgnore
     private String password;
 
-    private Collection<? extends GrantedAuthority> authorities;
+	private Collection<? extends GrantedAuthority> authorities;
+
+	private UserModel user;
 
     public UserDetailsImpl(Long id, String username, String password,
-			Collection<? extends GrantedAuthority> authorities) {
+			Collection<? extends GrantedAuthority> authorities, UserModel user) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
+		this.user = user;
     }
     
     public static UserDetailsImpl build(Users user) {
@@ -42,7 +46,8 @@ public class UserDetailsImpl implements UserDetails{
 				user.getId(), 
 				user.getUsername(),
 				user.getPassword(), 
-				authorities);
+				authorities,
+				user.getUser());
 	}
 
 	@Override
