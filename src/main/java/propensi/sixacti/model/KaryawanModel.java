@@ -189,14 +189,14 @@ public class KaryawanModel {
 //    public void setAssistManager(Set<KaryawanModel> assistManager) {
 //        this.assistManager = assistManager;
 //    }
-
-    public AtributModel getAtributModel() {
-        return atributModel;
-    }
-
-    public void setAtributModel(AtributModel atributModel) {
-        this.atributModel = atributModel;
-    }
+//
+//    public AtributModel getAtributModel() {
+//        return atributModel;
+//    }
+//
+//    public void setAtributModel(AtributModel atributModel) {
+//        this.atributModel = atributModel;
+//    }
 
     public DetailKontrakModel getDetailKontrakModel() {
         return detailKontrakModel;
