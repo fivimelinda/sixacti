@@ -76,13 +76,13 @@ public class TesMedisModel implements Serializable{
     @JsonIgnore
     private PelamarModel pelamarTesMedis;
 
-    public Boolean getStatus() {
-        return status;
-    }
+//    public Boolean getStatus() {
+//        return status;
+//    }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
+//    public void setStatus(Boolean status) {
+//        this.status = status;
+//    }
 
     /**
      * @return the idTesMedis
