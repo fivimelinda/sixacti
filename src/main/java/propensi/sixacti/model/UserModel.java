@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "userRole")
+@Table(name = "profile")
 public class UserModel implements Serializable {
 
     @Id
@@ -95,6 +95,11 @@ public class UserModel implements Serializable {
     @JsonIgnore
     private AkunModel akun;
 
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "idUsers", referencedColumnName = "id")
+    @JsonIgnore
+    private Users users;
+
     @OneToOne(mappedBy = "user")
     @JsonIgnore
     private KaryawanModel karyawan;
@@ -107,6 +112,20 @@ public class UserModel implements Serializable {
     setter getter
     **/
        
+    /**
+     * @return the users
+     */
+    public Users getUsers() {
+        return users;
+    }
+
+    /**
+     * @param users the users to set
+     */
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
     public String getNPWP() {
         return NPWP;
     }

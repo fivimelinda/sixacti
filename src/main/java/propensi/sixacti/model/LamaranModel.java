@@ -149,7 +149,6 @@ public class LamaranModel implements Serializable {
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private PelamarModel pelamar;
 
 //    @OneToMany(mappedBy = "lamaran")
