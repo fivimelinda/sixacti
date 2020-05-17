@@ -90,10 +90,10 @@ public class UserModel implements Serializable {
     Relation
     **/
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_akun", referencedColumnName = "idAkun")
-    @JsonIgnore
-    private AkunModel akun;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id_akun", referencedColumnName = "idAkun")
+//    @JsonIgnore
+//    private AkunModel akun;
 
     @OneToOne(cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "idUsers", referencedColumnName = "id")
@@ -238,13 +238,13 @@ public class UserModel implements Serializable {
         this.NPWP = nPWP;
     }
 
-//    public KaryawanModel getKaryawan() {
-//        return karyawan;
-//    }
-//
-//    public void setKaryawan(KaryawanModel karyawan) {
-//        this.karyawan = karyawan;
-//    }
+    public KaryawanModel getKaryawan() {
+        return karyawan;
+    }
+
+    public void setKaryawan(KaryawanModel karyawan) {
+        this.karyawan = karyawan;
+    }
 
 }
 

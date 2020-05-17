@@ -30,16 +30,21 @@ import propensi.sixacti.model.DepartemenModel;
 import propensi.sixacti.model.KaryawanModel;
 import propensi.sixacti.model.KategoriCutiModel;
 import propensi.sixacti.model.SectionModel;
+import propensi.sixacti.model.UserModel;
 import propensi.sixacti.rest.CutiDetail;
 import propensi.sixacti.service.CutiService;
 import propensi.sixacti.service.KaryawanService;
 import propensi.sixacti.service.KategoriCutiService;
+import propensi.sixacti.service.UserService;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8081", "http://localhost:8080" })
 @RestController
 public class CutiController {
 	@Autowired
 	private CutiService cutiService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private KaryawanService karyawanService;
@@ -119,9 +124,14 @@ public class CutiController {
 	}
 	
 	@GetMapping(value="/api/cuti/diajukan/get")
-	private HashMap<String, String> retrieveCutiDiajukan(@RequestParam("karyawanId") Long karyawanId) {
-			KaryawanModel karyawan = karyawanService.getKaryawanById(karyawanId);
-			HashMap<String, String> cutiResponse = new HashMap<String, String>();
+	private HashMap<String, String> retrieveCutiDiajukan(@RequestParam("id") String nik) {
+		UserModel user = userService.getuserByNIK(nik);
+		HashMap<String, String> cutiResponse = new HashMap<String, String>();
+		KaryawanModel karyawan = user.getKaryawan();
+		if (karyawan==null) {
+			throw new ResponseStatusException(
+					HttpStatus.FORBIDDEN);
+		}
 		try {
 			CutiModel cuti = cutiService.getCutiOnProcess(karyawan).get();
 			cutiResponse.put("cutiActive", "true");
@@ -138,6 +148,7 @@ public class CutiController {
 		} catch (NoSuchElementException e) {
 			cutiResponse.put("cutiActive", "false");
 			cutiResponse.put("sisaCuti", String.valueOf(karyawan.getSisaCuti()));
+			cutiResponse.put("idKaryawan", String.valueOf(karyawan.getId()));
 		}return cutiResponse;
 	}
 	
