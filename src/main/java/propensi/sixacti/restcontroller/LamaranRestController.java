@@ -77,9 +77,5 @@ public class LamaranRestController {
 //    @GetMapping(value = "/listLamaran/{idLowongan}")
 //    private List<LamaranModel> getLamaranByIdLowongan(@PathVariable Long idLowongan){
 //        return lamaranService.getLamaranByLowonganId(idLowongan);
-//    }
-
-
-
 
 }
