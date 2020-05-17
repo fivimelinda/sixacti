@@ -10,5 +10,6 @@ import propensi.sixacti.model.KaryawanModel;
 public interface KaryawanService {
 	KaryawanModel getKaryawanById(Long id);
 	void addKaryawan(KaryawanModel cuti);
+	// KaryawanModel addDummy();
 }
 
