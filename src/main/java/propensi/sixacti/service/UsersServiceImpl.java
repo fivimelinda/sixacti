@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import propensi.sixacti.model.UserModel;
 import propensi.sixacti.model.Users;
 import propensi.sixacti.repository.UsersDB;
 
@@ -20,11 +21,18 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Users getUsersById(Long id) {
         Optional<Users> user = usersDb.getUsersById(id);
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             return user.get();
         } else {
             throw new NoSuchElementException();
         }
+    }
+
+    @Override
+    public Users setUser(UserModel user, Long id) {
+        Users users = getUsersById(id);
+        users.setUser(user);
+        return usersDb.save(users);
     }
     
 }
