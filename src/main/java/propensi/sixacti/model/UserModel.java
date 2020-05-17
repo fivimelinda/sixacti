@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -237,13 +238,13 @@ public class UserModel implements Serializable {
         this.NPWP = nPWP;
     }
 
-//    public KaryawanModel getKaryawan() {
-//        return karyawan;
-//    }
-//
-//    public void setKaryawan(KaryawanModel karyawan) {
-//        this.karyawan = karyawan;
-//    }
+    public KaryawanModel getKaryawan() {
+        return karyawan;
+    }
+
+    public void setKaryawan(KaryawanModel karyawan) {
+        this.karyawan = karyawan;
+    }
 
 }
 

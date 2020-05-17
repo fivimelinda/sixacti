@@ -26,16 +26,16 @@ public class PelamarModel implements Serializable{
     @JsonIgnore
     private LamaranModel lamaran;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "pelamarTesTulis", cascade = CascadeType.ALL)
     private TesTulisModel tesTulis;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "pelamarTesMedis", cascade = CascadeType.ALL)
     private TesMedisModel tesMedis;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "pelamarTesWawancara", cascade = CascadeType.ALL)
     private TesWawancaraModel tesWawancara;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "pelamarAtribut", cascade = CascadeType.ALL)
     private AtributModel atribut;
 
     /**

@@ -89,9 +89,9 @@ public class KaryawanModel {
     @JsonIgnore
     private List<CutiModel> cuti;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
-    @JsonIgnore
-    private List<RequestLowonganModel> requestLowongan;
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
+    // @JsonIgnore
+    // private List<RequestLowonganModel> requestLowongan;
     
 
     /*
@@ -189,14 +189,14 @@ public class KaryawanModel {
 //    public void setAssistManager(Set<KaryawanModel> assistManager) {
 //        this.assistManager = assistManager;
 //    }
-
-    public AtributModel getAtributModel() {
-        return atributModel;
-    }
-
-    public void setAtributModel(AtributModel atributModel) {
-        this.atributModel = atributModel;
-    }
+//
+//    public AtributModel getAtributModel() {
+//        return atributModel;
+//    }
+//
+//    public void setAtributModel(AtributModel atributModel) {
+//        this.atributModel = atributModel;
+//    }
 
     public DetailKontrakModel getDetailKontrakModel() {
         return detailKontrakModel;
@@ -246,11 +246,11 @@ public class KaryawanModel {
 		this.section = section;
 	}
 
-	public List<RequestLowonganModel> getRequestLowongan() {
-		return requestLowongan;
-	}
+	// public List<RequestLowonganModel> getRequestLowongan() {
+	// 	return requestLowongan;
+	// }
 
-	public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
-		this.requestLowongan = requestLowongan;
-	}
+	// public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
+	// 	this.requestLowongan = requestLowongan;
+	// }
 }

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import propensi.sixacti.model.AtributModel;
+import propensi.sixacti.model.KaryawanModel;
 import propensi.sixacti.service.AtributService;
 import propensi.sixacti.service.KaryawanService;
 import propensi.sixacti.service.tes.PelamarRestService;
@@ -98,6 +100,11 @@ public class AtributRestController {
     @GetMapping(value = "/listAtribut")
     private List<AtributModel> retrieveListAtribut(){
         return atributService.getListAtribut();
+    }
+
+    @GetMapping(value = "/getUser/{id_karyawan}")
+    private String getUser(@PathVariable Long id_karyawan){
+        return karyawanService.getKaryawanById(id_karyawan).getUser().getNama();
     }
 
     @PutMapping(value = "/ubahStatusAtribut/{id_atribut}")
