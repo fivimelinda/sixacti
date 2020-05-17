@@ -27,7 +27,8 @@ public class CutiServiceImpl implements CutiService{
 	
 	@Override
 	public Optional<CutiModel> getCutiOnProcess(KaryawanModel karyawan) {
-		return cutiDb.findCutionProcess(karyawan, "Diajukan", "Diproses");
+		List<String> status = Arrays.asList("Diajukan", "Diproses");
+		return cutiDb.findCutionProcess(karyawan, status);
 	}
 	
 	@Override
