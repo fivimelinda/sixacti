@@ -22,11 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import propensi.sixacti.model.ERole;
 import propensi.sixacti.model.Roles;
+import propensi.sixacti.model.UserModel;
 import propensi.sixacti.model.Users;
 import propensi.sixacti.payload.request.LoginRequest;
 import propensi.sixacti.payload.request.SignupRequest;
 import propensi.sixacti.payload.response.JwtResponse;
 import propensi.sixacti.payload.response.MessageResponse;
+import propensi.sixacti.repository.UserDB;
 import propensi.sixacti.repository.Login.RolesRepository;
 import propensi.sixacti.repository.Login.UserRepository;
 import propensi.sixacti.security.jwt.JwtUtils;
@@ -38,6 +40,9 @@ import propensi.sixacti.security.services.UserDetailsImpl;
 public class AuthController {
 	@Autowired
 	AuthenticationManager authenticationManager;
+
+	@Autowired
+	UserDB userDb;
 
 	@Autowired
 	UserRepository userRepository;
@@ -56,7 +61,9 @@ public class AuthController {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
+		
+		
+		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
@@ -65,10 +72,17 @@ public class AuthController {
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 
+		Users users = userRepository.findByUsername(userDetails.getUsername()).orElse(null);
+
+		UserModel user = null;
+		if (userDb.findByUsers(users).size() != 0){
+			user = userDb.findByUsers(users).get(0);
+		}
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
-                                                 roles
+												 roles,
+												 user
                                                  ));
 	}
 
