@@ -55,7 +55,8 @@ public class LowonganKerjaModel implements Serializable {
     @JoinColumn(name="requestLowonganId", referencedColumnName = "id")
     private RequestLowonganModel requestLowongan; 
 
-
+    @OneToMany(mappedBy = "loker", fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    private List<FulfillmentModel> listFulfillment;
 
     public Long getIdLowongan() {
         return idLowongan;
@@ -136,5 +137,15 @@ public class LowonganKerjaModel implements Serializable {
     public void setListLamaran(List<LamaranModel> listLamaran) {
         this.listLamaran = listLamaran;
     }
+
+	public List<FulfillmentModel> getListFulfillment() {
+		return listFulfillment;
+	}
+
+	public void setListFulfillment(List<FulfillmentModel> listFulfillment) {
+		this.listFulfillment = listFulfillment;
+	}
+    
+    
 }
 

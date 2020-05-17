@@ -80,21 +80,5 @@ public class LamaranRestController {
 //    @GetMapping(value = "/listLamaran/{idLowongan}")
 //    private List<LamaranModel> getLamaranByIdLowongan(@PathVariable Long idLowongan){
 //        return lamaranService.getLamaranByLowonganId(idLowongan);
-//    }
-
-//    @GetMapping(value = "/lamaran/pelamar/{idPelamar}")
-//    public LamaranModel getLamaranByPelamar(
-//            @PathVariable (value = "idPelamar") Long idPelamar
-//    ){
-//        try{
-//            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
-//            return lamaranService.getLamaranByPelamar(pelamar);
-//        }catch(NoSuchElementException e){
-//            throw new ResponseStatusException(
-//                    HttpStatus.NOT_FOUND, "Lamaran Not Found"
-//            );
-//        }
-//    }
-
 
 }

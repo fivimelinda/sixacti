@@ -1,5 +1,6 @@
 package propensi.sixacti.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,8 @@ public class CutiServiceImpl implements CutiService{
 	
 	@Override
 	public Optional<CutiModel> getCutiOnProcess(KaryawanModel karyawan) {
-		return cutiDb.findCutionProcess(karyawan, "Diajukan", "Diproses");
+		List<String> status = Arrays.asList("Diajukan", "Diproses");
+		return cutiDb.findCutionProcess(karyawan, status);
 	}
 	
 	@Override
@@ -41,7 +43,8 @@ public class CutiServiceImpl implements CutiService{
 	
 	@Override
 	public List<CutiModel> getCutiDoneByKaryawan(KaryawanModel karyawan){
-		return cutiDb.findCutiDone(karyawan, "Disetujui", "Ditolak");
+		List<String> status = Arrays.asList("Disetujui", "Ditolak");
+		return cutiDb.findCutiDone(karyawan, status);
 	}
 	
 	@Override
