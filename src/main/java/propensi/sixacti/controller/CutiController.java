@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
 
@@ -107,15 +108,15 @@ public class CutiController {
 		}
 	}
 	
-//	@GetMapping(value="/api/cuti/get")
-//	private CutiModel retrieveCuti(@PathVariable("cutiId") Long cutiId) {
-//		try {
-//			return cutiService.getCutiById(cutiId).get();
-//		} catch (NoSuchElementException e) {
-//			throw new ResponseStatusException(
-//				HttpStatus.NOT_FOUND);
-//		}
-//	}
+	@GetMapping(value="/api/cuti/get")
+	private CutiModel retrieveCuti(@RequestParam("cutiId") Long cutiId) {
+		try {
+			return cutiService.getCutiById(cutiId).get();
+		} catch (NoSuchElementException e) {
+			throw new ResponseStatusException(
+				HttpStatus.NOT_FOUND);
+		}
+	}
 	
 	@GetMapping(value="/api/cuti/diajukan/get")
 	private HashMap<String, String> retrieveCutiDiajukan(@RequestParam("karyawanId") Long karyawanId) {
@@ -148,11 +149,11 @@ public class CutiController {
 			return listCuti;
 		} catch (NoSuchElementException e) {
 			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Riwayat not exist!");
+					HttpStatus.NOT_FOUND, "Riwayat does not exist!");
 		}
 	}
 	
-	@GetMapping(value="/api/listCuti/unreview")
+	@GetMapping(value="/api/listCuti/unreviewed")
 	private List<CutiModel> allCutiUnreviewed(@RequestParam("reviewerId") Long reviewerId){
 		KaryawanModel reviewer = karyawanService.getKaryawanById(reviewerId);
 		String statusDicari = "";
@@ -173,33 +174,38 @@ public class CutiController {
 			return listCuti;
 		} catch (NoSuchElementException e) {
 			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "List Cuti not exist!");
+					HttpStatus.NOT_FOUND, "List Cuti does not exist!");
 		}
 		
 	}
 	
-	@PutMapping(value="/api/cuti/approved")
+	@PutMapping(value="/api/cuti/approve")
 	private ResponseEntity<String> approveCuti(@RequestParam("cutiId") Long cutiId){
 		try {
 			CutiModel cutiTarget = cutiService.getCutiById(cutiId).get();
+			
 			KaryawanModel karyawanCuti = cutiTarget.getKaryawan();
 			String currStat = cutiTarget.getStatus().toLowerCase();
-			if (currStat.equals("Diajukan")) {
+			if (currStat.equals("diajukan")) {
 				cutiTarget.setStatus("Diproses");
-			} else if (currStat.equals("Diproses")) {
+			} else if (currStat.equals("diproses")) {
 				cutiTarget.setStatus("Disetujui");
-				karyawanCuti.setSisaCuti(karyawanCuti.getSisaCuti()-1);
+				Date firstDate = cutiTarget.getTanggalMulai();
+				Date secondDate =cutiTarget.getTanggalSampai();
+				long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+				long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+				karyawanCuti.setSisaCuti(karyawanCuti.getSisaCuti()- (int)diff);
 			}
 			cutiService.addCuti(cutiTarget);
 			karyawanService.addKaryawan(karyawanCuti);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (NoSuchElementException e) {
 			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Cuti not exist!");
+					HttpStatus.NOT_FOUND, "Cuti does not exist!");
 		}
 	}
 	
-	@PutMapping(value="/api/cuti/rejected")
+	@PutMapping(value="/api/cuti/reject")
 	private ResponseEntity<String> rejectCuti(@RequestParam("cutiId") Long cutiId){
 		try {
 			CutiModel cutiTarget = cutiService.getCutiById(cutiId).get();
@@ -208,7 +214,18 @@ public class CutiController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (NoSuchElementException e) {
 			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Cuti not exist!");
+					HttpStatus.NOT_FOUND, "Cuti does not exist!");
+		}
+	}
+	
+	@GetMapping(value="/api/get/sisaCuti")
+	private String getSisaCuti(@RequestParam("karyawanId") Long karyawanId) {
+		try {
+			KaryawanModel karyawan = karyawanService.getKaryawanById(karyawanId);
+			return Integer.toString(karyawan.getSisaCuti());
+		} catch (NoSuchElementException e) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND, "Karyawan does not exist!");
 		}
 	}
 	

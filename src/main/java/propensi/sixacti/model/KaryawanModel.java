@@ -21,11 +21,13 @@ public class KaryawanModel {
     
     @NotNull
     @Column(name="jenis_karyawan", nullable = false)
+    @JsonIgnore
     private boolean jenisKaryawan;
 
     @NotNull
     @Size(max = 10)
     @Column(name="gaji", nullable = false)
+    @JsonIgnore
     private Integer gaji;
     
     @Column(name="sisa", nullable = false)
@@ -187,14 +189,14 @@ public class KaryawanModel {
 //    public void setAssistManager(Set<KaryawanModel> assistManager) {
 //        this.assistManager = assistManager;
 //    }
-
-    public AtributModel getAtributModel() {
-        return atributModel;
-    }
-
-    public void setAtributModel(AtributModel atributModel) {
-        this.atributModel = atributModel;
-    }
+//
+//    public AtributModel getAtributModel() {
+//        return atributModel;
+//    }
+//
+//    public void setAtributModel(AtributModel atributModel) {
+//        this.atributModel = atributModel;
+//    }
 
     public DetailKontrakModel getDetailKontrakModel() {
         return detailKontrakModel;

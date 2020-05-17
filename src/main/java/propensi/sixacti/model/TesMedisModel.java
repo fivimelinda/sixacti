@@ -59,7 +59,9 @@ public class TesMedisModel implements Serializable{
     @Column(name="isEdit", nullable=false)
     private Boolean isEdit;
 
-    @NotNull
+    // @NotNull
+    // @Column(name="status", nullable = false)
+    // private Boolean status;
     @Column(name="isLolos", nullable=false)
     private Boolean isLolos;
 
@@ -73,6 +75,14 @@ public class TesMedisModel implements Serializable{
     @OnDelete(action= OnDeleteAction.CASCADE)
     @JsonIgnore
     private PelamarModel pelamarTesMedis;
+
+//    public Boolean getStatus() {
+//        return status;
+//    }
+
+//    public void setStatus(Boolean status) {
+//        this.status = status;
+//    }
 
     /**
      * @return the idTesMedis

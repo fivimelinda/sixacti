@@ -1,5 +1,7 @@
 package propensi.sixacti.restcontroller.tes;
 
+import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
@@ -17,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import propensi.sixacti.model.FulfillmentModel;
 import propensi.sixacti.model.LamaranModel;
+import propensi.sixacti.model.LowonganKerjaModel;
 import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.model.TesWawancaraModel;
+import propensi.sixacti.service.FulfillmentService;
 import propensi.sixacti.service.LamaranService;
 import propensi.sixacti.service.tes.PelamarRestService;
 import propensi.sixacti.service.tes.tesWawancara.TesWawancaraRestService;
@@ -37,6 +42,9 @@ public class TesWawancaraRestController {
 
     @Autowired
     private LamaranService lamaranService;
+    
+    @Autowired
+    private FulfillmentService fulfillmentService;
 
     //tambah tes wawancara
     @PostMapping(value = "/wawancara/{idPelamar}")
@@ -96,6 +104,30 @@ public class TesWawancaraRestController {
                 PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesWawancara.getPelamarTesWawancara().getIdPelamar());
                 LamaranModel lamaran = lamaranService.findByIdLamaran(pelamar.getLamaran().getId());
                 lamaran.setLolos(true);
+                LowonganKerjaModel loker = lamaran.getLowongan();
+                boolean gender = pelamar.getUserPelamar().isJenis_kelamin();
+                Date currentDate = new Date();
+                FulfillmentModel target = fulfillmentService.getFulfillmentByLokerAndTanggal(loker, currentDate);
+                if (target!=null) {
+                	if(gender) {
+                		target.setJumlahLakilaki(target.getJumlahLakilaki()+1);
+                	} else {
+                		target.setJumlahPerempuan(target.getJumlahPerempuan()+1);
+                	}
+                } else {
+                	target = new FulfillmentModel();
+                	target.setLoker(loker);
+                	target.setTanggalDiterima(currentDate);
+                	if(gender) {
+                		target.setJumlahLakilaki(1);
+                		target.setJumlahPerempuan(0);
+                	} else {
+                		target.setJumlahPerempuan(1);
+                		target.setJumlahLakilaki(0);
+                	}
+                	loker.getListFulfillment().add(target);
+                }
+                fulfillmentService.add(target);
             }
             return tesWawancaraRestService.ubahTesWawancara(idTesWawancara, tesWawancara);
         }catch(NoSuchElementException e){
