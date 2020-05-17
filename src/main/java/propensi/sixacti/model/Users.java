@@ -1,11 +1,14 @@
 package propensi.sixacti.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -33,6 +36,10 @@ public class Users {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "users")
     private UserModel user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
+    @JsonIgnore
+    private List<RequestLowonganModel> requestLowongan;
 
 
     public Users(){
