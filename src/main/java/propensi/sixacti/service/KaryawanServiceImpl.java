@@ -31,4 +31,14 @@ public class KaryawanServiceImpl implements KaryawanService{
 		karyawanDb.save(cuti);
 	}
 
+    // @Override
+    // public KaryawanModel addDummy() {
+    //     KaryawanModel dummy = new KaryawanModel();
+    //     dummy.setId(Long.valueOf(1));
+    //     dummy.setJenisKaryawan(true);
+    //     dummy.setGaji(12000);
+    //     dummy.setSisaCuti(1);
+
+    // }
+
 }

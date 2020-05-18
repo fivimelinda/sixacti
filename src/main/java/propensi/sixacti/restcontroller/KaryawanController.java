@@ -29,4 +29,5 @@ public class KaryawanController {
 					HttpStatus.NOT_FOUND);
 		}
 	}
+
 }

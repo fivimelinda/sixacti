@@ -99,9 +99,9 @@ public class AuthController {
 							 encoder.encode(signUpRequest.getPassword()));
 
 		Set<String> strRoles = signUpRequest.getRole();
-		System.out.println("---------------------------------------");
-		System.out.println(signUpRequest.getUsername());
-		System.out.println(strRoles);
+//		System.out.println("---------------------------------------");
+//		System.out.println(signUpRequest.getUsername());
+//		System.out.println(strRoles);
         Set<Roles> roles = new HashSet<>();
         
 		if (strRoles == null) {
@@ -115,6 +115,26 @@ public class AuthController {
 					Roles adminRole = roleRepository.findByRoleName(ERole.ROLE_ADMIN)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 					roles.add(adminRole);
+					break;
+                case "section manager":
+					Roles sectRole = roleRepository.findByRoleName(ERole.ROLE_SECTIONMANAGER)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(sectRole);
+					break;
+                case "assistant manager":
+					Roles assistRole = roleRepository.findByRoleName(ERole.ROLE_ASSISTANTMANAGER)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(assistRole);
+					break;
+                case "department manager":
+					Roles dptRole = roleRepository.findByRoleName(ERole.ROLE_DEPARTMENTMANAGER)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(dptRole);
+					break;
+                case "karyawan kontrak":
+					Roles kontrakRole = roleRepository.findByRoleName(ERole.ROLE_KARYAWANKONTRAK)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(kontrakRole);
 					break;
 				case "pelamar":
 					Roles modRole = roleRepository.findByRoleName(ERole.ROLE_PELAMAR)
