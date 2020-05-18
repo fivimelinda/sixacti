@@ -45,4 +45,11 @@ public class UsersRestController {
     private Users getUsers(@PathVariable("id") Long id){
         return usersService.getUsersById(id);
     }
+
+    @CrossOrigin
+    @PutMapping(value = "/editUser/{id}")
+    private Users editUser(@PathVariable("id") Long id, @Valid @RequestBody UserModel userModel,  BindingResult bindingResult){
+        return usersService.editUser(userModel, id);
+    }
+
 }
