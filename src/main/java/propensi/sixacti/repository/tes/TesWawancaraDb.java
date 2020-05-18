@@ -11,7 +11,7 @@ import propensi.sixacti.model.TesWawancaraModel;
 
 @Repository
 public interface TesWawancaraDb extends JpaRepository<TesWawancaraModel, Long>{
-    Optional<TesWawancaraModel> findById(Long idTesWawancara);
+//    Optional<TesWawancaraModel> findById(Long idTesWawancara);
     List<TesWawancaraModel> findByIdTesWawancara(Long idTesWawancara);
     List<TesWawancaraModel> findByPelamarTesWawancara(PelamarModel pelamarTesWawancara);
 }
