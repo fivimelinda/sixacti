@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public UserModel addUser(UserModel userModel) {
+        return userDB.save(userModel);
+    }
 }
