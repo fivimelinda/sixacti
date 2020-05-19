@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -25,8 +26,8 @@ public class KaryawanModel {
     private boolean jenisKaryawan;
 
     @NotNull
-    @Size(max = 10)
     @Column(name="gaji", nullable = false)
+    @Min(1)
     @JsonIgnore
     private Integer gaji;
     
