@@ -4,16 +4,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "userRole")
+@Table(name = "profile")
 public class UserModel implements Serializable {
 
     @Id
@@ -26,7 +28,8 @@ public class UserModel implements Serializable {
     @Column(name = "nama", nullable = false)
     private String nama;
 
-    @DateTimeFormat(iso = ISO.DATE)
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "tanggal_lahir" ,nullable = false)
     private Date tanggal_lahir;
     
@@ -45,12 +48,12 @@ public class UserModel implements Serializable {
     private String alamat;
 
     @NotNull
-    @Size(max = 3)
+    @Min(1)
     @Column(name = "RT", nullable = false)
     private Integer RT;
 
     @NotNull
-    @Size(max = 3)
+    @Min(1)
     @Column(name = "RW", nullable = false)
     private Integer RW;
     
@@ -65,7 +68,7 @@ public class UserModel implements Serializable {
     private String kecamatan;
 
     @NotNull
-    @Size(max = 5)
+    @Min(1)
     @Column(name = "kode_pos", nullable = false)
     private Integer kodePos;
    
@@ -89,16 +92,21 @@ public class UserModel implements Serializable {
     Relation
     **/
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_akun", referencedColumnName = "idAkun")
-    @JsonIgnore
-    private AkunModel akun;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id_akun", referencedColumnName = "idAkun")
+//    @JsonIgnore
+//    private AkunModel akun;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "idUsers", referencedColumnName = "id")
+    @JsonIgnore
+    private Users users;
+
+    @OneToOne(mappedBy = "user", optional = true)
     @JsonIgnore
     private KaryawanModel karyawan;
 
-    @OneToOne(mappedBy = "userPelamar")
+    @OneToOne(mappedBy = "userPelamar", optional = true)
     @JsonIgnore
     private PelamarModel pelamar;
 
@@ -106,6 +114,20 @@ public class UserModel implements Serializable {
     setter getter
     **/
        
+    /**
+     * @return the users
+     */
+    public Users getUsers() {
+        return users;
+    }
+
+    /**
+     * @param users the users to set
+     */
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
     public String getNPWP() {
         return NPWP;
     }
@@ -218,13 +240,13 @@ public class UserModel implements Serializable {
         this.NPWP = nPWP;
     }
 
-//    public KaryawanModel getKaryawan() {
-//        return karyawan;
-//    }
-//
-//    public void setKaryawan(KaryawanModel karyawan) {
-//        this.karyawan = karyawan;
-//    }
+    public KaryawanModel getKaryawan() {
+        return karyawan;
+    }
+
+    public void setKaryawan(KaryawanModel karyawan) {
+        this.karyawan = karyawan;
+    }
 
 }
 

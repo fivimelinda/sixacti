@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 import propensi.sixacti.model.KaryawanModel;
 import propensi.sixacti.model.RequestLowonganModel;
+import propensi.sixacti.model.Users;
 import propensi.sixacti.service.KaryawanService;
 import propensi.sixacti.service.RequestLowonganService;
+import propensi.sixacti.service.UsersService;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
 @RestController
@@ -26,6 +28,9 @@ public class RequestLowonganRestController {
 
     @Autowired
     KaryawanService karyawanService;
+
+    @Autowired
+    UsersService usersService;
 
     @CrossOrigin
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -40,8 +45,14 @@ public class RequestLowonganRestController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "/add")
-    private RequestLowonganModel addRequestLowongan(@Valid @RequestBody RequestLowonganModel requestLowongan, BindingResult bindingResult){
+    @RequestMapping(value = "/users/{id}")
+    private Users getUsers(@PathVariable("id") Long id){
+        return usersService.getUsersById(id);
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/add/{id}")
+    private RequestLowonganModel addRequestLowongan(@PathVariable("id") Long id, @Valid @RequestBody RequestLowonganModel requestLowongan, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
 
@@ -77,8 +88,11 @@ public class RequestLowonganRestController {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
             }
             else{
-                KaryawanModel karyawan = karyawanService.getKaryawanById(Long.parseLong("1"));
-                requestLowongan.setKaryawan(karyawan);
+               Users users = getUsers(id);
+                // if(karyawan == null){
+                //     karyawanService
+                // }
+                requestLowongan.setUsers(users);
                 return requestLowonganService.addRequestLowongan(requestLowongan);
             }
             // mekanismennya nanti diubah pas udh ada login di front end

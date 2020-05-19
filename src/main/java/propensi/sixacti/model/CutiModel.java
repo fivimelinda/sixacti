@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -38,17 +39,17 @@ public class CutiModel implements Serializable {
     private KategoriCutiModel kategori;
 
     @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso = ISO.DATE)
     @Column(name="tanggal_mulai", nullable = false)
     private Date tanggalMulai;
     
     @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso = ISO.DATE)
     @Column(name="tanggal_diajukan", nullable = false)
     private Date tanggalDiajukan;
 
     @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso = ISO.DATE)
     @Column(name="tanggal_sampai", nullable = false)
     private Date tanggalSampai;
 

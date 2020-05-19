@@ -47,9 +47,16 @@ public class AtributModel implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private KaryawanModel karyawan;
 
+    public KaryawanModel getKaryawan() {
+        return karyawan;
+    }
+
+    public void setKaryawan(KaryawanModel karyawan) {
+        this.karyawan = karyawan;
+    }
+    
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
     @OnDelete(action= OnDeleteAction.CASCADE)
@@ -98,20 +105,20 @@ public class AtributModel implements Serializable {
         this.ukuran_sepatu = ukuran_sepatu;
     }
 
-    /**
-     * @return the karyawan
-     */
-    public KaryawanModel getKaryawan() {
-        return karyawan;
-    }
-    
-    /**
-     * @param karyawan the karyawan to set
-     */
-    public void setKaryawan(KaryawanModel karyawan) {
-        this.karyawan = karyawan;
-
-    }
+//    /**
+//     * @return the karyawan
+//     */
+//    public KaryawanModel getKaryawan() {
+//        return karyawan;
+//    }
+//
+//    /**
+//     * @param karyawan the karyawan to set
+//     */
+//    public void setKaryawan(KaryawanModel karyawan) {
+//        this.karyawan = karyawan;
+//
+//    }
 
     public Long getId_atribut() {
         return id_atribut;

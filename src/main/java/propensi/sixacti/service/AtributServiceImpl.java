@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import propensi.sixacti.model.AtributModel;
 import propensi.sixacti.repository.AtributDb;
 
+
 import java.util.List;
 import java.util.Optional;
 

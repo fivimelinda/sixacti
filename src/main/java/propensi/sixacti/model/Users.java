@@ -1,11 +1,14 @@
 package propensi.sixacti.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -30,6 +33,14 @@ public class Users {
     joinColumns = @JoinColumn(name = "userId"),
     inverseJoinColumns = @JoinColumn(name = "roleId"))
     private Set<Roles> roles = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "users")
+    private UserModel user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
+    @JsonIgnore
+    private List<RequestLowonganModel> requestLowongan;
+
 
     public Users(){
 
@@ -87,5 +98,18 @@ public class Users {
      */
     public void setRoles(Set<Roles> roles) {
         this.roles = roles;
+    }
+
+    /**
+     * @return the user
+     */
+    public UserModel getUser() {
+        return user;
+    }
+    /**
+     * @param user the user to set
+     */
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 }

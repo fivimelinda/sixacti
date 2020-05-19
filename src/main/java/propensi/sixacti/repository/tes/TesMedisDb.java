@@ -14,4 +14,5 @@ public interface TesMedisDb extends JpaRepository<TesMedisModel, Long>{
     Optional<TesMedisModel> findById(Long idTesMedis);
     List<TesMedisModel> findByIdTesMedis(Long idTesMedis);
     List<TesMedisModel> findByPelamarTesMedis(PelamarModel pelamarTesMedis);
+
 }

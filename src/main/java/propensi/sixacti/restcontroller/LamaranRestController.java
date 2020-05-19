@@ -34,18 +34,23 @@ public class LamaranRestController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/addLamaran/{idLowongan}")
-    private ResponseEntity<Long> createLamaran(@PathVariable Long idLowongan, @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
+
+    @PostMapping(value = "/addLamaran/{idLowongan}/{idUser}")
+    private ResponseEntity<Long> createLamaran(@PathVariable Long idLowongan,
+                                               @PathVariable String idUser,
+                                               @RequestBody LamaranModel lamaranModel, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }else{
             LowonganKerjaModel lowonganKerjaModel = lowonganKerjaService.getLowonganKerjaById(idLowongan);
-            UserModel user = userService.getuserByNIK("1234567890123456");
+            UserModel user = userService.getuserByNIK(idUser);
             PelamarModel pelamarModel = pelamarRestService.getPelamarByUser(user);
 
             lamaranModel.setPelamar(pelamarModel);
             lamaranModel.setLowongan(lowonganKerjaModel);
+//            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar((long) 1);
+//            lamaranModel.setPelamar(pelamar);
             lamaranModel.setLolos(false);
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             lamaranModel.setTimestampPelamar(timestamp);
@@ -77,9 +82,5 @@ public class LamaranRestController {
 //    @GetMapping(value = "/listLamaran/{idLowongan}")
 //    private List<LamaranModel> getLamaranByIdLowongan(@PathVariable Long idLowongan){
 //        return lamaranService.getLamaranByLowonganId(idLowongan);
-//    }
-
-
-
 
 }

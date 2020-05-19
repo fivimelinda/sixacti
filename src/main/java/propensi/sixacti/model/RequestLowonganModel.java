@@ -89,17 +89,17 @@ public class RequestLowonganModel implements Serializable {
     private String status;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "idKaryawan", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "idUsers", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private KaryawanModel karyawan; 
+    private Users users; 
 
-    public void setKaryawan(KaryawanModel karyawan){
-        this.karyawan = karyawan;
+    public void setUsers(Users users){
+        this.users = users;
     }
 
-    public KaryawanModel getKaryawan(){
-        return karyawan;
+    public Users getUsers(){
+        return users;
     }
 
     @OneToMany(mappedBy = "idReqLoker", fetch = FetchType.LAZY)
@@ -108,6 +108,7 @@ public class RequestLowonganModel implements Serializable {
     private List<DetailOfRequirementModel> detailOfRequirement;
     
     @OneToOne(mappedBy = "requestLowongan")
+    @JsonIgnore
     private LowonganKerjaModel lowonganKerja; 
 
     public Long getId() {
@@ -222,7 +223,15 @@ public class RequestLowonganModel implements Serializable {
         this.namaReplacement = namaReplacement;
     }
 
+	public LowonganKerjaModel getLowonganKerja() {
+		return lowonganKerja;
+	}
 
+	public void setLowonganKerja(LowonganKerjaModel lowonganKerja) {
+		this.lowonganKerja = lowonganKerja;
+	}
+
+    
 
     // public Integer getIdKaryawanDummy(){
     //     return id_karyawan_dummy;

@@ -52,6 +52,18 @@ public class TesTulisModel implements Serializable{
     @JsonIgnore
     private PelamarModel pelamarTesTulis;
 
+    @NotNull
+    @Column(name="status", nullable = false)
+    private Boolean status;
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
     /**
      * @return the isGagal
      */
