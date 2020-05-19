@@ -2,6 +2,9 @@ package propensi.sixacti.restcontroller;
 
 import javax.validation.Valid;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -13,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import propensi.sixacti.model.PelamarModel;
+import propensi.sixacti.model.Roles;
 import propensi.sixacti.model.UserModel;
 import propensi.sixacti.model.Users;
+import propensi.sixacti.service.PelamarService;
 import propensi.sixacti.service.UserService;
 import propensi.sixacti.service.UsersService;
 
@@ -29,6 +35,9 @@ public class UsersRestController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PelamarService pelamarService;
+
     @CrossOrigin
     @PutMapping(value = "/setUser/{id}" )
     private Users setUser(@PathVariable("id") Long id, @Valid @RequestBody UserModel userModel,  BindingResult bindingResult){
@@ -36,7 +45,19 @@ public class UsersRestController {
         //     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         // } else {
             userModel.setUsers(usersService.getUsersById(id));
-            return usersService.setUser(userService.addUser(userModel), id);
+            Users baru =  usersService.setUser(userService.addUser(userModel), id);
+            Set<Roles> it = baru.getRoles();
+            for(Roles temp : it){
+                System.out.println(temp);
+                System.out.println(temp.getRoleName());
+                if(temp.getRoleName().toString().equals("ROLE_PELAMAR")){
+                    System.out.println("MASUUUUK");
+                    PelamarModel a = pelamarService.generatePelamar(baru.getUser().getNIK());
+                    System.out.println(a);
+                }
+            }
+            return baru;
+            
         
     }
 
