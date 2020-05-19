@@ -1,7 +1,7 @@
 package propensi.sixacti.controller;
 
 import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -98,10 +98,10 @@ public class AuthController {
 		Users user = new Users(signUpRequest.getUsername(), 
 							 encoder.encode(signUpRequest.getPassword()));
 
-		Set<String> strRoles = signUpRequest.getRole();
-		System.out.println("---------------------------------------");
-		System.out.println(signUpRequest.getUsername());
-		System.out.println(strRoles);
+		List<String> strRoles = signUpRequest.getRole();
+		// System.out.println("---------------------------------------");
+		// System.out.println(signUpRequest.getUsername());
+		// System.out.println(strRoles);
         Set<Roles> roles = new HashSet<>();
         
 		if (strRoles == null) {

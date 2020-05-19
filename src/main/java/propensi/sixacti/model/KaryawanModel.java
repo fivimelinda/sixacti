@@ -56,6 +56,7 @@ public class KaryawanModel {
 //    @JoinColumn(name="id_assist_mngr")
 //    private Set<KaryawanModel> assistManager;
 
+
     @OneToOne(mappedBy = "karyawan")
     @JsonIgnore
     private AtributModel atributModel;
@@ -90,7 +91,6 @@ public class KaryawanModel {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
     @JsonIgnore
     private List<RequestLowonganModel> requestLowongan;
-    
 
     /*
     Section Setter Getter===============================================================================================
@@ -250,5 +250,6 @@ public class KaryawanModel {
 
 	public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
 		this.requestLowongan = requestLowongan;
-	}
+    }
+    
 }
