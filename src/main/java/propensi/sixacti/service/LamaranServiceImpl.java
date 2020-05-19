@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import propensi.sixacti.exception.FileStorageException;
 import propensi.sixacti.model.BerkasModel;
 import propensi.sixacti.model.LamaranModel;
+import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.repository.LamaranDB;
 
 
@@ -47,6 +48,16 @@ public class LamaranServiceImpl implements LamaranService {
         targetLamaran.setStatusLamaran(lamaran.getStatusLamaran());
         return lamaranDB.save(targetLamaran);
     }
+
+//    @Override
+//    public LamaranModel getLamaranByPelamar(PelamarModel pelamar){
+//        List<LamaranModel> listLamaran = lamaranDB.findByPelamarLamaran(pelamar);
+//        if(listLamaran.size() != 0){
+//            return listLamaran.get(0);
+//        }else{
+//            return null;
+//        }
+//    }
 
 
 }
