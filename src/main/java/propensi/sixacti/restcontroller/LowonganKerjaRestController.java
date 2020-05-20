@@ -111,19 +111,18 @@ public class LowonganKerjaRestController {
         } return myList;
     }
     @GetMapping(value = "/cekPelamar/{idLowongan}/{nik}")
-    private List<LowonganKerjaModel> cekPelamar(@PathVariable Long idLowongan,
+    private String cekPelamar(@PathVariable Long idLowongan,
                                                 @PathVariable String nik){
-        List<LowonganKerjaModel> myList = new ArrayList<>();
+//        List<String> myList = new ArrayList<>();
         LowonganKerjaModel lowonganKerjaModel = lowonganKerjaService.getLowonganKerjaById(idLowongan);
-        System.out.println("masuk0");
+
         for (LamaranModel j : lowonganKerjaModel.getListLamaran()){
-            System.out.println("masuk1");
+
             if (j.getNik().equals(nik)){
-                System.out.println("ini nik sama" + j.getNik());
-                myList.add(lowonganKerjaModel);
+
+                return j.getNik();
             }
-        }
-        return myList;
+        } return "gagal" ;
     }
 
 

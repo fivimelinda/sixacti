@@ -79,6 +79,20 @@ public class LamaranRestController {
         }
     }
 
+    @GetMapping(value = "/cekPelamar/{nik}")
+    private String cekPelamar(@PathVariable String nik){
+//        List<String> myList = new ArrayList<>();
+//        LamaranModel lamaran = lamaranService.getLamaran().get();
+
+        for (LamaranModel j : lamaranService.getLamaran()){
+
+            if (j.getNik().equals(nik)){
+
+                return j.getNik();
+            }
+        } return "gagal" ;
+    }
+
 //    @GetMapping(value = "/listLamaran/{idLowongan}")
 //    private List<LamaranModel> getLamaranByIdLowongan(@PathVariable Long idLowongan){
 //        return lamaranService.getLamaranByLowonganId(idLowongan);
