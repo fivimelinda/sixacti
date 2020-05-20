@@ -28,10 +28,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import propensi.sixacti.model.CutiModel;
 import propensi.sixacti.model.DepartemenModel;
-import propensi.sixacti.model.ERole;
 import propensi.sixacti.model.KaryawanModel;
 import propensi.sixacti.model.KategoriCutiModel;
-import propensi.sixacti.model.Roles;
 import propensi.sixacti.model.SectionModel;
 import propensi.sixacti.model.UserModel;
 import propensi.sixacti.repository.Login.RolesRepository;
@@ -41,7 +39,7 @@ import propensi.sixacti.service.KaryawanService;
 import propensi.sixacti.service.KategoriCutiService;
 import propensi.sixacti.service.UserService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8081", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class CutiController {
 	@Autowired
@@ -180,7 +178,6 @@ public class CutiController {
 		try {
 			UserModel user = userService.getuserByNIK(reviewerId);
 			try {
-				System.out.print("BBBBBB");
 				KaryawanModel reviewer = user.getKaryawan();
 				String statusDicari = "Diajukan";
 				List<KaryawanModel> karyawanFiltered = null;
@@ -229,11 +226,13 @@ public class CutiController {
 		}
 	}
 	
-	@PutMapping(value="/api/cuti/approve")
+	@GetMapping(value="/api/cuti/approve")
 	private ResponseEntity<String> approveCuti(@RequestParam("cutiId") Long cutiId){
+		System.out.println("-----------------BBBBBBBBB----------");
 		try {
+			System.out.println("-----------------CCCCCCCCCA----------");
 			CutiModel cutiTarget = cutiService.getCutiById(cutiId).get();
-			
+			System.out.println("-----------------AAAAAAAAAAAA----------");
 			KaryawanModel karyawanCuti = cutiTarget.getKaryawan();
 			String currStat = cutiTarget.getStatus().toLowerCase();
 			if (currStat.equals("diajukan")) {
@@ -250,12 +249,13 @@ public class CutiController {
 			karyawanService.addKaryawan(karyawanCuti);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (NoSuchElementException e) {
+			System.out.println("-----------------DDDDDD----------");
 			throw new ResponseStatusException(
 					HttpStatus.NOT_FOUND, "Cuti does not exist!");
 		}
 	}
 	
-	@PutMapping(value="/api/cuti/reject")
+	@GetMapping(value="/api/cuti/reject")
 	private ResponseEntity<String> rejectCuti(@RequestParam("cutiId") Long cutiId){
 		try {
 			CutiModel cutiTarget = cutiService.getCutiById(cutiId).get();

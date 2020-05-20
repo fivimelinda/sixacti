@@ -137,6 +137,11 @@ public class AuthController {
 					roles.add(modRole);
 
 					break;
+				case "karyawan tetap":
+					Roles tetapRole = roleRepository.findByRoleName(ERole.ROLE_KARYAWANTETAP)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(tetapRole);
+					break;
 				default:
 					Roles userRole = roleRepository.findByRoleName(ERole.ROLE_KARYAWANTETAP)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
