@@ -37,8 +37,10 @@ public class RoleModel implements Serializable {
 	// public void setListKaryawan(List<KaryawanModel> listKaryawan) {
 	// 	this.listKaryawan = listKaryawan;
 	// }
-
-	public Long getId() {
+	/**
+     * @return the id
+     */
+    public Long getId() {
         return id;
     }
 
