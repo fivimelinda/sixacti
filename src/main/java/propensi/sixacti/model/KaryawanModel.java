@@ -28,7 +28,6 @@ public class KaryawanModel {
     @NotNull
     @Column(name="gaji", nullable = false)
     @Min(1)
-    @JsonIgnore
     private Integer gaji;
     
     @Column(name="sisa", nullable = false)
