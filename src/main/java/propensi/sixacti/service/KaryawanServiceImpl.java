@@ -32,8 +32,8 @@ public class KaryawanServiceImpl implements KaryawanService{
     }
 	
 	@Override
-	public void addKaryawan(KaryawanModel cuti) {
-		karyawanDb.save(cuti);
+	public void addKaryawan(KaryawanModel karyawan) {
+		karyawanDb.save(karyawan);
 	}
 
     // @Override

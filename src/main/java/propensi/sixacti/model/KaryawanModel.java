@@ -20,10 +20,10 @@ public class KaryawanModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotNull
-    @Column(name="jenis_karyawan", nullable = false)
-    @JsonIgnore
-    private boolean jenisKaryawan;
+//    @NotNull
+//    @Column(name="jenis_karyawan", nullable = false)
+//    @JsonIgnore
+//    private boolean jenisKaryawan;
 
     @NotNull
     @Column(name="gaji", nullable = false)
@@ -31,7 +31,7 @@ public class KaryawanModel {
     @JsonIgnore
     private Integer gaji;
     
-    @Column(name="sisaCuti", nullable = false)
+    @Column(name="sisa", nullable = false)
     private Integer sisaCuti;
     
 
@@ -116,9 +116,9 @@ public class KaryawanModel {
 		this.id = id;
 	}
 
-	public boolean isJenisKaryawan() {
-		return jenisKaryawan;
-	}
+//	public boolean isJenisKaryawan() {
+//		return jenisKaryawan;
+//	}
 
 	// public void setJenisKaryawan(boolean jenisKaryawan) {
 	// 	this.jenisKaryawan = jenisKaryawan;
