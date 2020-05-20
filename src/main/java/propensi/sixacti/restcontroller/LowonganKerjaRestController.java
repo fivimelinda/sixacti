@@ -6,12 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.model.LowonganKerjaModel;
 import propensi.sixacti.model.RequestLowonganModel;
 import propensi.sixacti.service.LowonganKerjaService;
 import propensi.sixacti.service.RequestLowonganService;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -93,6 +95,35 @@ public class LowonganKerjaRestController {
         }
     }
 
+    @GetMapping(value = "/lowonganPelamar/{nik}")
+    private List<LowonganKerjaModel> getLowonganByPelamar(@PathVariable String nik){
+        List<LowonganKerjaModel> myList = new ArrayList<>();
+        List<LowonganKerjaModel> lokerList = lowonganKerjaService.getListLowonganKerja();
+        for(LowonganKerjaModel i : lokerList){
+            System.out.println("masuk0");
+            for (LamaranModel j : i.getListLamaran()){
+                System.out.println("masuk1");
+                if (j.getNik().equals(nik)){
+                    System.out.println("ini nik sama" + j.getNik());
+                    myList.add(i);
+                }
+            }
+        } return myList;
+    }
+    @GetMapping(value = "/cekPelamar/{idLowongan}/{nik}")
+    private String cekPelamar(@PathVariable Long idLowongan,
+                                                @PathVariable String nik){
+//        List<String> myList = new ArrayList<>();
+        LowonganKerjaModel lowonganKerjaModel = lowonganKerjaService.getLowonganKerjaById(idLowongan);
+
+        for (LamaranModel j : lowonganKerjaModel.getListLamaran()){
+
+            if (j.getNik().equals(nik)){
+
+                return j.getNik();
+            }
+        } return "gagal" ;
+    }
 
 
 }
