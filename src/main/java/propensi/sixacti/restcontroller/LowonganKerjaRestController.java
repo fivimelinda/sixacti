@@ -100,19 +100,18 @@ public class LowonganKerjaRestController {
         List<LowonganKerjaModel> myList = new ArrayList<>();
         List<LowonganKerjaModel> lokerList = lowonganKerjaService.getListLowonganKerja();
         for(LowonganKerjaModel i : lokerList){
-            System.out.println("masuk0");
             for (LamaranModel j : i.getListLamaran()){
-                System.out.println("masuk1");
+
                 if (j.getNik().equals(nik)){
-                    System.out.println("ini nik sama" + j.getNik());
+
                     myList.add(i);
                 }
             }
         } return myList;
     }
-    @GetMapping(value = "/cekPelamar/{idLowongan}/{nik}")
-    private String cekPelamar(@PathVariable Long idLowongan,
-                                                @PathVariable String nik){
+    @GetMapping(value = "/getIdPelamar/{idLowongan}/{nik}")
+    private Long cekPelamar(@PathVariable Long idLowongan,
+                            @PathVariable String nik){
 //        List<String> myList = new ArrayList<>();
         LowonganKerjaModel lowonganKerjaModel = lowonganKerjaService.getLowonganKerjaById(idLowongan);
 
@@ -120,9 +119,9 @@ public class LowonganKerjaRestController {
 
             if (j.getNik().equals(nik)){
 
-                return j.getNik();
+                return j.getPelamar().getIdPelamar();
             }
-        } return "gagal" ;
+        } return Long.valueOf(0);
     }
 
 
