@@ -28,10 +28,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import propensi.sixacti.model.CutiModel;
 import propensi.sixacti.model.DepartemenModel;
-import propensi.sixacti.model.ERole;
 import propensi.sixacti.model.KaryawanModel;
 import propensi.sixacti.model.KategoriCutiModel;
-import propensi.sixacti.model.Roles;
 import propensi.sixacti.model.SectionModel;
 import propensi.sixacti.model.UserModel;
 import propensi.sixacti.repository.Login.RolesRepository;
@@ -41,7 +39,7 @@ import propensi.sixacti.service.KaryawanService;
 import propensi.sixacti.service.KategoriCutiService;
 import propensi.sixacti.service.UserService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8081", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class CutiController {
 	@Autowired
@@ -79,9 +77,9 @@ public class CutiController {
 				cutiService.addCuti(newCuti);
 				karyawan.getCuti().add(newCuti);
 				return cuti;
-			} catch (NoSuchElementException e) {
+			} catch (Exception e) {
 				throw new ResponseStatusException(
-						HttpStatus.NOT_FOUND, "Karyawan not found!");
+						HttpStatus.NOT_FOUND, "Karyawan tidak ditemukan");
 			}
 		}
 	}
@@ -94,10 +92,10 @@ public class CutiController {
 				cutiService.deleteCuti(cuti);
 				return new ResponseEntity<>(HttpStatus.OK);
 			}
-			return new ResponseEntity<>(HttpStatus.PRECONDITION_FAILED);
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		} catch (Exception e) {
 			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Cuti not found!");
+					HttpStatus.NOT_FOUND, "Cuti terkait tidak ditemukan");
 		}
 	}
 	
@@ -132,35 +130,37 @@ public class CutiController {
 	
 	@GetMapping(value="/api/cuti/diajukan/get")
 	private HashMap<String, String> retrieveCutiDiajukan(@RequestParam("id") String nik) {
-		UserModel user = userService.getuserByNIK(nik);
-		HashMap<String, String> cutiResponse = new HashMap<String, String>();
 		try {
-			KaryawanModel karyawan = user.getKaryawan();
-			if (!(karyawan.isJenisKaryawan())) {
-				throw new ResponseStatusException(
-						HttpStatus.FORBIDDEN);
-			}
+			UserModel user = userService.getuserByNIK(nik);
+			HashMap<String, String> cutiResponse = new HashMap<String, String>();
 			try {
-				CutiModel cuti = cutiService.getCutiOnProcess(karyawan).get();
-				cutiResponse.put("cutiActive", "true");
-				cutiResponse.put("idKaryawan", String.valueOf(karyawan.getId()));
-				cutiResponse.put("idCuti", String.valueOf(cuti.getId()));
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				cutiResponse.put("tanggalMulai", dateFormat.format(cuti.getTanggalMulai()));
-				cutiResponse.put("tanggalSampai", dateFormat.format(cuti.getTanggalSampai()));
-				cutiResponse.put("tanggalDiajukan", dateFormat.format(cuti.getTanggalDiajukan()));
-				cutiResponse.put("namaKategori", cuti.getKategori().getNamaKategori());
-				cutiResponse.put("idKategori", String.valueOf(cuti.getKategori().getId()));
-				cutiResponse.put("statusCuti", cuti.getStatus());
-				cutiResponse.put("keterangan", cuti.getKeterangan());
-			} catch (NoSuchElementException e) {
-				cutiResponse.put("cutiActive", "false");
-				cutiResponse.put("sisaCuti", String.valueOf(karyawan.getSisaCuti()));
-				cutiResponse.put("idKaryawan", String.valueOf(karyawan.getId()));
-			}return cutiResponse;
-		} catch (NullPointerException e) {
+				KaryawanModel karyawan = user.getKaryawan();
+				try {
+					CutiModel cuti = cutiService.getCutiOnProcess(karyawan).get();
+					cutiResponse.put("cutiActive", "true");
+					cutiResponse.put("idKaryawan", String.valueOf(karyawan.getId()));
+					cutiResponse.put("idCuti", String.valueOf(cuti.getId()));
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					cutiResponse.put("tanggalMulai", dateFormat.format(cuti.getTanggalMulai()));
+					cutiResponse.put("tanggalSampai", dateFormat.format(cuti.getTanggalSampai()));
+					cutiResponse.put("tanggalDiajukan", dateFormat.format(cuti.getTanggalDiajukan()));
+					cutiResponse.put("namaKategori", cuti.getKategori().getNamaKategori());
+					cutiResponse.put("idKategori", String.valueOf(cuti.getKategori().getId()));
+					cutiResponse.put("statusCuti", cuti.getStatus());
+					cutiResponse.put("sisaCuti", String.valueOf(karyawan.getSisaCuti()));
+					cutiResponse.put("keterangan", cuti.getKeterangan());
+				} catch (NoSuchElementException e) {
+					cutiResponse.put("cutiActive", "false");
+					cutiResponse.put("sisaCuti", String.valueOf(karyawan.getSisaCuti()));
+					cutiResponse.put("idKaryawan", String.valueOf(karyawan.getId()));
+				}return cutiResponse;
+			} catch (NullPointerException e) {
+				throw new ResponseStatusException(
+						HttpStatus.NOT_FOUND, "Profil belum diisi!");
+			}
+		} catch (NoSuchElementException e) {
 			throw new ResponseStatusException(
-					HttpStatus.FORBIDDEN);
+					HttpStatus.NOT_FOUND, "Profil belum diisi!");
 		}
 	}
 	
@@ -180,7 +180,6 @@ public class CutiController {
 		try {
 			UserModel user = userService.getuserByNIK(reviewerId);
 			try {
-				System.out.print("BBBBBB");
 				KaryawanModel reviewer = user.getKaryawan();
 				String statusDicari = "Diajukan";
 				List<KaryawanModel> karyawanFiltered = null;
@@ -199,12 +198,11 @@ public class CutiController {
 				}
 			} catch (NullPointerException e){
 				throw new ResponseStatusException(
-						HttpStatus.FORBIDDEN);
+						HttpStatus.NOT_FOUND, "Profil belum diisi!");
 			}
 		} catch (NoSuchElementException e) {
-			System.out.print("aaaaaaaaaa");
 			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND);
+					HttpStatus.NOT_FOUND, "Profil belum diisi!");
 		}
 	}
 	
@@ -225,15 +223,14 @@ public class CutiController {
 		} 
 		catch (NullPointerException e) {
 			throw new ResponseStatusException(
-					HttpStatus.FORBIDDEN);
+					HttpStatus.NOT_FOUND, "Profil belum diisi!");
 		}
 	}
 	
-	@PutMapping(value="/api/cuti/approve")
+	@GetMapping(value="/api/cuti/approve")
 	private ResponseEntity<String> approveCuti(@RequestParam("cutiId") Long cutiId){
 		try {
 			CutiModel cutiTarget = cutiService.getCutiById(cutiId).get();
-			
 			KaryawanModel karyawanCuti = cutiTarget.getKaryawan();
 			String currStat = cutiTarget.getStatus().toLowerCase();
 			if (currStat.equals("diajukan")) {
@@ -244,18 +241,18 @@ public class CutiController {
 				Date secondDate =cutiTarget.getTanggalSampai();
 				long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
 				long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-				karyawanCuti.setSisaCuti(karyawanCuti.getSisaCuti()- (int)diff);
+				karyawanCuti.setSisaCuti(karyawanCuti.getSisaCuti()- (int)diff -1);
 			}
 			cutiService.addCuti(cutiTarget);
 			karyawanService.addKaryawan(karyawanCuti);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (NoSuchElementException e) {
 			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Cuti does not exist!");
+					HttpStatus.NOT_FOUND, "Pengajuan cuti terkait tidak ditemukan.");
 		}
 	}
 	
-	@PutMapping(value="/api/cuti/reject")
+	@GetMapping(value="/api/cuti/reject")
 	private ResponseEntity<String> rejectCuti(@RequestParam("cutiId") Long cutiId){
 		try {
 			CutiModel cutiTarget = cutiService.getCutiById(cutiId).get();
@@ -264,7 +261,7 @@ public class CutiController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (NoSuchElementException e) {
 			throw new ResponseStatusException(
-					HttpStatus.NOT_FOUND, "Cuti does not exist!");
+					HttpStatus.NOT_FOUND, "Pengajuan cuti terkai tidak ditemukan");
 		}
 	}
 	

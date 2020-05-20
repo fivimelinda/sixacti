@@ -1,5 +1,6 @@
 package propensi.sixacti.payload.request;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.*;
@@ -13,7 +14,7 @@ public class SignupRequest {
     @Size(min = 6, max = 40)
     private String password;
 
-    private Set<String> role;
+    private List<String> role;
 
     // private String departement;
 
@@ -38,14 +39,14 @@ public class SignupRequest {
     /**
      * @param role the role to set
      */
-    public void setRole(Set<String> role) {
+    public void setRole(List<String> role) {
         this.role = role;
     }
 
     /**
      * @return the role
      */
-    public Set<String> getRole() {
+    public List<String> getRole() {
         return role;
     }
 
