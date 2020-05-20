@@ -22,23 +22,25 @@ public class RoleModel implements Serializable {
     @Column (name = "nama_role")
     private String namaRole;
     
-    @OneToMany(fetch=FetchType.LAZY, mappedBy = "role")
-    @JsonIgnore
-    private List<KaryawanModel> listKaryawan;
+    // @OneToMany(fetch=FetchType.LAZY, mappedBy = "role")
+    // @JsonIgnore
+    // private List<KaryawanModel> listKaryawan;
 
     /*
     Section Setter Getter===============================================================================================
      */
 
-    public List<KaryawanModel> getListKaryawan() {
-		return listKaryawan;
-	}
+    // public List<KaryawanModel> getListKaryawan() {
+	// 	return listKaryawan;
+	// }
 
-	public void setListKaryawan(List<KaryawanModel> listKaryawan) {
-		this.listKaryawan = listKaryawan;
-	}
-
-	public Long getId() {
+	// public void setListKaryawan(List<KaryawanModel> listKaryawan) {
+	// 	this.listKaryawan = listKaryawan;
+	// }
+	/**
+     * @return the id
+     */
+    public Long getId() {
         return id;
     }
 
