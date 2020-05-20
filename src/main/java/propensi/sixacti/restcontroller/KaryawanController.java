@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,6 +82,42 @@ public class KaryawanController {
         	}
             
         }
+	}
+	
+	@GetMapping(value= "/get/{nik}")
+	private KaryawanModel retrieve(@PathVariable("nik") String nik) {
+		try {
+			UserModel user = userService.getuserByNIK(nik);
+			try {
+				KaryawanModel target = user.getKaryawan();
+				return target;
+			} catch (NullPointerException e) {
+				return null;
+			}
+		} catch (NoSuchElementException e) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@PutMapping(value="/edit/{nik}")
+	private KaryawanModel edit(@PathVariable("nik") String nik, 
+			@Valid @RequestBody KaryawanDetail karyawan, BindingResult bindingResult) {
+		try {
+			UserModel user = userService.getuserByNIK(nik);
+			KaryawanModel target = user.getKaryawan();
+    		target.setGaji(karyawan.getGaji());
+    		target.setSisaCuti(karyawan.getSisaCuti());
+    		SectionModel section = sectionService.getSectionById(karyawan.getIdSect());
+    		DepartemenModel dept = deptService.getDeptById(karyawan.getIdDept());
+    		target.setDepartemen(dept);
+    		target.setSection(section);
+			karyawanService.addKaryawan(target);
+			return target;
+		} catch (NoSuchElementException e) {
+			throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND);
+		}
 	}
 
 }
