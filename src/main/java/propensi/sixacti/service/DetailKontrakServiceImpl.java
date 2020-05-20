@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import propensi.sixacti.model.DetailKontrakModel;
+import propensi.sixacti.model.KaryawanModel;
+import propensi.sixacti.model.UserModel;
 import propensi.sixacti.repository.DetailKontrakDB;
 import propensi.sixacti.repository.KaryawanDB;
 
@@ -74,6 +76,16 @@ public class DetailKontrakServiceImpl implements DetailKontrakService {
     public Integer getGaji(Long id) {
         return getDetailKontrakById(id).getKaryawan().getGaji();
         
+    }
+
+    @Override
+    public UserModel getUser(Long id) {
+        return getDetailKontrakById(id).getKaryawan().getUser();
+    }
+
+    @Override
+    public String getSection(Long id){
+        return getDetailKontrakById(id).getKaryawan().getSection().getNamaSection();
     }
 
 }

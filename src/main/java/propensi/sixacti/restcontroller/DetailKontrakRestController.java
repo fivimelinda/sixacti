@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import propensi.sixacti.model.DetailKontrakModel;
+import propensi.sixacti.model.KaryawanModel;
+import propensi.sixacti.model.UserModel;
 import propensi.sixacti.service.DetailKontrakService;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
@@ -60,4 +62,17 @@ public class DetailKontrakRestController {
     private Integer getGaji(@PathVariable("id") Long id){
         return detailKontrakService.getGaji(id);
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/user/{id}")
+    private UserModel getUser(@PathVariable("id") Long id){
+        return detailKontrakService.getUser(id);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/section/{id}")
+    private String getSection(@PathVariable("id") Long id){
+        return detailKontrakService.getSection(id);
+    }
+
 }
