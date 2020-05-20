@@ -97,11 +97,11 @@ public class RequestLowonganModel implements Serializable {
     public void setUsers(Users users){
         this.users = users;
     }
-
+    
     public Users getUsers(){
         return users;
     }
-
+    
     @OneToMany(mappedBy = "idReqLoker", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore

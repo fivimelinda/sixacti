@@ -1,7 +1,7 @@
 package propensi.sixacti.controller;
 
 import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -62,8 +62,6 @@ public class AuthController {
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 		
-		
-		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
@@ -98,17 +96,14 @@ public class AuthController {
 		Users user = new Users(signUpRequest.getUsername(), 
 							 encoder.encode(signUpRequest.getPassword()));
 
-		Set<String> strRoles = signUpRequest.getRole();
-//		System.out.println("---------------------------------------");
-//		System.out.println(signUpRequest.getUsername());
-//		System.out.println(strRoles);
+		List<String> strRoles = signUpRequest.getRole();
+		// System.out.println("---------------------------------------");
+		// System.out.println(signUpRequest.getUsername());
+		// System.out.println(strRoles);
+
         Set<Roles> roles = new HashSet<>();
         
-		if (strRoles == null) {
-			Roles userRole = roleRepository.findByRoleName(ERole.ROLE_PELAMAR)
-					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-		} else {
+		
 			strRoles.forEach(role -> {
 				switch (role) {
                 case "admin":
@@ -153,7 +148,7 @@ public class AuthController {
 					roles.add(userRole);
 				}
 			});
-		}
+		
 
 		user.setRoles(roles);
 		userRepository.save(user);

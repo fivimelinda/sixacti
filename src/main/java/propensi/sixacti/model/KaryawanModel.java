@@ -20,10 +20,10 @@ public class KaryawanModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotNull
-    @Column(name="jenis_karyawan", nullable = false)
-    @JsonIgnore
-    private boolean jenisKaryawan;
+//    @NotNull
+//    @Column(name="jenis_karyawan", nullable = false)
+//    @JsonIgnore
+//    private boolean jenisKaryawan;
 
     @NotNull
     @Column(name="gaji", nullable = false)
@@ -34,7 +34,41 @@ public class KaryawanModel {
     @Column(name="sisa", nullable = false)
     private Integer sisaCuti;
     
-//    @NotNull
+
+
+
+    @OneToOne(mappedBy = "karyawan", optional = true)
+    @JsonIgnore
+    private AtributModel atributModel;
+
+    @OneToOne(mappedBy = "karyawan", cascade = CascadeType.ALL,  fetch = FetchType.LAZY,optional = true)
+    @JsonIgnore
+    private DetailKontrakModel detailKontrakModel;
+
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "nik", referencedColumnName = "nik")
+    private UserModel user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_dept", referencedColumnName = "id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private DepartemenModel departemen;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_sect", referencedColumnName = "idSection", nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private SectionModel section;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
+    @JsonIgnore
+    private List<CutiModel> cuti;
+
+    // @ManyToOne(fetch = FetchType.EAGER)
+    // @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
+    // @OnDelete(action = OnDeleteAction.CASCADE)
+    // private RoleModel role;
+
+    //    @NotNull
 //    @Column(name="hutangCuti", nullable = false)
 //    private Integer hutangCuti;
 
@@ -59,41 +93,16 @@ public class KaryawanModel {
 //    @JoinColumn(name="id_assist_mngr")
 //    private Set<KaryawanModel> assistManager;
 
-    @OneToOne(mappedBy = "karyawan")
-    @JsonIgnore
-    private AtributModel atributModel;
-
-    @OneToOne(mappedBy = "karyawan", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
-    @JsonIgnore
-    private DetailKontrakModel detailKontrakModel;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "nik", referencedColumnName = "nik")
-    private UserModel user;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private RoleModel role;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_dept", referencedColumnName = "id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private DepartemenModel departemen;
+// <<<<<<< HEAD
+//     @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
+//     @JsonIgnore
+//     private List<RequestLowonganModel> requestLowongan;
+// =======
+//     // @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
+//     // @JsonIgnore
+//     // private List<RequestLowonganModel> requestLowongan;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_sect", referencedColumnName = "idSection", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private SectionModel section;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
-    @JsonIgnore
-    private List<CutiModel> cuti;
-
-    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "karyawan")
-    // @JsonIgnore
-    // private List<RequestLowonganModel> requestLowongan;
-    
+// >>>>>>> master
 
     /*
     Section Setter Getter===============================================================================================
@@ -107,13 +116,13 @@ public class KaryawanModel {
 		this.id = id;
 	}
 
-	public boolean isJenisKaryawan() {
-		return jenisKaryawan;
-	}
+//	public boolean isJenisKaryawan() {
+//		return jenisKaryawan;
+//	}
 
-	public void setJenisKaryawan(boolean jenisKaryawan) {
-		this.jenisKaryawan = jenisKaryawan;
-	}
+	// public void setJenisKaryawan(boolean jenisKaryawan) {
+	// 	this.jenisKaryawan = jenisKaryawan;
+	// }
 
 	public Integer getGaji() {
 		return gaji;
@@ -131,7 +140,51 @@ public class KaryawanModel {
 		this.sisaCuti = sisaCuti;
 	}
 
-//	public Long getIdDeptManager() {
+
+
+    public DetailKontrakModel getDetailKontrakModel() {
+        return detailKontrakModel;
+    }
+
+    public void setDetailKontrakModel(DetailKontrakModel detailKontrakModel) {
+        this.detailKontrakModel = detailKontrakModel;
+    }
+
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
+    
+
+    public DepartemenModel getDepartemen() {
+        return departemen;
+    }
+
+    public void setDepartemen(DepartemenModel departemen) {
+        this.departemen = departemen;
+    }
+
+    public List<CutiModel> getCuti() {
+        return cuti;
+    }
+
+    public void setCuti(List<CutiModel> cuti) {
+        this.cuti = cuti;
+    }
+
+	public SectionModel getSection() {
+		return section;
+	}
+
+	public void setSection(SectionModel section) {
+		this.section = section;
+    }
+
+    //	public Long getIdDeptManager() {
 //		return idDeptManager;
 //	}
 //
@@ -198,60 +251,27 @@ public class KaryawanModel {
 //    public void setAtributModel(AtributModel atributModel) {
 //        this.atributModel = atributModel;
 //    }
+    
+    // public RoleModel getRole() {
+    //     return role;
+    // }
 
-    public DetailKontrakModel getDetailKontrakModel() {
-        return detailKontrakModel;
-    }
-
-    public void setDetailKontrakModel(DetailKontrakModel detailKontrakModel) {
-        this.detailKontrakModel = detailKontrakModel;
-    }
-
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
-
-    public RoleModel getRole() {
-        return role;
-    }
-
-    public void setRole(RoleModel role) {
-        this.role = role;
-    }
-
-    public DepartemenModel getDepartemen() {
-        return departemen;
-    }
-
-    public void setDepartemen(DepartemenModel departemen) {
-        this.departemen = departemen;
-    }
-
-    public List<CutiModel> getCuti() {
-        return cuti;
-    }
-
-    public void setCuti(List<CutiModel> cuti) {
-        this.cuti = cuti;
-    }
-
-	public SectionModel getSection() {
-		return section;
-	}
-
-	public void setSection(SectionModel section) {
-		this.section = section;
-	}
+    // public void setRole(RoleModel role) {
+    //     this.role = role;
+    // }
 
 	// public List<RequestLowonganModel> getRequestLowongan() {
 	// 	return requestLowongan;
 	// }
 
-	// public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
-	// 	this.requestLowongan = requestLowongan;
-	// }
+// <<<<<<< HEAD
+// 	public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
+// 		this.requestLowongan = requestLowongan;
+//     }
+    
+// =======
+// 	// public void setRequestLowongan(List<RequestLowonganModel> requestLowongan) {
+// 	// 	this.requestLowongan = requestLowongan;
+// 	// }
+// >>>>>>> master
 }

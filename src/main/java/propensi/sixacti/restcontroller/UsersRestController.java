@@ -46,19 +46,12 @@ public class UsersRestController {
         // } else {
             userModel.setUsers(usersService.getUsersById(id));
             Users baru =  usersService.setUser(userService.addUser(userModel), id);
-            Set<Roles> it = baru.getRoles();
-            for(Roles temp : it){
-                System.out.println(temp);
-                System.out.println(temp.getRoleName());
-                if(temp.getRoleName().toString().equals("ROLE_PELAMAR")){
-                    System.out.println("MASUUUUK");
-                    PelamarModel a = pelamarService.generatePelamar(baru.getUser().getNIK());
-                    System.out.println(a);
-                }
-            }
             return baru;
-            
-        
+    }
+    
+    @PutMapping(value = "/addPelamar/{nik}")
+    private PelamarModel addPelamar(@PathVariable("nik") String nik) {
+    	return pelamarService.generatePelamar(nik);
     }
 
     @CrossOrigin

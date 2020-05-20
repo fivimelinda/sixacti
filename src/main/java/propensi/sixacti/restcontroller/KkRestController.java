@@ -23,6 +23,8 @@ public class KkRestController {
 
     @PostMapping("/uploadKk/{idLamaran}")
     public ResponseEntity<String> uploadKk(@PathVariable Long idLamaran, @RequestParam("file") MultipartFile file){
+        System.out.println(idLamaran);
+        System.out.println("------------------------------------------");
         LamaranModel lamaranModel = lamaranService.findByIdLamaran(idLamaran);
         KkModel kkModel = kkService.storeFile(lamaranModel, file);
 
