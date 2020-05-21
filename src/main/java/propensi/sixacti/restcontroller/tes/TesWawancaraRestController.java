@@ -23,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import propensi.sixacti.model.ERole;
 import propensi.sixacti.model.FulfillmentModel;
+import propensi.sixacti.model.KaryawanModel;
 import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.model.LowonganKerjaModel;
 import propensi.sixacti.model.PelamarModel;
@@ -34,6 +35,7 @@ import propensi.sixacti.repository.UserDB;
 import propensi.sixacti.repository.UsersDB;
 import propensi.sixacti.repository.Login.RolesRepository;
 import propensi.sixacti.service.FulfillmentService;
+import propensi.sixacti.service.KaryawanService;
 import propensi.sixacti.service.LamaranService;
 import propensi.sixacti.service.UserService;
 import propensi.sixacti.service.tes.PelamarRestService;
@@ -66,7 +68,10 @@ public class TesWawancaraRestController {
     private UsersDB usersDb;
 
     @Autowired
-	RolesRepository roleRepository;
+    RolesRepository roleRepository;
+    
+    @Autowired
+    KaryawanService karyawanService;
 
     //tambah tes wawancara
     @PostMapping(value = "/wawancara/{idPelamar}")
@@ -122,45 +127,52 @@ public class TesWawancaraRestController {
         @RequestBody TesWawancaraModel tesWawancara
     ){
         try{
-            if (tesWawancara.getIsLolos()){
-                PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesWawancara.getPelamarTesWawancara().getIdPelamar());
-                LamaranModel lamaran = lamaranService.findByIdLamaran(pelamar.getLamaran().getId());
-                lamaran.setLolos(true);
-                LowonganKerjaModel loker = lamaran.getLowongan();
-                boolean gender = pelamar.getUserPelamar().isJenis_kelamin();
-                Date currentDate = new Date();
-                FulfillmentModel target = fulfillmentService.getFulfillmentByLokerAndTanggal(loker, currentDate);
-                if (target!=null) {
-                	if(gender) {
-                		target.setJumlahLakilaki(target.getJumlahLakilaki()+1);
-                	} else {
-                		target.setJumlahPerempuan(target.getJumlahPerempuan()+1);
-                	}
-                } else {
-                	target = new FulfillmentModel();
-                	target.setLoker(loker);
-                	target.setTanggalDiterima(currentDate);
-                	if(gender) {
-                		target.setJumlahLakilaki(1);
-                		target.setJumlahPerempuan(0);
-                	} else {
-                		target.setJumlahPerempuan(1);
-                		target.setJumlahLakilaki(0);
-                	}
-                	loker.getListFulfillment().add(target);
-                }
-                fulfillmentService.add(target);
-            }
+            // if (tesWawancara.getIsLolos()){
+            //     PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesWawancara.getPelamarTesWawancara().getIdPelamar());
+            //     LamaranModel lamaran = lamaranService.findByIdLamaran(pelamar.getLamaran().getId());
+            //     lamaran.setLolos(true);
+            //     LowonganKerjaModel loker = lamaran.getLowongan();
+            //     boolean gender = pelamar.getUserPelamar().isJenis_kelamin();
+            //     Date currentDate = new Date();
+            //     FulfillmentModel target = fulfillmentService.getFulfillmentByLokerAndTanggal(loker, currentDate);
+            //     if (target!=null) {
+            //     	if(gender) {
+            //     		target.setJumlahLakilaki(target.getJumlahLakilaki()+1);
+            //     	} else {
+            //     		target.setJumlahPerempuan(target.getJumlahPerempuan()+1);
+            //     	}
+            //     } else {
+            //     	target = new FulfillmentModel();
+            //     	target.setLoker(loker);
+            //     	target.setTanggalDiterima(currentDate);
+            //     	if(gender) {
+            //     		target.setJumlahLakilaki(1);
+            //     		target.setJumlahPerempuan(0);
+            //     	} else {
+            //     		target.setJumlahPerempuan(1);
+            //     		target.setJumlahLakilaki(0);
+            //     	}
+            //     	loker.getListFulfillment().add(target);
+            //     }
+            //     fulfillmentService.add(target);
+            // }
 
-            if(tesWawancara.getIsLolos()){
-                PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesWawancara.getPelamarTesWawancara().getIdPelamar());
-                UserModel user = userDb.findByPelamar(pelamar).get(0);
-                Users users = usersDb.findByUser(user).get(0);
-                Set<Roles> roles = new HashSet<>();
-                Roles kontrakRole = roleRepository.findByRoleName(ERole.ROLE_KARYAWANKONTRAK).orElse(null);
-                roles.add(kontrakRole);
-                users.setRoles(roles);               
-            }
+            // if(tesWawancara.getIsLolos()){
+            //     PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesWawancara.getPelamarTesWawancara().getIdPelamar());
+            //     UserModel user = userDb.findByPelamar(pelamar).get(0);
+            //     KaryawanModel karyawan = new KaryawanModel();
+            //     karyawan.setUser(user);
+            //     karyawan.setGaji(1000000);
+            //     karyawan.setDepartemen(null);
+            //     karyawan.setSection(null);
+            //     karyawanService.buatKaryawan(karyawan);
+            //     Users users = usersDb.findByUser(user).get(0);
+            //     Set<Roles> roles = new HashSet<>();
+            //     Roles kontrakRole = roleRepository.findByRoleName(ERole.ROLE_KARYAWANKONTRAK).orElse(null);
+            //     roles.add(kontrakRole);
+            //     users.setRoles(roles);               
+            // }
+            
             return tesWawancaraRestService.ubahTesWawancara(idTesWawancara, tesWawancara);
         }catch(NoSuchElementException e){
             throw new ResponseStatusException(
