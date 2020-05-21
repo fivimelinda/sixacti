@@ -127,6 +127,7 @@ public class TesWawancaraRestController {
         @RequestBody TesWawancaraModel tesWawancara
     ){
         try{
+
             // if (tesWawancara.getIsLolos()){
             //     PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesWawancara.getPelamarTesWawancara().getIdPelamar());
             //     LamaranModel lamaran = lamaranService.findByIdLamaran(pelamar.getLamaran().getId());
@@ -173,6 +174,7 @@ public class TesWawancaraRestController {
             //     users.setRoles(roles);               
             // }
             
+
             return tesWawancaraRestService.ubahTesWawancara(idTesWawancara, tesWawancara);
         }catch(NoSuchElementException e){
             throw new ResponseStatusException(

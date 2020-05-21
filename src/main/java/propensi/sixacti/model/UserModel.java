@@ -102,7 +102,7 @@ public class UserModel implements Serializable {
     @JsonIgnore
     private Users users;
 
-    @OneToOne(mappedBy = "user", optional = true)
+    @OneToOne(mappedBy = "user", optional = true, cascade = CascadeType.ALL)
     @JsonIgnore
     private KaryawanModel karyawan;
 
