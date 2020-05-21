@@ -28,7 +28,7 @@ import propensi.sixacti.service.KaryawanService;
 import propensi.sixacti.service.SectionService;
 import propensi.sixacti.service.UserService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8081", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api/karyawan")
 public class KaryawanController {

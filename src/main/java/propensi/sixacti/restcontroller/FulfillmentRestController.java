@@ -17,7 +17,7 @@ import propensi.sixacti.model.RequestLowonganModel;
 import propensi.sixacti.service.FulfillmentService;
 import propensi.sixacti.service.RequestLowonganService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8081", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class FulfillmentRestController {
 	@Autowired
