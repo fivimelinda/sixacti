@@ -40,6 +40,20 @@ public class KaryawanModel {
     @JsonIgnore
     private AtributModel atributModel;
 
+    /**
+     * @return the atributModel
+     */
+    public AtributModel getAtributModel() {
+        return atributModel;
+    }
+
+    /**
+     * @param atributModel the atributModel to set
+     */
+    public void setAtributModel(AtributModel atributModel) {
+        this.atributModel = atributModel;
+    }
+
     @OneToOne(mappedBy = "karyawan", cascade = CascadeType.ALL,  fetch = FetchType.LAZY,optional = true)
     @JsonIgnore
     private DetailKontrakModel detailKontrakModel;

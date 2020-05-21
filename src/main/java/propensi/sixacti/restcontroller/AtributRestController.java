@@ -21,9 +21,11 @@ import propensi.sixacti.model.AtributModel;
 import propensi.sixacti.model.KaryawanModel;
 import propensi.sixacti.service.AtributService;
 import propensi.sixacti.service.KaryawanService;
+import propensi.sixacti.service.UserService;
 import propensi.sixacti.service.tes.PelamarRestService;
 import propensi.sixacti.model.AtributModel;
 import propensi.sixacti.model.PelamarModel;
+import propensi.sixacti.model.UserModel;
 import propensi.sixacti.repository.AtributDb;
 import propensi.sixacti.service.AtributRestService;
 
@@ -46,10 +48,13 @@ public class AtributRestController {
     @Autowired
     private KaryawanService karyawanService;
 
-    @PostMapping(value="/tambahAtribut/{idPelamar}")
+    @Autowired
+    private UserService userService;
+
+    @PostMapping(value="/tambahAtribut/{nik}")
     public AtributModel tambahAtribut(
         @Valid @RequestBody AtributModel atribut,
-        @PathVariable (value = "idPelamar") Long idPelamar,
+        @PathVariable (value = "nik") String nik,
         BindingResult bindingResult) 
         {
         //TODO: process POST request
@@ -58,9 +63,10 @@ public class AtributRestController {
                 HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field");
         }
         else{
-            PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(idPelamar);
-            pelamar.setAtribut(atribut);;
-            atribut.setPelamarAtribut(pelamar);
+            UserModel user = userService.getuserByNIK(nik);
+            KaryawanModel karyawan = user.getKaryawan();
+            karyawan.setAtributModel(atribut);
+            atribut.setKaryawan(karyawan);
             return atributRestService.buatAtribut(atribut);
         }
     }
