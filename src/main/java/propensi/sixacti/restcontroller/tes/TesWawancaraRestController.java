@@ -1,8 +1,10 @@
 package propensi.sixacti.restcontroller.tes;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -19,13 +21,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import propensi.sixacti.model.ERole;
 import propensi.sixacti.model.FulfillmentModel;
 import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.model.LowonganKerjaModel;
 import propensi.sixacti.model.PelamarModel;
+import propensi.sixacti.model.Roles;
 import propensi.sixacti.model.TesWawancaraModel;
+import propensi.sixacti.model.UserModel;
+import propensi.sixacti.model.Users;
+import propensi.sixacti.repository.UserDB;
+import propensi.sixacti.repository.UsersDB;
+import propensi.sixacti.repository.Login.RolesRepository;
 import propensi.sixacti.service.FulfillmentService;
 import propensi.sixacti.service.LamaranService;
+import propensi.sixacti.service.UserService;
 import propensi.sixacti.service.tes.PelamarRestService;
 import propensi.sixacti.service.tes.tesWawancara.TesWawancaraRestService;
 
@@ -45,6 +55,18 @@ public class TesWawancaraRestController {
     
     @Autowired
     private FulfillmentService fulfillmentService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserDB userDb;
+
+    @Autowired
+    private UsersDB usersDb;
+
+    @Autowired
+	RolesRepository roleRepository;
 
     //tambah tes wawancara
     @PostMapping(value = "/wawancara/{idPelamar}")
@@ -128,6 +150,16 @@ public class TesWawancaraRestController {
                 	loker.getListFulfillment().add(target);
                 }
                 fulfillmentService.add(target);
+            }
+
+            if(tesWawancara.getIsLolos()){
+                PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesWawancara.getPelamarTesWawancara().getIdPelamar());
+                UserModel user = userDb.findByPelamar(pelamar).get(0);
+                Users users = usersDb.findByUser(user).get(0);
+                Set<Roles> roles = new HashSet<>();
+                Roles kontrakRole = roleRepository.findByRoleName(ERole.ROLE_KARYAWANKONTRAK).orElse(null);
+                roles.add(kontrakRole);
+                users.setRoles(roles);               
             }
             return tesWawancaraRestService.ubahTesWawancara(idTesWawancara, tesWawancara);
         }catch(NoSuchElementException e){
