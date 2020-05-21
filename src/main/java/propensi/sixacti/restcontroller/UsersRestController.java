@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +21,11 @@ import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.model.Roles;
 import propensi.sixacti.model.UserModel;
 import propensi.sixacti.model.Users;
+import propensi.sixacti.repository.UserDB;
 import propensi.sixacti.service.PelamarService;
 import propensi.sixacti.service.UserService;
 import propensi.sixacti.service.UsersService;
+import propensi.sixacti.service.tes.PelamarRestService;
 
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
 @RestController
@@ -38,6 +41,12 @@ public class UsersRestController {
     @Autowired
     private PelamarService pelamarService;
 
+    @Autowired
+    private PelamarRestService pelamarRestService;
+
+    @Autowired
+    private UserDB userDb;
+
     @CrossOrigin
     @PutMapping(value = "/setUser/{id}" )
     private Users setUser(@PathVariable("id") Long id, @Valid @RequestBody UserModel userModel,  BindingResult bindingResult){
@@ -49,9 +58,15 @@ public class UsersRestController {
             return baru;
     }
     
-    @PutMapping(value = "/addPelamar/{nik}")
+    @GetMapping(value = "/addPelamar/{nik}")
     private PelamarModel addPelamar(@PathVariable("nik") String nik) {
     	return pelamarService.generatePelamar(nik);
+    }
+
+    @GetMapping(value = "/getPelamar/{nik}")
+    private PelamarModel getPelamar(@PathVariable("nik") String nik) {
+        UserModel user = userDb.findUserModelByNik(nik).orElse(null);
+    	return pelamarRestService.getPelamarByUser(user);
     }
 
     @CrossOrigin

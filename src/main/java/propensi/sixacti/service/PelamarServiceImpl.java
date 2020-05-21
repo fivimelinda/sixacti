@@ -8,6 +8,9 @@ import propensi.sixacti.model.UserModel;
 import propensi.sixacti.repository.UserDB;
 import propensi.sixacti.repository.tes.PelamarDb;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 @Service
@@ -26,8 +29,19 @@ public class PelamarServiceImpl implements PelamarService {
         UserModel lama = userDb.findUserModelByNik(id).get();
         baru.setUserPelamar(lama);
         return pelamarDb.save(baru);
-
-
     }
+
+    @Override
+    public PelamarModel getPelamarByNik(String nik){
+        UserModel user = userDb.findUserModelByNik(nik).orElse(null);
+        List<PelamarModel> pelamar = pelamarDb.findByUserPelamar(user);
+        if(pelamar.size()==0){
+            return null;
+        }else{
+            return pelamar.get(0);
+        }
+    }
+
+
     
 }
