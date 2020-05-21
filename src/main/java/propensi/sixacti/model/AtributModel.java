@@ -47,6 +47,7 @@ public class AtributModel implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private KaryawanModel karyawan;
 
     public KaryawanModel getKaryawan() {

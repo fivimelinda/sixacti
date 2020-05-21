@@ -37,21 +37,20 @@ public class KaryawanModel {
 
 
     @OneToOne(mappedBy = "karyawan", optional = true)
-    @JsonIgnore
-    private AtributModel atributModel;
+    private AtributModel atribut;
 
     /**
      * @return the atributModel
      */
     public AtributModel getAtributModel() {
-        return atributModel;
+        return this.atribut;
     }
 
     /**
      * @param atributModel the atributModel to set
      */
-    public void setAtributModel(AtributModel atributModel) {
-        this.atributModel = atributModel;
+    public void setAtributModel(AtributModel atribut) {
+        this.atribut = atribut;
     }
 
     @OneToOne(mappedBy = "karyawan", cascade = CascadeType.ALL,  fetch = FetchType.LAZY,optional = true)
