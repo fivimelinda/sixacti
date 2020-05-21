@@ -66,7 +66,7 @@ public class AtributRestController {
         else{
             UserModel user = userService.getuserByNIK(nik);
             KaryawanModel karyawan = user.getKaryawan();
-            karyawan.setAtributModel(atribut);
+            karyawan.setAtribut(atribut);
             atribut.setKaryawan(karyawan);
             return atributRestService.buatAtribut(atribut);
         }
@@ -105,7 +105,7 @@ public class AtributRestController {
     ){
         try{
             UserModel user = userService.getuserByNIK(nik);
-            AtributModel atribut = user.getKaryawan().getAtributModel();
+            AtributModel atribut = user.getKaryawan().getAtribut();
             return atribut;
         }catch(NoSuchElementException e){
             throw new ResponseStatusException(
