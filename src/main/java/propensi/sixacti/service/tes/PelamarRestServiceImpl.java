@@ -25,11 +25,6 @@ public class PelamarRestServiceImpl implements PelamarRestService {
     public PelamarModel getPelamarByIdPelamar(Long idPelamar){
         PelamarModel pelamar= pelamarDb.findById(idPelamar).orElse(null);
         return pelamar;
-        // if(restoran.isPresent()){
-        //     return restoran.get();
-        // }else{
-        //     throw new NoSuchElementException();
-        // }
     }
 
     @Override
