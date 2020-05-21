@@ -9,4 +9,5 @@ public interface RequestLowonganService {
     List<RequestLowonganModel> retrieveListRequestLowongan();
     RequestLowonganModel addRequestLowongan(RequestLowonganModel requestLowongan);
     void deleteRequestLowonganById(Long id);
+    RequestLowonganModel tolakRequest(Long id);
 }
