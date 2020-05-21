@@ -29,6 +29,7 @@ import propensi.sixacti.model.UserModel;
 import propensi.sixacti.repository.AtributDb;
 import propensi.sixacti.service.AtributRestService;
 
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
@@ -65,7 +66,6 @@ public class AtributRestController {
         else{
             UserModel user = userService.getuserByNIK(nik);
             KaryawanModel karyawan = user.getKaryawan();
-            System.out.println(karyawan);
             karyawan.setAtributModel(atribut);
             atribut.setKaryawan(karyawan);
             return atributRestService.buatAtribut(atribut);
@@ -81,7 +81,7 @@ public class AtributRestController {
             return atributRestService.ubahAtribut(idAtribut, atribut);
         }catch(NoSuchElementException e){
             throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "ID Tes Medis " + String.valueOf(idAtribut+ " Not Found"
+                HttpStatus.NOT_FOUND, "ID Atribut " + String.valueOf(idAtribut+ " Not Found"
             ));
         }
     }
@@ -96,6 +96,21 @@ public class AtributRestController {
             throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "ID Atribut " + String.valueOf(idAtribut+ " Not Found"
             ));
+        }
+    }
+
+    @GetMapping(value = "/get-nik/{nik}")
+    public AtributModel getAtribut(
+        @PathVariable (value = "nik") String nik
+    ){
+        try{
+            UserModel user = userService.getuserByNIK(nik);
+            AtributModel atribut = user.getKaryawan().getAtributModel();
+            return atribut;
+        }catch(NoSuchElementException e){
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "ID Atribut Not Found"
+            );
         }
     }
 

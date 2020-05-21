@@ -37,6 +37,7 @@ public class KaryawanModel {
 
 
     @OneToOne(mappedBy = "karyawan", optional = true)
+    @JsonIgnore
     private AtributModel atribut;
 
     /**
