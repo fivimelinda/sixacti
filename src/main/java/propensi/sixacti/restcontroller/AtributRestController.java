@@ -65,6 +65,7 @@ public class AtributRestController {
         else{
             UserModel user = userService.getuserByNIK(nik);
             KaryawanModel karyawan = user.getKaryawan();
+            System.out.println(karyawan);
             karyawan.setAtributModel(atribut);
             atribut.setKaryawan(karyawan);
             return atributRestService.buatAtribut(atribut);

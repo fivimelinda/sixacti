@@ -44,7 +44,7 @@ public class AtributModel implements Serializable {
     @Column(name = "status", nullable = false)
     private Boolean status;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "id_karyawan", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
@@ -58,25 +58,25 @@ public class AtributModel implements Serializable {
         this.karyawan = karyawan;
     }
     
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
-    @OnDelete(action= OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private PelamarModel pelamarAtribut;
+    // @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = true)
+    // @JoinColumn(name = "idPelamar", referencedColumnName = "idPelamar")
+    // @OnDelete(action= OnDeleteAction.CASCADE)
+    // @JsonIgnore
+    // private PelamarModel pelamarAtribut;
 
-    /**
-     * @param pelamarAtribut the pelamarAtribut to set
-     */
-    public void setPelamarAtribut(PelamarModel pelamarAtribut) {
-        this.pelamarAtribut = pelamarAtribut;
-    }
+    // /**
+    //  * @param pelamarAtribut the pelamarAtribut to set
+    //  */
+    // public void setPelamarAtribut(PelamarModel pelamarAtribut) {
+    //     this.pelamarAtribut = pelamarAtribut;
+    // }
 
-    /**
-     * @return the pelamarAtribut
-     */
-    public PelamarModel getPelamarAtribut() {
-        return pelamarAtribut;
-    }
+    // /**
+    //  * @return the pelamarAtribut
+    //  */
+    // public PelamarModel getPelamarAtribut() {
+    //     return pelamarAtribut;
+    // }
 
     /**
      * @return the ukuran_baju
