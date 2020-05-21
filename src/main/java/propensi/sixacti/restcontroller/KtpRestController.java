@@ -18,7 +18,7 @@ import propensi.sixacti.service.LamaranService;
 
 import java.io.IOException;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class KtpRestController {

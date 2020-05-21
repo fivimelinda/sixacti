@@ -30,7 +30,6 @@ import propensi.sixacti.service.tes.PelamarRestService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/profil")
-
 public class UsersRestController {
     @Autowired
     private UsersService usersService;
