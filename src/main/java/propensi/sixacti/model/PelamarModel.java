@@ -35,22 +35,23 @@ public class PelamarModel implements Serializable{
     @OneToOne(mappedBy = "pelamarTesWawancara", cascade = CascadeType.ALL)
     private TesWawancaraModel tesWawancara;
 
-    @OneToOne(mappedBy = "pelamarAtribut", cascade = CascadeType.ALL)
-    private AtributModel atribut;
+    // @OneToOne(mappedBy = "pelamarAtribut", cascade = CascadeType.ALL)
+    // @JsonIgnore
+    // private AtributModel atribut;
 
-    /**
-     * @param atribut the atribut to set
-     */
-    public void setAtribut(AtributModel atribut) {
-        this.atribut = atribut;
-    }
+    // /**
+    // //  * @param atribut the atribut to set
+    //  */
+    // public void setAtribut(AtributModel atribut) {
+    //     this.atribut = atribut;
+    // }
 
-    /**
-     * @return the atribut
-     */
-    public AtributModel getAtribut() {
-        return atribut;
-    }
+    // /**
+    //  * @return the atribut
+    //  */
+    // public AtributModel getAtribut() {
+    //     return atribut;
+    // }
     
     /**
      * @param idPelamar the idPelamar to set
