@@ -116,7 +116,7 @@ public class RequestLowonganRestController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/tolakRequest/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/tolakRequest/{id}", method = RequestMethod.GET)
     private RequestLowonganModel tolakRequest(@PathVariable Long id){
         try{
             return requestLowonganService.tolakRequest(id);
