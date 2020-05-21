@@ -18,7 +18,7 @@ import propensi.sixacti.service.KaryawanService;
 import propensi.sixacti.service.RequestLowonganService;
 import propensi.sixacti.service.UsersService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080","http://sixacti.herokuapp.com/" })
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080","http://sixacti.herokuapp.com" })
 @RestController
 @RequestMapping("/request")
 
