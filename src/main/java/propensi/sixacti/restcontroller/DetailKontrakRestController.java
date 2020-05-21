@@ -16,7 +16,7 @@ import propensi.sixacti.model.KaryawanModel;
 import propensi.sixacti.model.UserModel;
 import propensi.sixacti.service.DetailKontrakService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080","http://sixacti.herokuapp.com" })
 @RestController
 @RequestMapping("/detailKontrak")
 
