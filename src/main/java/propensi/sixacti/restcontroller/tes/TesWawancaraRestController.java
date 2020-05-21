@@ -141,13 +141,15 @@ public class TesWawancaraRestController {
                 	target.setLoker(loker);
                 	target.setTanggalDiterima(currentDate);
                 	if(gender) {
+				System.out.println('abcd');
                 		target.setJumlahLakilaki(1);
                 		target.setJumlahPerempuan(0);
                 	} else {
                 		target.setJumlahPerempuan(1);
                 		target.setJumlahLakilaki(0);
+				System.out.println('deejde');
                 	}
-                	loker.getListFulfillment().add(target);
+//                 	loker.getListFulfillment().add(target);
                 }
                 fulfillmentService.add(target);
             }
