@@ -42,6 +42,13 @@ public class RequestLowonganServiceImpl implements RequestLowonganService {
     public void deleteRequestLowonganById(Long id) {
         requestLowonganDb.deleteById(id);
     }
-    
-    
+
+    @Override
+    public RequestLowonganModel tolakRequest(Long id) {
+        RequestLowonganModel targetRequest = getRequestLowonganById(id);
+        targetRequest.setStatus("Ditolak");
+        return requestLowonganDb.save(targetRequest);
+    }
+
+
 }
