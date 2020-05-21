@@ -147,7 +147,7 @@ public class TesWawancaraRestController {
                 		target.setJumlahPerempuan(1);
                 		target.setJumlahLakilaki(0);
                 	}
-                	loker.getListFulfillment().add(target);
+//                 	loker.getListFulfillment().add(target);
                 }
                 fulfillmentService.add(target);
             }
