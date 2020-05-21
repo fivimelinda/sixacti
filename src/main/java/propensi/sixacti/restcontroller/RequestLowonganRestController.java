@@ -1,6 +1,7 @@
 package propensi.sixacti.restcontroller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
@@ -18,7 +19,7 @@ import propensi.sixacti.service.KaryawanService;
 import propensi.sixacti.service.RequestLowonganService;
 import propensi.sixacti.service.UsersService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/request")
 
@@ -112,6 +113,20 @@ public class RequestLowonganRestController {
         // }
         requestLowonganService.deleteRequestLowonganById(id);
         return "success";
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/tolakRequest/{id}", method = RequestMethod.GET)
+    private RequestLowonganModel tolakRequest(@PathVariable Long id){
+        try{
+            return requestLowonganService.tolakRequest(id);
+
+        }
+        catch (NoSuchElementException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "ID Request Lowongan " + id + "Not Found"
+            );
+        }
     }
 
 

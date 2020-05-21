@@ -13,7 +13,7 @@ import propensi.sixacti.model.LamaranModel;
 import propensi.sixacti.service.BpjsKetenagakerjaanService;
 import propensi.sixacti.service.LamaranService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class BpjsKetenagakerjaanRestController {

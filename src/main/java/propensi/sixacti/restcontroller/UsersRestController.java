@@ -27,10 +27,9 @@ import propensi.sixacti.service.UserService;
 import propensi.sixacti.service.UsersService;
 import propensi.sixacti.service.tes.PelamarRestService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/profil")
-
 public class UsersRestController {
     @Autowired
     private UsersService usersService;
@@ -47,7 +46,6 @@ public class UsersRestController {
     @Autowired
     private UserDB userDb;
 
-    @CrossOrigin
     @PutMapping(value = "/setUser/{id}" )
     private Users setUser(@PathVariable("id") Long id, @Valid @RequestBody UserModel userModel,  BindingResult bindingResult){
         // if(bindingResult.hasFieldErrors()){
@@ -69,13 +67,11 @@ public class UsersRestController {
     	return pelamarRestService.getPelamarByUser(user);
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/users/{id}")
     private Users getUsers(@PathVariable("id") Long id){
         return usersService.getUsersById(id);
     }
 
-    @CrossOrigin
     @PutMapping(value = "/editUser/{id}")
     private Users editUser(@PathVariable("id") Long id, @Valid @RequestBody UserModel userModel,  BindingResult bindingResult){
         return usersService.editUser(userModel, id);

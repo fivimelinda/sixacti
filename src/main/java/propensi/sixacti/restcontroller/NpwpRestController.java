@@ -13,7 +13,7 @@ import propensi.sixacti.model.NpwpModel;
 import propensi.sixacti.service.LamaranService;
 import propensi.sixacti.service.NpwpService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class NpwpRestController {
