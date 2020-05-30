@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import propensi.sixacti.model.KategoriCutiModel;
 import propensi.sixacti.service.KategoriCutiService;
 
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8081", "http://localhost:8080" })
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class KategoriController {
 	@Autowired
