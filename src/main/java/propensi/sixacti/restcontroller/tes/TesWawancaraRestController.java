@@ -127,7 +127,6 @@ public class TesWawancaraRestController {
         @RequestBody TesWawancaraModel tesWawancara
     ){
         try{
-
             // if (tesWawancara.getIsLolos()){
             //     PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesWawancara.getPelamarTesWawancara().getIdPelamar());
             //     LamaranModel lamaran = lamaranService.findByIdLamaran(pelamar.getLamaran().getId());
