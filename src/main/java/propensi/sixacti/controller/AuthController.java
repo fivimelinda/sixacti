@@ -102,7 +102,6 @@ public class AuthController {
 		// System.out.println(strRoles);
 
         Set<Roles> roles = new HashSet<>();
-        
 		
 			strRoles.forEach(role -> {
 				switch (role) {
