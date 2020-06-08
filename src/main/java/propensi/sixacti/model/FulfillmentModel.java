@@ -12,11 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,7 +29,7 @@ public class FulfillmentModel implements Serializable{
     private Long id;
 	
 	@NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@Temporal(TemporalType.DATE)
     @Column(name="tanggalDiterima", nullable = false)
     private Date tanggalDiterima;
 	
