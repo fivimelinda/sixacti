@@ -2,6 +2,7 @@ package propensi.sixacti.restcontroller;
 
 import javax.validation.Valid;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -17,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import propensi.sixacti.model.ERole;
 import propensi.sixacti.model.PelamarModel;
 import propensi.sixacti.model.Roles;
 import propensi.sixacti.model.UserModel;
 import propensi.sixacti.model.Users;
 import propensi.sixacti.repository.UserDB;
+import propensi.sixacti.repository.Login.RolesRepository;
+import propensi.sixacti.repository.Login.UserRepository;
 import propensi.sixacti.service.PelamarService;
 import propensi.sixacti.service.UserService;
 import propensi.sixacti.service.UsersService;
@@ -33,6 +37,12 @@ import propensi.sixacti.service.tes.PelamarRestService;
 public class UsersRestController {
     @Autowired
     private UsersService usersService;
+
+    @Autowired
+    UserRepository userRepository;
+    
+    @Autowired
+	RolesRepository roleRepository;
 
     @Autowired
     private UserService userService;
@@ -75,6 +85,17 @@ public class UsersRestController {
     @PutMapping(value = "/editUser/{id}")
     private Users editUser(@PathVariable("id") Long id, @Valid @RequestBody UserModel userModel,  BindingResult bindingResult){
         return usersService.editUser(userModel, id);
+    }
+
+    @GetMapping(value = "/update/role/{id}")
+    private Users updateRole(@PathVariable ("id") Long id){
+        Set<Roles> roles = new HashSet<>();
+        Roles karyawanRole = roleRepository.findByRoleName(ERole.ROLE_KARYAWANKONTRAK)
+							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+					roles.add(karyawanRole);
+        Users user  = usersService.getUsersById(id);
+        user.setRoles(roles);
+        return user;
     }
 
 }
