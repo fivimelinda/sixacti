@@ -127,35 +127,38 @@ public class TesWawancaraRestController {
         @RequestBody TesWawancaraModel tesWawancara
     ){
         try{
-            // if (tesWawancara.getIsLolos()){
-            //     PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesWawancara.getPelamarTesWawancara().getIdPelamar());
-            //     LamaranModel lamaran = lamaranService.findByIdLamaran(pelamar.getLamaran().getId());
-            //     lamaran.setLolos(true);
-            //     LowonganKerjaModel loker = lamaran.getLowongan();
-            //     boolean gender = pelamar.getUserPelamar().isJenis_kelamin();
-            //     Date currentDate = new Date();
-            //     FulfillmentModel target = fulfillmentService.getFulfillmentByLokerAndTanggal(loker, currentDate);
-            //     if (target!=null) {
-            //     	if(gender) {
-            //     		target.setJumlahLakilaki(target.getJumlahLakilaki()+1);
-            //     	} else {
-            //     		target.setJumlahPerempuan(target.getJumlahPerempuan()+1);
-            //     	}
-            //     } else {
-            //     	target = new FulfillmentModel();
-            //     	target.setLoker(loker);
-            //     	target.setTanggalDiterima(currentDate);
-            //     	if(gender) {
-            //     		target.setJumlahLakilaki(1);
-            //     		target.setJumlahPerempuan(0);
-            //     	} else {
-            //     		target.setJumlahPerempuan(1);
-            //     		target.setJumlahLakilaki(0);
-            //     	}
-            //     	loker.getListFulfillment().add(target);
-            //     }
-            //     fulfillmentService.add(target);
-            // }
+
+             if (tesWawancara.getIsLolos()){
+            	 TesWawancaraModel wawancara = tesWawancaraRestService.getTesWawancaraByIdTesWawancara(idTesWawancara);
+                 PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(wawancara.getPelamarTesWawancara().getIdPelamar());
+                 LamaranModel lamaran = lamaranService.findByIdLamaran(pelamar.getLamaran().getId());
+                 lamaran.setLolos(true);
+                 lamaran.setStatusLamaran("Diterima");
+                 LowonganKerjaModel loker = lamaran.getLowongan();
+                 boolean gender = pelamar.getUserPelamar().isJenis_kelamin();
+                 Date currentDate = new Date();
+                 FulfillmentModel target = fulfillmentService.getFulfillmentByLokerAndTanggal(loker, currentDate);
+                 if (target!=null) {
+                 	if(gender) {
+                 		target.setJumlahLakilaki(target.getJumlahLakilaki()+1);
+                 	} else {
+                 		target.setJumlahPerempuan(target.getJumlahPerempuan()+1);
+                 	}
+                 } else {
+                 	target = new FulfillmentModel();
+                 	target.setLoker(loker);
+                 	target.setTanggalDiterima(currentDate);
+                 	if(gender) {
+                 		target.setJumlahLakilaki(1);
+                 		target.setJumlahPerempuan(0);
+                 	} else {
+                 		target.setJumlahPerempuan(1);
+                 		target.setJumlahLakilaki(0);
+                 	}
+                 	loker.getListFulfillment().add(target);
+                 }
+                 fulfillmentService.add(target);
+             }
 
             // if(tesWawancara.getIsLolos()){
             //     PelamarModel pelamar = pelamarRestService.getPelamarByIdPelamar(tesWawancara.getPelamarTesWawancara().getIdPelamar());
